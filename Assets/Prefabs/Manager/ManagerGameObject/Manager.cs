@@ -31,7 +31,7 @@ public class Manager : MonoBehaviour
     public LayerMask ignoreLayer;
     bool prevMenuState = true;
     public Text moneyText;
-    int availableMoney = 400;
+    int availableMoney = 400; // MONEY
     int currentSelection = 0;
     private void Start()
     {
