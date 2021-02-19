@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2929511488373839930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2929511488373839928}
+  - component: {fileID: 2929511488373839931}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2929511488373839928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2929511488373839930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 637.6506, y: 392.28317, z: -87.40949}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2929511488373839931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2929511488373839930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f8147bd3420bf743b81a6638f400215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceInfo:
+  - resourceName: Wall
+    buildingCost: 80
+    unlocked: 1
+    iconSprite: {fileID: 21300000, guid: 1a89e1a341f724748a663c41cb828de5, type: 3}
+    prefab: {fileID: 0}
+  - resourceName: Turret
+    buildingCost: 200
+    unlocked: 1
+    iconSprite: {fileID: 21300000, guid: a39b7c05f825d45478975de2fb504618, type: 3}
+    prefab: {fileID: 0}
+  - resourceName: Troop
+    buildingCost: 50
+    unlocked: 1
+    iconSprite: {fileID: 21300000, guid: 911646eda6c2fd344b61fd451ca04723, type: 3}
+    prefab: {fileID: 0}
+  - resourceName: Power Station
+    buildingCost: 500
+    unlocked: 1
+    iconSprite: {fileID: 21300000, guid: fc3113329d767a440ae94b29bf6c80c9, type: 3}
+    prefab: {fileID: 0}
+  - resourceName: Flying Saucer
+    buildingCost: 1000
+    unlocked: 1
+    iconSprite: {fileID: 21300000, guid: f5a20bc2143fc3a40be92ba2d4d9ff18, type: 3}
+    prefab: {fileID: 0}
+  - resourceName: Shark
+    buildingCost: 5000
+    unlocked: 1
+    iconSprite: {fileID: 21300000, guid: c6595ebce1e612e4281dda178d8b598d, type: 3}
+    prefab: {fileID: 0}
+  buildTabScroll: {fileID: 0}
+  nullIcon: {fileID: 21300000, guid: 56be7910c47d1264bbb8f7dd6d177dd4, type: 3}
+  iconHolder: {fileID: 0}
+  placeIndicator: {fileID: 0}
+  theFont: {fileID: 12800000, guid: 47c0bc6729c694c4ea79b1d92842b6ee, type: 3}
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 768
+  moneyText: {fileID: 0}
