@@ -18,14 +18,19 @@ public class PlayFabAuth : MonoBehaviour
     
     public bool isAuthenticated = false;
 
-    LoginWithPlayFabRequest loginRequest;
+    public LoginWithPlayFabRequest loginRequest;
     RegisterPlayFabUserRequest registerRequest;
+    public GetPlayerCombinedInfoRequestParams infoRequest;
+    VirtualCurrency vC;
 
+    private void Awake()
+    {
+        vC = gameObject.GetComponent<VirtualCurrency>();
+    }
 
     private void Start()
     {
         userEmail.gameObject.SetActive(false);
-
     }
 
     // login function calle by the button.
@@ -35,21 +40,25 @@ public class PlayFabAuth : MonoBehaviour
 
         loginRequest.Username = userName.text;
         loginRequest.Password = userPassword.text;
+        loginRequest.InfoRequestParameters = infoRequest;
 
-        PlayFabClientAPI.LoginWithPlayFab(loginRequest, result => {
+        PlayFabClientAPI.LoginWithPlayFab(loginRequest, result =>
+        {
             // If the asccount is found.
             isAuthenticated = true;
-
-
             message.text = "Welcome " + userName.text + " ! Connecting...";
 
-        }, error => {
+            vC.FetchCurrency();
+            vC.PurchaseUpgrade("Upgrade", 50);
+
+        }, error =>
+        {
             //If the Account is not found.
             isAuthenticated = false;
-    
-            if (error.ErrorMessage == "User not found") 
-            { 
-                userEmail.gameObject.SetActive(true); 
+
+            if (error.ErrorMessage == "User not found")
+            {
+                userEmail.gameObject.SetActive(true);
                 message.text = "Failed to login. " + error.ErrorMessage + ".\nPlease enter your email to register.";
             }
 
