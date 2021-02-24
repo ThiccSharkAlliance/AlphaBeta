@@ -7,11 +7,11 @@ using PlayFab.ClientModels;
 public class VirtualCurrency : MonoBehaviour
 {
     //Currency
-    private static int sealsCurrrency;
-    private static List<ItemInstance> inventoryItem = new List<ItemInstance>();
+    protected int sealsCurrrency;
+    protected  List<ItemInstance> inventoryItem = new List<ItemInstance>();
 
-    public static int SealsCurrency { get { return sealsCurrrency;} set{ sealsCurrrency = value; }}
-    public static List<ItemInstance> InventoryItems { get { return inventoryItem; } set { inventoryItem = value; }}
+    public int SealsCurrency { get { return sealsCurrrency;} set{ sealsCurrrency = value; }}
+    public List<ItemInstance> InventoryItems { get { return inventoryItem; } set { inventoryItem = value; }}
 
 
     PlayFabAuth PFA;
@@ -22,18 +22,18 @@ public class VirtualCurrency : MonoBehaviour
         PFA = gameObject.GetComponent<PlayFabAuth>();
     }
 
-    public void FetchCurrency()
-    {
-        PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result => {
+    //public void FetchCurrency()
+    //{
+    //    PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result => {
            
-            SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currncy value.
-            Debug.Log(SealsCurrency); 
+    //        SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currncy value.
+    //        Debug.Log(SealsCurrency); 
 
-        }, error => {
-            Debug.Log("Error ritriving you currency");
+    //    }, error => {
+    //        Debug.Log("Error ritriving you currency");
            
-        }, null);
-    }
+    //    }, null);
+    //}
     
     public void PurchaseUpgrade(string itemID, int price)
     {

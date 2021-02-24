@@ -736,6 +736,7 @@ GameObject:
   - component: {fileID: 719876212}
   - component: {fileID: 719876211}
   - component: {fileID: 719876213}
+  - component: {fileID: 719876214}
   m_Layer: 0
   m_Name: PlayFabManager
   m_TagString: Untagged
@@ -856,6 +857,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88cc717918070e242b3700458b8293c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &719876214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719876210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99cb5b66a2a041b47b34ec7af8e3a0b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gotCurrency: 0
 --- !u!1 &825832557
 GameObject:
   m_ObjectHideFlags: 0

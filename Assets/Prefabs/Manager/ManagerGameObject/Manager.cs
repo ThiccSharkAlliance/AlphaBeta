@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
+
+  
+    VirtualCurrency virtualCurrency;
     [System.Serializable]
     public struct ResourceInfo
     {
@@ -13,8 +16,11 @@ public class Manager : MonoBehaviour
         public bool unlocked;
         public Sprite iconSprite;
         public GameObject prefab;
+
+        //public string ResourceName { get { return resourceName; } set{ resourceName = value; } }
+        
     }
-    
+    //public List<ResourceInfo> resourceInfo;
     public ResourceInfo[] resourceInfo;
 
     public GameObject buildTabScroll;
@@ -31,37 +37,57 @@ public class Manager : MonoBehaviour
     public LayerMask ignoreLayer;
     bool prevMenuState = true;
     public Text moneyText;
-    int availableMoney = 400; // MONEY
+    //int availableMoney = 400; // MONEY
     int currentSelection = 0;
+
+/// <summary>
+/// 
+/// </summary>
+
+    private void Awake()
+    {
+        virtualCurrency = FindObjectOfType<VirtualCurrency>();
+
+    }
+
     private void Start()
     {
+
         placeIndicator.transform.position = new Vector3(0f, -1000f, 0f);
         buildTabScroll.transform.position = new Vector2(-1000f, -1000f);
         iconHolder = buildTabScroll.transform.Find("IconHolder").gameObject;
         RebuildSelectableBuildings();
-        moneyText.text = availableMoney.ToString();
+        moneyText.text = virtualCurrency.SealsCurrency.ToString();
+        Debug.Log(virtualCurrency.SealsCurrency.ToString());
     }
 
     public void RebuildSelectableBuildings()
     {
         //Clear icons
         unlockedBuildOptionsList.Clear();
-
-        foreach(GameObject g2 in unlockedSpriteList)
+        //unlockedBuildOptionsList = virtualCurrency.InventoryItems;
+        foreach (GameObject g2 in unlockedSpriteList)
         {
             Destroy(g2);
         }
         unlockedSpriteList.Clear();
 
 
-
         //rebuild;
-        for(int i = 0; i< resourceInfo.Length; i++) {
+        for (int i = 0; i < resourceInfo.Length; i++)
+        {
             if (resourceInfo[i].unlocked)
             {
                 unlockedBuildOptionsList.Add(i);
             }
         }
+        ////rebuild;
+        //for(int i = 0; i< resourceInfo.Length; i++) {
+        //    if (resourceInfo[i].unlocked)
+        //    {
+        //        unlockedBuildOptionsList.Add(i);
+        //    }
+        //}
 
 
         int unlockedCount = unlockedBuildOptionsList.Count;
@@ -80,7 +106,7 @@ public class Manager : MonoBehaviour
         RectTransform tr = g.AddComponent<RectTransform>();
         tr.position = iconHolder.transform.position + new Vector3(0f, startY);
         startY -= gapSize + iconSize;
-       tr.sizeDelta = new Vector2(iconSize, iconSize);
+        tr.sizeDelta = new Vector2(iconSize, iconSize);
         Image sr = g.AddComponent<Image>();
         sr.sprite = nullIcon;
         unlockedSpriteList.Add(g);
@@ -92,7 +118,7 @@ public class Manager : MonoBehaviour
             g = new GameObject();
             g.name = resourceInfo[unlockedBuildOptionsList[i]].resourceName;
             g.transform.parent = iconHolder.transform;
-             tr = g.AddComponent<RectTransform>();
+            tr = g.AddComponent<RectTransform>();
             tr.position = iconHolder.transform.position + new Vector3(0f, startY);
             
             
@@ -109,7 +135,8 @@ public class Manager : MonoBehaviour
             tr = t.GetComponent<RectTransform>();
             tr.position = iconHolder.transform.position + new Vector3(0f, startY - (iconSize/2f) - gapSize*2);
             costText.text = resourceInfo[unlockedBuildOptionsList[i]].buildingCost.ToString();
-            if(resourceInfo[unlockedBuildOptionsList[i]].buildingCost > availableMoney)
+            
+            if(resourceInfo[unlockedBuildOptionsList[i]].buildingCost > virtualCurrency.SealsCurrency)
             {
                 costText.color = Color.red;
             }
@@ -123,14 +150,14 @@ public class Manager : MonoBehaviour
             startY -= gapSize + iconSize;
         }
 
-         g = new GameObject();
+        g = new GameObject();
         g.name = "Null";
         g.transform.parent = iconHolder.transform;
-         tr = g.AddComponent<RectTransform>();
+        tr = g.AddComponent<RectTransform>();
         tr.position = iconHolder.transform.position + new Vector3(0f, startY);
         startY -= gapSize + iconSize;
         tr.sizeDelta = new Vector2(iconSize, iconSize);
-         sr = g.AddComponent<Image>();
+        sr = g.AddComponent<Image>();
         sr.sprite = nullIcon;
         unlockedSpriteList.Add(g);
     }
@@ -152,7 +179,8 @@ public class Manager : MonoBehaviour
 
         Color canBuildColor = Color.white;
         Color placeIndicatorColor = Color.green;
-        if (resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost > availableMoney)
+        if (resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost > virtualCurrency.SealsCurrency)
+       // if (resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost > availableMoney)
         {
             placeIndicatorColor = Color.red;
             canBuildColor = Color.red;
@@ -185,7 +213,8 @@ public class Manager : MonoBehaviour
     }
     public bool TryToBuild()
     {
-        if(resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost > availableMoney)
+        if(resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost > virtualCurrency.SealsCurrency)
+       // if(resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost > availableMoney)
         {
             return false;
         }
@@ -194,17 +223,20 @@ public class Manager : MonoBehaviour
             GameObject toBeCloned = resourceInfo[unlockedBuildOptionsList[currentSelection]].prefab;
             GameObject newBuilding = GameObject.Instantiate(toBeCloned, toBeCloned.transform.position, toBeCloned.transform.rotation);
             newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, placeIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);
-          //  Material newMat = new Material(newBuilding.GetComponent<MeshRenderer>().material);
-          //  newBuilding.GetComponent<MeshRenderer>().material = newMat;
+            //  Material newMat = new Material(newBuilding.GetComponent<MeshRenderer>().material);
+            //  newBuilding.GetComponent<MeshRenderer>().material = newMat;
             //Note for Jack. Use one material.
-            availableMoney -= resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost;
-            moneyText.text = availableMoney.ToString();
+            virtualCurrency.SealsCurrency -= resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost;
+            //availableMoney -= resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost;
+            moneyText.text = virtualCurrency.SealsCurrency.ToString();
+            //moneyText.text = availableMoney.ToString();
             return true;
         }
     }
 
     public void Update()
     {
+        moneyText.text = virtualCurrency.SealsCurrency.ToString();
         if (buildSelectorVisible)
         {
             buildTabScroll.transform.position = Input.mousePosition + new Vector3(iconSize, 0f) ;
@@ -247,7 +279,7 @@ public class Manager : MonoBehaviour
         {
             buildTabScroll.transform.position = new Vector2(-1000f, -1000f);
             placeIndicator.transform.position = new Vector3(0f, -1000f, 0f);
-            for (int i = 0; i < resourceInfo.Length; i++)
+            for (int i = 0; i < resourceInfo.Length; i++)///////////////////////////// change to lenght
             {
                 resourceInfo[i].prefab.SetActive(false);
             }

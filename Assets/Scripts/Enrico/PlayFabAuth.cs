@@ -4,10 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using PlayFab;
 using PlayFab.ClientModels;
+using UnityEngine.SceneManagement;
 
 
 public class PlayFabAuth : MonoBehaviour
 {
+    PlayFabAuth PFA;
+    private void OnEnable()
+    {
+        if (PFA == null)
+        {
+            PFA = this;
+        }
+        else
+        {
+            if (PFA != this)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
     // Ref to login input fields.
     public InputField userName;
     public InputField userPassword;
@@ -21,11 +38,14 @@ public class PlayFabAuth : MonoBehaviour
     public LoginWithPlayFabRequest loginRequest;
     RegisterPlayFabUserRequest registerRequest;
     public GetPlayerCombinedInfoRequestParams infoRequest;
+
     VirtualCurrency vC;
+    GetPlayerStats gps;
 
     private void Awake()
     {
         vC = gameObject.GetComponent<VirtualCurrency>();
+        gps = gameObject.GetComponent<GetPlayerStats>();
     }
 
     private void Start()
@@ -48,8 +68,14 @@ public class PlayFabAuth : MonoBehaviour
             isAuthenticated = true;
             message.text = "Welcome " + userName.text + " ! Connecting...";
 
-            vC.FetchCurrency();
-            vC.PurchaseUpgrade("Upgrade", 50);
+            //vC.FetchCurrency();
+            // vC.PurchaseUpgrade("Upgrade", 50);
+            if(gps.gotCurrency == false)
+            {
+                gps.FetchCurrency();
+               // SceneManager.LoadScene("ShipControlTestScene");
+            }
+            
 
         }, error =>
         {
