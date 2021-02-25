@@ -878,6 +878,31 @@ PrefabInstance:
       propertyPath: resourceInfo.Array.data[0].prefab
       value: 
       objectReference: {fileID: 440668947}
+    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
+        type: 3}
+      propertyPath: resourceInfo.Array.data[0].buildingCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
+        type: 3}
+      propertyPath: resourceInfo.Array.data[2].buildingCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
+        type: 3}
+      propertyPath: resourceInfo.Array.data[3].buildingCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
+        type: 3}
+      propertyPath: resourceInfo.Array.data[4].buildingCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
+        type: 3}
+      propertyPath: resourceInfo.Array.data[5].buildingCost
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 070856fc9ae042b49a3107d5ddbfbebd, type: 3}
 --- !u!1 &718430741 stripped
@@ -1982,7 +2007,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1258531099}
   m_Layer: 0
-  m_Name: ----------------------------- Singletons----------------------------
+  m_Name: --------------- Singletons----------------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
