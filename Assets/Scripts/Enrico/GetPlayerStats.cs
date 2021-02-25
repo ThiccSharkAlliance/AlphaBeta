@@ -8,17 +8,28 @@ using PlayFab.ClientModels;
 public class GetPlayerStats : MonoBehaviour
 {
     //References
+    private Manager manager;
     private VirtualCurrency virtualCurrency;
     private PlayFabAuth PFA;
-
+    private Inventory inventory;
+    
     //Variables
     public bool gotCurrency = false;
-    private string sceneName = "ShipControlTestScene"; // Change with final game scene.
+    private string sceneName = "ShipControlTestScene"; // Change with final game scene name.
    
     private void Awake()
     {
-       virtualCurrency = gameObject.GetComponent<VirtualCurrency>();
+        //Instance refs-----
+        virtualCurrency = gameObject.GetComponent<VirtualCurrency>();
         PFA = gameObject.GetComponent<PlayFabAuth>();
+        manager = FindObjectOfType<Manager>();
+        inventory = gameObject.GetComponent<Inventory>();
+        ///---------------
+    }
+
+    private void Update()
+    {
+        CheckStatsAndLoadScene();
     }
 
     public void FetchCurrency()
@@ -27,8 +38,7 @@ public class GetPlayerStats : MonoBehaviour
         {
             PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result => {
 
-               virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currncy value.
-                Debug.Log(virtualCurrency.SealsCurrency);
+                virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
                 gotCurrency = true;
 
             }, error => {
@@ -36,11 +46,6 @@ public class GetPlayerStats : MonoBehaviour
 
             }, null);
         }
-    }
-
-    private void Update()
-    {
-        CheckStatsAndLoadScene();
     }
 
     private void CheckStatsAndLoadScene()
@@ -51,6 +56,7 @@ public class GetPlayerStats : MonoBehaviour
             {
                 SceneManager.LoadScene("ShipControlTestScene");
                 gotCurrency = false;
+                
             }
         }
     }

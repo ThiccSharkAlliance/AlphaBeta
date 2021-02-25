@@ -6,15 +6,18 @@ using PlayFab.ClientModels;
 
 public class VirtualCurrency : MonoBehaviour
 {
-    //Currency
+
+    //References
+    PlayFabAuth PFA;
+    
+    //Currency Variebles
     protected int sealsCurrrency;
     protected  List<ItemInstance> inventoryItem = new List<ItemInstance>();
 
+    //Properties
     public int SealsCurrency { get { return sealsCurrrency;} set{ sealsCurrrency = value; }}
-    public List<ItemInstance> InventoryItems { get { return inventoryItem; } set { inventoryItem = value; }}
+    public List<ItemInstance> InventoryItems { get { return inventoryItem; } set { inventoryItem = value; }} // to take to inventory class 
 
-
-    PlayFabAuth PFA;
     
     private void Awake()
     {
@@ -22,19 +25,6 @@ public class VirtualCurrency : MonoBehaviour
         PFA = gameObject.GetComponent<PlayFabAuth>();
     }
 
-    //public void FetchCurrency()
-    //{
-    //    PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result => {
-           
-    //        SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currncy value.
-    //        Debug.Log(SealsCurrency); 
-
-    //    }, error => {
-    //        Debug.Log("Error ritriving you currency");
-           
-    //    }, null);
-    //}
-    
     public void PurchaseUpgrade(string itemID, int price)
     {
 

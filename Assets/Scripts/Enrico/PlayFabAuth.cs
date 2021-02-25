@@ -4,12 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using PlayFab;
 using PlayFab.ClientModels;
-using UnityEngine.SceneManagement;
-
 
 public class PlayFabAuth : MonoBehaviour
 {
     PlayFabAuth PFA;
+    // Ref to login input fields.
+    public InputField userName;
+    public InputField userPassword;
+    public InputField userEmail;
+
+    //Message to dispaly on login panel.
+    public Text message;
+    
+    public bool isAuthenticated = false;
+
+    public LoginWithPlayFabRequest loginRequest;
+    public RegisterPlayFabUserRequest registerRequest;
+    public GetPlayerCombinedInfoRequestParams infoRequest;
+
+    private VirtualCurrency vC;
+    private GetPlayerStats gps;
+    private Inventory inventory;
+
     private void OnEnable()
     {
         if (PFA == null)
@@ -24,28 +40,13 @@ public class PlayFabAuth : MonoBehaviour
             }
         }
         DontDestroyOnLoad(this.gameObject);
-    }
-    // Ref to login input fields.
-    public InputField userName;
-    public InputField userPassword;
-    public InputField userEmail;
-
-    //Message to dispaly on login panel.
-    public Text message;
-    
-    public bool isAuthenticated = false;
-
-    public LoginWithPlayFabRequest loginRequest;
-    RegisterPlayFabUserRequest registerRequest;
-    public GetPlayerCombinedInfoRequestParams infoRequest;
-
-    VirtualCurrency vC;
-    GetPlayerStats gps;
+    }//Singleton
 
     private void Awake()
     {
         vC = gameObject.GetComponent<VirtualCurrency>();
         gps = gameObject.GetComponent<GetPlayerStats>();
+        inventory = gameObject.GetComponent<Inventory>();
     }
 
     private void Start()
@@ -53,7 +54,7 @@ public class PlayFabAuth : MonoBehaviour
         userEmail.gameObject.SetActive(false);
     }
 
-    // login function calle by the button.
+    // login function called by the button.
     public void Login()
     {
         loginRequest = new LoginWithPlayFabRequest();
@@ -70,10 +71,12 @@ public class PlayFabAuth : MonoBehaviour
 
             //vC.FetchCurrency();
             // vC.PurchaseUpgrade("Upgrade", 50);
+            
             if(gps.gotCurrency == false)
             {
                 gps.FetchCurrency();
-               // SceneManager.LoadScene("ShipControlTestScene");
+
+                inventory.GetCatalog();
             }
             
 
