@@ -5,9 +5,9 @@ using UnityEngine.UI;
 using PlayFab;
 using PlayFab.ClientModels;
 
-
 public class PlayFabAuth : MonoBehaviour
 {
+    PlayFabAuth PFA;
     // Ref to login input fields.
     public InputField userName;
     public InputField userPassword;
@@ -18,38 +18,76 @@ public class PlayFabAuth : MonoBehaviour
     
     public bool isAuthenticated = false;
 
-    LoginWithPlayFabRequest loginRequest;
-    RegisterPlayFabUserRequest registerRequest;
+    public LoginWithPlayFabRequest loginRequest;
+    public RegisterPlayFabUserRequest registerRequest;
+    public GetPlayerCombinedInfoRequestParams infoRequest;
 
+    private VirtualCurrency vC;
+    private GetPlayerStats gps;
+    private Inventory inventory;
+
+    private void OnEnable()
+    {
+        if (PFA == null)
+        {
+            PFA = this;
+        }
+        else
+        {
+            if (PFA != this)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }//Singleton
+
+    private void Awake()
+    {
+        vC = gameObject.GetComponent<VirtualCurrency>();
+        gps = gameObject.GetComponent<GetPlayerStats>();
+        inventory = gameObject.GetComponent<Inventory>();
+    }
 
     private void Start()
     {
         userEmail.gameObject.SetActive(false);
-
     }
 
-    // login function calle by the button.
+    // login function called by the button.
     public void Login()
     {
         loginRequest = new LoginWithPlayFabRequest();
 
         loginRequest.Username = userName.text;
         loginRequest.Password = userPassword.text;
+        loginRequest.InfoRequestParameters = infoRequest;
 
-        PlayFabClientAPI.LoginWithPlayFab(loginRequest, result => {
+        PlayFabClientAPI.LoginWithPlayFab(loginRequest, result =>
+        {
             // If the asccount is found.
             isAuthenticated = true;
-
-
             message.text = "Welcome " + userName.text + " ! Connecting...";
 
-        }, error => {
+            //vC.FetchCurrency();
+            // vC.PurchaseUpgrade("Upgrade", 50);
+            
+            if(gps.gotCurrency == false)
+            {
+                gps.FetchCurrency();
+
+                inventory.GetCatalog();
+            }
+            
+
+        }, error =>
+        {
             //If the Account is not found.
             isAuthenticated = false;
-    
-            if (error.ErrorMessage == "User not found") 
-            { 
-                userEmail.gameObject.SetActive(true); 
+
+            if (error.ErrorMessage == "User not found")
+            {
+                userEmail.gameObject.SetActive(true);
                 message.text = "Failed to login. " + error.ErrorMessage + ".\nPlease enter your email to register.";
             }
 

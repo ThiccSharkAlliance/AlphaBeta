@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -633,7 +633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1671917563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,6 +1016,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 2929511488373839930, guid: 070856fc9ae042b49a3107d5ddbfbebd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
         type: 3}
       propertyPath: resourceInfo.Array.data[0].prefab
@@ -1081,6 +1086,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1671917566}
     m_Modifications:
+    - target: {fileID: 4710412547120832809, guid: 6ff122b024714264a8e8c54d1ce9c1d1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -360
+      objectReference: {fileID: 0}
     - target: {fileID: 4710412547229004210, guid: 6ff122b024714264a8e8c54d1ce9c1d1,
         type: 3}
       propertyPath: m_Name
@@ -1264,6 +1274,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlaceIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145805133548518495, guid: 97a020c0a2161804099537fb1648bb4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97a020c0a2161804099537fb1648bb4e, type: 3}
