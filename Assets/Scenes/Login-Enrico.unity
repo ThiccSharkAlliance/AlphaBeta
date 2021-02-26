@@ -903,6 +903,11 @@ PrefabInstance:
       propertyPath: resourceInfo.Array.data[5].buildingCost
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
+        type: 3}
+      propertyPath: resourceInfo.Array.data[4].unlocked
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 070856fc9ae042b49a3107d5ddbfbebd, type: 3}
 --- !u!1 &718430741 stripped
@@ -1402,6 +1407,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934775432757706117, guid: 0de4e32d7780b624fa3959676608513d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5934775432820262368, guid: 0de4e32d7780b624fa3959676608513d,
         type: 3}

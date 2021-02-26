@@ -25,7 +25,7 @@ public class ShipControl : MonoBehaviour
     int targetColour = 0; //0 = red, 1 = blue
     bool buildMode = false; //0= fire 1=building
 
-    Manager manager => FindObjectOfType<Manager>().GetComponent<Manager>();
+    Manager manager => FindObjectOfType<Manager>().GetComponent<Manager>();  
 
 
     void Start()
