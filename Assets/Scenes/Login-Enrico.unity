@@ -830,24 +830,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
         type: 3}
-      propertyPath: buildTabScroll
+      propertyPath: resourceInfo.Array.data[0].prefab
       value: 
-      objectReference: {fileID: 1122935151}
-    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
-        type: 3}
-      propertyPath: placeIndicator
-      value: 
-      objectReference: {fileID: 222570287}
-    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
-        type: 3}
-      propertyPath: moneyText
-      value: 
-      objectReference: {fileID: 2093297700}
-    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
-        type: 3}
-      propertyPath: resourceInfo.Array.data[1].buildingCost
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 440668947}
     - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
         type: 3}
       propertyPath: resourceInfo.Array.data[1].prefab
@@ -875,39 +860,19 @@ PrefabInstance:
       objectReference: {fileID: 822561414}
     - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
         type: 3}
-      propertyPath: resourceInfo.Array.data[0].prefab
+      propertyPath: buildTabScroll
       value: 
-      objectReference: {fileID: 440668947}
+      objectReference: {fileID: 1122935151}
     - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
         type: 3}
-      propertyPath: resourceInfo.Array.data[0].buildingCost
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: placeIndicator
+      value: 
+      objectReference: {fileID: 222570287}
     - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
         type: 3}
-      propertyPath: resourceInfo.Array.data[2].buildingCost
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
-        type: 3}
-      propertyPath: resourceInfo.Array.data[3].buildingCost
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
-        type: 3}
-      propertyPath: resourceInfo.Array.data[4].buildingCost
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
-        type: 3}
-      propertyPath: resourceInfo.Array.data[5].buildingCost
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
-        type: 3}
-      propertyPath: resourceInfo.Array.data[4].unlocked
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: moneyText
+      value: 
+      objectReference: {fileID: 2093297700}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 070856fc9ae042b49a3107d5ddbfbebd, type: 3}
 --- !u!1 &718430741 stripped
