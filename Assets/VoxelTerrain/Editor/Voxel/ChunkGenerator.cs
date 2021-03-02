@@ -89,6 +89,7 @@ namespace VoxelTerrain.Editor.Voxel
             var stoneDepth = Engine.VoxelTypeHeights.StoneDepth;
             var snowHeight = Engine.VoxelTypeHeights.SnowHeight;
             var caveStartHeight = Engine.VoxelTypeHeights.CaveStartHeight;
+            var groundLevel = Engine.WorldInfo.GroundLevel;
 
             return new ChunkVoxelSetter
             {
@@ -102,7 +103,8 @@ namespace VoxelTerrain.Editor.Voxel
                 seed = 1,
                 StoneDepth = stoneDepth,
                 SnowHeight = snowHeight,
-                CaveStartHeight = caveStartHeight
+                CaveStartHeight = caveStartHeight,
+                groundLevel = groundLevel
             };
         }
     }
