@@ -66,7 +66,7 @@ namespace VoxelTerrain.Editor.MMesh
 
         public async void SetMesh(float[] Voxels, float x, float y, float z, float size)
         {
-            MarchingCubes( Voxels, 16, 1, new Vector3(x, y, z), true);
+            MarchingCubes(size, new Vector3(x, y, z), true);
             /*
             Vertices.Clear();
             Triangles.Clear();
@@ -78,7 +78,7 @@ namespace VoxelTerrain.Editor.MMesh
             //_chunk.CreateMesh();
         }
 
-        private void MarchingCubes(float[]voxels, int size, float scale, Vector3 origin, bool interpolate)
+        private void MarchingCubes(float scale, Vector3 origin, bool interpolate)
         {
             int flagIndex = 0;
             int index = 0;

@@ -33,7 +33,7 @@ namespace VoxelTerrain.Editor.Voxel.Dependencies
             var chunkPos = NearestChunk(new Vector3(x, y, z), scale);
             var chunk = GetChunkAt(chunkPos);
 
-            if (chunk == null) return 0; // SetVoxelType(x, y, z); 
+            if (chunk == null) return SetVoxelType(x, y, z); 
 
             var voxPos = new Vector3(x, y, z) - chunkPos;
             return (int) chunk[voxPos.x, voxPos.y, voxPos.z];
