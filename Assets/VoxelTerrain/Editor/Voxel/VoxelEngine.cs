@@ -108,9 +108,9 @@ namespace VoxelTerrain.Editor.Voxel
         {
             var point = NearestChunk(Position);
 
-            for (var x = -_worldInfo.Distance; x < _worldInfo.Distance; x += ChunkSize)
+            for (var x = -_worldInfo.Distance; x <= _worldInfo.Distance; x += ChunkSize)
             {
-                for (var z = -_worldInfo.Distance; z < _worldInfo.Distance; z += ChunkSize)
+                for (var z = -_worldInfo.Distance; z <= _worldInfo.Distance; z += ChunkSize)
                 {
                     var pointToCheck = new ChunkId(point.x + x, -ChunkHeight / 2, point.z + z);
                     if (Vector3.Distance(new Vector3(pointToCheck.X, -ChunkHeight / 2, pointToCheck.Z), Position) >
