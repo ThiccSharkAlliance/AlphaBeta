@@ -14,18 +14,25 @@ namespace VoxelTerrain.Editor.Voxel
         [SerializeField] private VoxelTypeHeights _voxelTypeHeights;
         [SerializeField] private WorldGenerationFunctions _worldGeneration;
         [SerializeField] private float _noiseScale;
+        [SerializeField] private int seed;
         
         private float _maxMagnitude;
 
-        private Vector3 Position => _worldInfo.Origin != null ? new Vector3(_worldInfo.Origin.position.x, 0, _worldInfo.Origin.position.z) : Vector3.zero;
+        private Vector3 Position => _worldInfo.Origin != null ? new Vector3(_worldInfo.Origin.position.x, -ChunkHeight / 2, _worldInfo.Origin.position.z) : Vector3.zero;
         public ChunkInfo ChunkInfo => _chunkInfo;
         private float ChunkSize => Chunk.ChunkSize * _chunkInfo.VoxelSize;
+        private float ChunkHeight => Chunk.ChunkHeight * _chunkInfo.VoxelSize;
         public VoxelTypeHeights VoxelTypeHeights => _voxelTypeHeights;
         public float NoiseScale => _noiseScale;
+
+        public int Seed => seed;
+
+        public WorldInfo WorldInfo => _worldInfo;
 
         #region Unity Functions
         private void Awake()
         {
+            WorldData.Engine = this;
             _worldGeneration.GenerateWorld(transform.position, _worldInfo.Distance, _chunkInfo.VoxelSize);
         }
 
@@ -40,7 +47,7 @@ namespace VoxelTerrain.Editor.Voxel
             var curChunkPosX = Mathf.FloorToInt(pos.x / ChunkSize) * ChunkSize;
             var curChunkPosZ = Mathf.FloorToInt(pos.z / ChunkSize) * ChunkSize;
 
-            return new Vector3(curChunkPosX, 0, curChunkPosZ);
+            return new Vector3(curChunkPosX, -ChunkHeight / 2, curChunkPosZ);
         }
 
         private Chunk ChunkAt(ChunkId point, bool forceLoad = true)
@@ -56,7 +63,7 @@ namespace VoxelTerrain.Editor.Voxel
             var x = point.X;
             var z = point.Z;
 
-            var origin = new Vector3(x, 0, z);
+            var origin = new Vector3(x, -ChunkHeight / 2, z);
 
             return _worldGeneration.ChunkGenerator.CreateChunkJob(origin);
         }
@@ -105,12 +112,12 @@ namespace VoxelTerrain.Editor.Voxel
         {
             var point = NearestChunk(Position);
 
-            for (var x = -_worldInfo.Distance; x < _worldInfo.Distance; x += Chunk.ChunkSize)
+            for (var x = -_worldInfo.Distance; x <= _worldInfo.Distance; x += ChunkSize)
             {
-                for (var z = -_worldInfo.Distance; z < _worldInfo.Distance; z += Chunk.ChunkSize)
+                for (var z = -_worldInfo.Distance; z <= _worldInfo.Distance; z += ChunkSize)
                 {
-                    var pointToCheck = new ChunkId(point.x + x, 0, point.z + z);
-                    if (Vector3.Distance(new Vector3(pointToCheck.X, 0, pointToCheck.Z), Position) >
+                    var pointToCheck = new ChunkId(point.x + x, -ChunkHeight / 2, point.z + z);
+                    if (Vector3.Distance(new Vector3(pointToCheck.X, -ChunkHeight / 2, pointToCheck.Z), Position) >
                         _worldInfo.Distance) continue;
 
                     var c = ChunkAt(pointToCheck, false);
@@ -119,7 +126,7 @@ namespace VoxelTerrain.Editor.Voxel
                     {
                         c = LoadChunkAt(pointToCheck);
                         
-                        if (c != null) SpawnChunk(c, new Vector3(point.x + x, 0, point.z + z));
+                        if (c != null) SpawnChunk(c, new Vector3(point.x + x, -ChunkHeight / 2, point.z + z));
                     }
                 }
             }

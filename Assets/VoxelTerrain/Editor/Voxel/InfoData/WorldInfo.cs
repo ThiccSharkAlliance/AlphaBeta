@@ -4,14 +4,13 @@ namespace VoxelTerrain.Editor.Voxel.InfoData
 {
     public class WorldInfo : MonoBehaviour
     {
-        [SerializeField] private Material _material;
         [SerializeField] private float _distance;
-        [SerializeField, Tooltip("Must be divisible by 32")] private float _height;
         [SerializeField] private Transform _origin;
-
-        public Material Material => _material;
+        [SerializeField] private float _groundLevel;
+        
         public float Distance => _distance;
-        public float Height => _height;
         public Transform Origin => _origin;
+
+        public float GroundLevel => _groundLevel;
     }
 }

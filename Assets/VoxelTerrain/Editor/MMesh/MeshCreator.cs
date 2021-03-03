@@ -66,7 +66,7 @@ namespace VoxelTerrain.Editor.MMesh
 
         public async void SetMesh(float[] Voxels, float x, float y, float z, float size)
         {
-            MarchingCubes( Voxels, 16, 1, new Vector3(x, y, z), false);
+            MarchingCubes(size, new Vector3(x, y, z), true);
             /*
             Vertices.Clear();
             Triangles.Clear();
@@ -78,7 +78,7 @@ namespace VoxelTerrain.Editor.MMesh
             //_chunk.CreateMesh();
         }
 
-        private void MarchingCubes(float[]voxels, int size, float scale, Vector3 origin, bool interpolate)
+        private void MarchingCubes(float scale, Vector3 origin, bool interpolate)
         {
             int flagIndex = 0;
             int index = 0;
@@ -88,21 +88,21 @@ namespace VoxelTerrain.Editor.MMesh
 
             float[] afCubes = new float[8];
 
-            for (int x = 0; x < Chunk.ChunkSize - 1; x++)
+            for (int x = 0; x < Chunk.ChunkSize; x++)
             {
                 for (int y = 0; y < Chunk.ChunkHeight - 1; y++)
                 {
-                    for (int z = 0; z < Chunk.ChunkSize - 1; z++)
+                    for (int z = 0; z < Chunk.ChunkSize; z++)
                     {
                         //Offsets are same as cornerOffsets[8]
-                        afCubes[0] = voxels[Chunk.PosToIndex(x, y, z)];
-                        afCubes[1] = voxels[Chunk.PosToIndex(x + 1, y, z)];
-                        afCubes[2] = voxels[Chunk.PosToIndex(x + 1, y + 1, z)];
-                        afCubes[3] = voxels[Chunk.PosToIndex(x, y + 1, z)];
-                        afCubes[4] = voxels[Chunk.PosToIndex(x, y, z + 1)];
-                        afCubes[5] = voxels[Chunk.PosToIndex(x + 1, y, z + 1)];
-                        afCubes[6] = voxels[Chunk.PosToIndex(x + 1, y + 1, z + 1)];
-                        afCubes[7] = voxels[Chunk.PosToIndex(x, y + 1, z + 1)];
+                        afCubes[0] = _world.GetVoxelAt(origin.x + x, origin.y + y, origin.z + z, scale);
+                        afCubes[1] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y, origin.z + z, scale);
+                        afCubes[2] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y + 1, origin.z + z, scale);
+                        afCubes[3] = _world.GetVoxelAt(origin.x + x, origin.y + y + 1, origin.z + z, scale);
+                        afCubes[4] = _world.GetVoxelAt(origin.x + x, origin.y + y, origin.z + z + 1, scale);
+                        afCubes[5] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y, origin.z + z + 1, scale);
+                        afCubes[6] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y + 1, origin.z + z + 1, scale);
+                        afCubes[7] = _world.GetVoxelAt(origin.x + x, origin.y + y + 1, origin.z + z + 1, scale);
 
 
                         //Calculate the index of the current cube configuration as follows:
@@ -146,8 +146,8 @@ namespace VoxelTerrain.Editor.MMesh
                                 if (interpolate)
                                 {
                                     float ofst;
-                                    float s1 = voxels[Chunk.PosToIndex(x + (int) edge1.x, y + (int) edge1.y, z + (int) edge1.z)];
-                                    float delta = s1 - voxels[Chunk.PosToIndex(x + (int) edge2.x, y + (int) edge2.y, z + (int) edge2.z)];
+                                    float s1 = _world.GetVoxelAt(origin.x + x + edge1.x, origin.y + y + edge1.y, origin.z + z + edge1.z, scale);
+                                    float delta = s1 - _world.GetVoxelAt(origin.x + x + edge2.x, origin.y + y + edge2.y, origin.z + z + edge2.z, scale);
                                     if (delta == 0.0f)
                                         ofst = 0.5f;
                                     else
@@ -195,7 +195,7 @@ namespace VoxelTerrain.Editor.MMesh
 
                         if (i + 1 >= Chunk.ChunkSize)
                         {
-                            chunk = _world.GetChunkAt(new Vector3(x + Chunk.ChunkSize, y, z));
+                            chunk = _world.GetChunkAt(new Vector3(x + (Chunk.ChunkSize * size), y, z));
                             if (chunk != null) vox = chunk[0, j, k];
                             else vox = 0;
                         }
@@ -221,7 +221,7 @@ namespace VoxelTerrain.Editor.MMesh
 
                         if (i - 1 < 0)
                         {
-                            chunk = _world.GetChunkAt(new Vector3(x - Chunk.ChunkSize, y, z));
+                            chunk = _world.GetChunkAt(new Vector3(x - (Chunk.ChunkSize * size), y, z));
                             if (chunk != null) vox = chunk[Chunk.ChunkSize - 1, j, k];
                             else vox = 0;
                         }
@@ -292,7 +292,7 @@ namespace VoxelTerrain.Editor.MMesh
 
                         if (k + 1 >= Chunk.ChunkSize)
                         {
-                            chunk = _world.GetChunkAt(new Vector3(x, y, z + Chunk.ChunkSize));
+                            chunk = _world.GetChunkAt(new Vector3(x, y, z + (Chunk.ChunkSize * size)));
                             if (chunk != null) vox = chunk[i, j, 0];
                             else vox = 0;
                         }
@@ -321,7 +321,7 @@ namespace VoxelTerrain.Editor.MMesh
 
                         if (k - 1 < 0)
                         {
-                            chunk = _world.GetChunkAt(new Vector3(x, y, z - Chunk.ChunkSize));
+                            chunk = _world.GetChunkAt(new Vector3(x, y, z - (Chunk.ChunkSize * size)));
                             if (chunk != null) vox = chunk[i, j, Chunk.ChunkSize - 1];
                             else vox = 0;
                         }
