@@ -2,7 +2,6 @@
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
-using VoxelTerrain.Editor.Noise;
 
 namespace VoxelTerrain.Editor.Voxel.Jobs
 {
@@ -43,7 +42,7 @@ namespace VoxelTerrain.Editor.Voxel.Jobs
             var blockType = VoxelType.Default;
 
             //3D noise for heightmap
-            var simplex1 = PerlinNoise.Generate2DNoiseValue( x, z, scale, seed, groundLevel);
+            var simplex1 = TerrainData.Noise.Generate2DNoiseValue( x, z, scale, seed, groundLevel);
 
             //under the surface, dirt block
             if (y <= simplex1)

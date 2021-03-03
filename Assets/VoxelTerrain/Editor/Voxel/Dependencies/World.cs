@@ -52,7 +52,7 @@ namespace VoxelTerrain.Editor.Voxel.Dependencies
             var blockType = VoxelType.Default;
 
             // noise for heightmap
-            var simplex1 = PerlinNoise.Generate2DNoiseValue( x, z, Engine.NoiseScale, Engine.Seed, Engine.WorldInfo.GroundLevel);
+            var simplex1 = TerrainData.Noise.Generate2DNoiseValue( x, z, Engine.NoiseScale, Engine.Seed, Engine.WorldInfo.GroundLevel);
 
             //under the surface, dirt block
             if (y <= simplex1)
