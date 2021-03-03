@@ -9,6 +9,7 @@ namespace VoxelTerrain.Editor.Voxel.Dependencies
     {
         public Dictionary<ChunkId, Chunk> Chunks = new Dictionary<ChunkId, Chunk>();
         public Dictionary<ChunkId, GameObject> ChunkObjects = new Dictionary<ChunkId, GameObject>();
+        public VoxelEngine Engine { get; set; }
 
         public float this[int x, int y, int z]
         {
@@ -50,24 +51,21 @@ namespace VoxelTerrain.Editor.Voxel.Dependencies
         {
             var blockType = VoxelType.Default;
 
-            // //3D noise for heightmap
-            // var simplex1 = PerlinNoise.Generate2DNoiseValue( x, z, noiseScale, seed, groundLevel);
-            // // var simplex2 = PerlinNoise.Generate2DNoiseValue(x * 0.8f, z * 0.8f, scale, seed, groundLevel) * heightMultiplier;
-            // //
-            // // var heightMap = simplex1 + simplex2;
-            //
-            // //under the surface, dirt block
-            // if (y <= simplex1)
-            // {
-            //     //blockType = VoxelType.Dirt;
-            //     blockType = VoxelType.Dirt;
-            //
-            //     //just on the surface, use a grass type
-            //     if (y > simplex1 - 1)
-            //     {
-            //         blockType = VoxelType.Grass;
-            //     }
-            // }
+            // noise for heightmap
+            var simplex1 = PerlinNoise.Generate2DNoiseValue( x, z, Engine.NoiseScale, Engine.Seed, Engine.WorldInfo.GroundLevel);
+
+            //under the surface, dirt block
+            if (y <= simplex1)
+            {
+                //blockType = VoxelType.Dirt;
+                blockType = VoxelType.Dirt;
+            
+                //just on the surface, use a grass type
+                if (y > simplex1 - 1)
+                {
+                    blockType = VoxelType.Grass;
+                }
+            }
 
             return (int) blockType;
         }

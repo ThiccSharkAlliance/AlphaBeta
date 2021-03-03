@@ -11,7 +11,6 @@ namespace VoxelTerrain.Editor.Voxel.Jobs
     {
         [ReadOnly] public int size;
         [ReadOnly] public int height;
-        [ReadOnly] public int heightMultiplier;
         [ReadOnly] public float groundLevel;
         [ReadOnly] public float scale;
         [ReadOnly] public float resolution;
@@ -44,19 +43,16 @@ namespace VoxelTerrain.Editor.Voxel.Jobs
             var blockType = VoxelType.Default;
 
             //3D noise for heightmap
-            var simplex1 = PerlinNoise.Generate2DNoiseValue( x * 0.3f, z * 0.3f, scale, seed, groundLevel) * heightMultiplier;
-            var simplex2 = PerlinNoise.Generate2DNoiseValue(x * 0.8f, z * 0.8f, scale, seed, groundLevel) * heightMultiplier;
-            
-            var heightMap = simplex1 + simplex2;
+            var simplex1 = PerlinNoise.Generate2DNoiseValue( x, z, scale, seed, groundLevel);
 
             //under the surface, dirt block
-            if (y <= heightMap)
+            if (y <= simplex1)
             {
                 //blockType = VoxelType.Dirt;
                 blockType = VoxelType.Dirt;
 
                 //just on the surface, use a grass type
-                if (y > heightMap - 1)
+                if (y > simplex1 - 1)
                 {
                     blockType = VoxelType.Grass;
                 }

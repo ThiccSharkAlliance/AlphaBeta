@@ -14,6 +14,7 @@ namespace VoxelTerrain.Editor.Voxel
         [SerializeField] private VoxelTypeHeights _voxelTypeHeights;
         [SerializeField] private WorldGenerationFunctions _worldGeneration;
         [SerializeField] private float _noiseScale;
+        [SerializeField] private int seed;
         
         private float _maxMagnitude;
 
@@ -24,11 +25,14 @@ namespace VoxelTerrain.Editor.Voxel
         public VoxelTypeHeights VoxelTypeHeights => _voxelTypeHeights;
         public float NoiseScale => _noiseScale;
 
+        public int Seed => seed;
+
         public WorldInfo WorldInfo => _worldInfo;
 
         #region Unity Functions
         private void Awake()
         {
+            WorldData.Engine = this;
             _worldGeneration.GenerateWorld(transform.position, _worldInfo.Distance, _chunkInfo.VoxelSize);
         }
 
