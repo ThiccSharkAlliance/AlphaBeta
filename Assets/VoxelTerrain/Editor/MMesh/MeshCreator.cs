@@ -66,12 +66,14 @@ namespace VoxelTerrain.Editor.MMesh
 
         public async void SetMesh(float[] Voxels, float x, float y, float z, float size)
         {
-            //MarchingCubes( Voxels, 16, 1, new Vector3(x, y, z), true);
+            MarchingCubes( Voxels, 16, 1, new Vector3(x, y, z), false);
+            /*
             Vertices.Clear();
             Triangles.Clear();
             Colors.Clear();
             
             await SetMeshData(Voxels, x, y, z, size);
+            */
             
             //_chunk.CreateMesh();
         }
@@ -107,6 +109,8 @@ namespace VoxelTerrain.Editor.MMesh
                         //Loop over each of the 8 corners of the cube, and set the corresponding
                         //bit to 1 if its value is below the surface level.
                         //this will result in a value between 0 and 255
+
+                        flagIndex = 0;
                         for (int vtest = 0; vtest < 8; vtest++)
                         {
                             if (afCubes[vtest] <= 0.0f)
