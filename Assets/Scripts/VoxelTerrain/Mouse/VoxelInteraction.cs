@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VoxelTerrain.Grid;
+using VoxelTerrain.SaveLoad;
 using VoxelTerrain.Voxel;
+using VoxelTerrain.Voxel.Dependencies;
 
 namespace VoxelTerrain.Mouse
 {
@@ -15,6 +17,7 @@ namespace VoxelTerrain.Mouse
         [SerializeField] private float _circleRadius = 5;
         [SerializeField] private float _flattenHeight = 2;
         [SerializeField] private FlattenShape _shape = FlattenShape.Single;
+        [SerializeField] private ChunkLoader _chunkLoader;
         
         private float _offset = 0;
         
@@ -72,6 +75,7 @@ namespace VoxelTerrain.Mouse
                     voxPos = (hitPos - chunkPos) / Size;
                     chunk.SetVoxel(voxPos, voxelType);
                     chunk.SetMesh(chunkPos);
+                    if (_chunkLoader) _chunkLoader.SaveChunk(chunk, new ChunkId(chunkPos.x, chunkPos.y, chunkPos.z));
                     break;
                 case FlattenShape.Square:
                     chunkList = new List<Chunk>();
@@ -103,6 +107,7 @@ namespace VoxelTerrain.Mouse
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
+                        if (_chunkLoader) _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                     }
 
                     break;
@@ -136,6 +141,7 @@ namespace VoxelTerrain.Mouse
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
+                        if (_chunkLoader) _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                     }
                     break;
                 default:
