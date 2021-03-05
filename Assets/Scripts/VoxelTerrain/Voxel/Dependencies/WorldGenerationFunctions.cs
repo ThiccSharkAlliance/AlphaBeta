@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using VoxelTerrain.SaveLoad;
 
 namespace VoxelTerrain.Voxel.Dependencies
 {
+    [RequireComponent(typeof(ChunkGenerator), typeof(ChunkLoader))]
     public class WorldGenerationFunctions : MonoBehaviour
     {
         [SerializeField] private VoxelEngine _engine;
         [SerializeField] private ChunkGenerator _chunkGenerator;
-
-        public ChunkGenerator ChunkGenerator => _chunkGenerator;
+        [SerializeField] private ChunkLoader _chunkLoader;
 
         public void GenerateWorld(Vector3 origin, float distance, float size)
         {
@@ -20,7 +21,18 @@ namespace VoxelTerrain.Voxel.Dependencies
                 }
             }
         }
-        
-        private void GenerateChunkData(Vector3 pos) => _chunkGenerator.CreateChunkJob(pos);
+
+        public Chunk GenerateChunkData(Vector3 pos)
+        {
+            Chunk c;
+
+            c = _chunkLoader.LoadChunkAt(pos);
+
+            if (c != null) return c;
+            
+            c = _chunkGenerator.CreateChunkJob(pos);
+
+            return c;
+        }
     }
 }

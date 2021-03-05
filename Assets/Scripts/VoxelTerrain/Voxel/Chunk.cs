@@ -10,9 +10,6 @@ namespace VoxelTerrain.Voxel
         public const int ChunkHeight = 64; //This should be 16 too, but I wanted taller chunks
         public float[] Voxels;
         private VoxelEngine Engine;
-        private string ChunkName;
-        private float voxelSize;
-
         private GameObject Entity;
 
         //Used to find voxel at position
@@ -23,14 +20,9 @@ namespace VoxelTerrain.Voxel
         }
 
         public void AddEntity(GameObject entity) => Entity = entity;
+        public void AddEngine(VoxelEngine engine) => Engine = engine;
 
         public void SetVoxel(Vector3 pos, VoxelType vox) => this[(int) pos.x, (int) pos.y, (int) pos.z] = (float) vox;
-
-        public void VoxelsFromJob(ChunkVoxelSetter job)
-        {
-            Voxels = job.voxels.ToArray();
-            job.voxels.Dispose();
-        }
 
         public void SetMesh( Vector3 origin)
         {
@@ -49,7 +41,7 @@ namespace VoxelTerrain.Voxel
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();
             
-            mesh.name = ChunkName;
+            mesh.name = "Chunk: " + origin;
 
             monoGo.MeshFilter.sharedMesh = mesh;
             monoGo.MeshCollider.sharedMesh = mesh;
@@ -57,12 +49,10 @@ namespace VoxelTerrain.Voxel
 
         public static int PosToIndex(int x, int y, int z) => z * (ChunkSize) * (ChunkHeight) + y * (ChunkSize) + x;
 
-        public Chunk(float x, float y, float z, float size, VoxelEngine engine)
+        public Chunk(VoxelEngine engine)
         {
             Engine = engine;
             Voxels = new float[ChunkSize * ChunkHeight * ChunkSize];
-            ChunkName = "Chunk: " + x + ", " + y + ", " + z;
-            voxelSize = size;
         }
     }
 }

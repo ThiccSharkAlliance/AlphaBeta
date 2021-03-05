@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using VoxelTerrain.SaveLoad;
 using VoxelTerrain.Voxel.Dependencies;
 using VoxelTerrain.Voxel.InfoData;
 
 namespace VoxelTerrain.Voxel
 {
     [RequireComponent(typeof(WorldInfo), typeof(ChunkInfo), typeof(VoxelTypeHeights))]
+    [RequireComponent(typeof(WorldGenerationFunctions))]
     public class VoxelEngine : MonoBehaviour
     {
         public World WorldData = new World();
@@ -64,12 +66,13 @@ namespace VoxelTerrain.Voxel
             var z = point.Z;
 
             var origin = new Vector3(x, -ChunkHeight / 2, z);
-
-            return _worldGeneration.ChunkGenerator.CreateChunkJob(origin);
+            
+            return _worldGeneration.GenerateChunkData(origin);
         }
 
         private void SpawnChunk(Chunk nonNullChunk, Vector3 pos)
         {
+            nonNullChunk.AddEngine(this);
             var chunkId = new ChunkId(pos.x, pos.y, pos.z);
             WorldData.Chunks.Add(chunkId, nonNullChunk);
 
