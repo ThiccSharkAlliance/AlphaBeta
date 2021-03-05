@@ -112,19 +112,23 @@ namespace TerrainData
                     // Generate 2D noise value
                     noiseReturn += Mathf.PerlinNoise(xSample, ySample) * amplitude;
 
-                    // Set the value at the current coordinate and subtract ground level
-                    noiseReturn -= groundLevel;
-
-                    // Anything below ground level is moved up to 0 for flat land
-                    if (noiseReturn < 0)
-                    {
-                        noiseReturn = 0;
-                    }
                 }
 
                 // Multiply the amplitude and frequency each octave
                 amplitude *= dimension;
                 frequency *= lacunarity;
+            }
+
+            if (!threeDimensions)
+            {
+                // Set the value at the current coordinate and subtract ground level
+                noiseReturn -= groundLevel;
+
+                // Anything below ground level is moved up to 0 for flat land
+                if (noiseReturn < 0)
+                {
+                    noiseReturn = 0;
+                }
             }
 
             return noiseReturn * scale;
