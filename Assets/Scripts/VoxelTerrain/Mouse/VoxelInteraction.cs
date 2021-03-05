@@ -15,12 +15,19 @@ namespace VoxelTerrain.Mouse
         [SerializeField] private float _circleRadius = 5;
         [SerializeField] private float _flattenHeight = 2;
         [SerializeField] private FlattenShape _shape = FlattenShape.Single;
-
-        public FlattenShape Shape => _shape;
+        
+        private float _offset = 0;
+        
+        public FlattenShape Shape
+        {
+            get => _shape;
+            private set => _shape = value;
+        }
 
         private Camera CamMain => Camera.main;
-        private float Offset => _engine.ChunkInfo.VoxelSize / 2;
         private float Size => _engine.ChunkInfo.VoxelSize;
+
+        public void SetShape(FlattenShape shape) => Shape = shape;
 
         public void DestroyVoxel()
         {
@@ -28,7 +35,7 @@ namespace VoxelTerrain.Mouse
         
             if (!Physics.Raycast(ray, out var hit)) return;
 
-            var hitPos = GridSnapper.SnapToGrid(hit.point, Size, Offset);
+            var hitPos = GridSnapper.SnapToGrid(hit.point, Size, _offset);
 
             hitPos.y -= Size;
         
@@ -41,7 +48,7 @@ namespace VoxelTerrain.Mouse
         
             if (!Physics.Raycast(ray, out RaycastHit hit)) return;
 
-            var hitPos = GridSnapper.SnapToGrid(hit.point, Size, Offset);
+            var hitPos = GridSnapper.SnapToGrid(hit.point, Size, _offset);
         
             UpdateChunks(hitPos, _setVoxelType);
         }
