@@ -66,7 +66,7 @@ namespace VoxelTerrain.MMesh
         //     0, 1, 6
         // };
 
-        public async void SetMesh(float[] Voxels, float x, float y, float z, float size)
+        public async void SetMesh(byte[] Voxels, float x, float y, float z, float size)
         {
             MarchingCubes(Voxels, size, new Vector3(x, y, z), true);
             /*
@@ -80,7 +80,7 @@ namespace VoxelTerrain.MMesh
             //_chunk.CreateMesh();
         }
 
-        private void MarchingCubes(float[] voxels, float scale, Vector3 origin, bool interpolate)
+        private void MarchingCubes(byte[] voxels, float scale, Vector3 origin, bool interpolate)
         {
             int flagIndex = 0;
             int index = 0;

@@ -19,7 +19,7 @@ namespace VoxelTerrain.Voxel.Jobs
         [ReadOnly] public float CaveStartHeight;
 
         public Vector3 origin;
-        public NativeArray<float> voxels;
+        public NativeArray<byte> voxels;
         public int seed;
 
         public void Execute()
@@ -38,7 +38,7 @@ namespace VoxelTerrain.Voxel.Jobs
         }
 
         //set individual voxel type using noise function
-        public float SetVoxelType(float x, float y, float z)
+        public byte SetVoxelType(float x, float y, float z)
         {
             var blockType = VoxelType.Default;
 
@@ -58,7 +58,7 @@ namespace VoxelTerrain.Voxel.Jobs
                 }
             }
 
-            return (float) blockType;
+            return (byte) blockType;
         }
     }
 }

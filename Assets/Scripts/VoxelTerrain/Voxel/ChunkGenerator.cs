@@ -110,7 +110,7 @@ namespace VoxelTerrain.Voxel
                 scale = scale,
                 resolution = resolution,
                 origin = origin,
-                voxels = new NativeArray<float>((Chunk.ChunkSize + 1) * (Chunk.ChunkHeight + 1) * (Chunk.ChunkSize + 1), Allocator.Persistent),
+                voxels = new NativeArray<byte>((Chunk.ChunkSize + 1) * (Chunk.ChunkHeight + 1) * (Chunk.ChunkSize + 1), Allocator.Persistent),
                 seed = Engine.Seed,
                 StoneDepth = stoneDepth,
                 SnowHeight = snowHeight,
