@@ -66,7 +66,7 @@ namespace VoxelTerrain.MMesh
 
         public async void SetMesh(float[] Voxels, float x, float y, float z, float size)
         {
-            MarchingCubes(size, new Vector3(x, y, z), true);
+            MarchingCubes(Voxels, size, new Vector3(x, y, z), true);
             /*
             Vertices.Clear();
             Triangles.Clear();
@@ -78,7 +78,7 @@ namespace VoxelTerrain.MMesh
             //_chunk.CreateMesh();
         }
 
-        private void MarchingCubes(float scale, Vector3 origin, bool interpolate)
+        private void MarchingCubes(float[] voxels, float scale, Vector3 origin, bool interpolate)
         {
             int flagIndex = 0;
             int index = 0;
@@ -94,16 +94,30 @@ namespace VoxelTerrain.MMesh
                 {
                     for (int z = 0; z < Chunk.ChunkSize; z++)
                     {
-                        //Offsets are same as cornerOffsets[8]
-                        afCubes[0] = _world.GetVoxelAt(origin.x + x, origin.y + y, origin.z + z, scale);
-                        afCubes[1] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y, origin.z + z, scale);
-                        afCubes[2] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y + 1, origin.z + z, scale);
-                        afCubes[3] = _world.GetVoxelAt(origin.x + x, origin.y + y + 1, origin.z + z, scale);
-                        afCubes[4] = _world.GetVoxelAt(origin.x + x, origin.y + y, origin.z + z + 1, scale);
-                        afCubes[5] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y, origin.z + z + 1, scale);
-                        afCubes[6] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y + 1, origin.z + z + 1, scale);
-                        afCubes[7] = _world.GetVoxelAt(origin.x + x, origin.y + y + 1, origin.z + z + 1, scale);
-
+                        if (x == Chunk.ChunkSize - 1 || z == Chunk.ChunkSize - 1)
+                        {
+                            //Offsets are same as cornerOffsets[8]
+                            afCubes[0] = _world.GetVoxelAt(origin.x + x, origin.y + y, origin.z + z, scale);
+                            afCubes[1] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y, origin.z + z, scale);
+                            afCubes[2] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y + 1, origin.z + z, scale);
+                            afCubes[3] = _world.GetVoxelAt(origin.x + x, origin.y + y + 1, origin.z + z, scale);
+                            afCubes[4] = _world.GetVoxelAt(origin.x + x, origin.y + y, origin.z + z + 1, scale);
+                            afCubes[5] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y, origin.z + z + 1, scale);
+                            afCubes[6] = _world.GetVoxelAt(origin.x + x + 1, origin.y + y + 1, origin.z + z + 1, scale);
+                            afCubes[7] = _world.GetVoxelAt(origin.x + x, origin.y + y + 1, origin.z + z + 1, scale);
+                        }
+                        else
+                        {
+                            //Offsets are same as cornerOffsets[8]
+                            afCubes[0] = voxels[Chunk.PosToIndex(x, y, z)];
+                            afCubes[1] = voxels[Chunk.PosToIndex(x + 1, y, z)];
+                            afCubes[2] = voxels[Chunk.PosToIndex(x + 1, y + 1, z)];
+                            afCubes[3] = voxels[Chunk.PosToIndex(x, y + 1, z)];
+                            afCubes[4] = voxels[Chunk.PosToIndex(x, y, z + 1)];
+                            afCubes[5] = voxels[Chunk.PosToIndex(x + 1, y, z + 1)];
+                            afCubes[6] = voxels[Chunk.PosToIndex(x + 1, y + 1, z + 1)];
+                            afCubes[7] = voxels[Chunk.PosToIndex(x, y + 1, z + 1)];
+                        }
 
                         //Calculate the index of the current cube configuration as follows:
                         //Loop over each of the 8 corners of the cube, and set the corresponding
@@ -146,8 +160,23 @@ namespace VoxelTerrain.MMesh
                                 if (interpolate)
                                 {
                                     float ofst;
-                                    float s1 = _world.GetVoxelAt(origin.x + x + edge1.x, origin.y + y + edge1.y, origin.z + z + edge1.z, scale);
-                                    float delta = s1 - _world.GetVoxelAt(origin.x + x + edge2.x, origin.y + y + edge2.y, origin.z + z + edge2.z, scale);
+                                    float s1;
+                                    float delta;
+                                    if (x == Chunk.ChunkSize - 1 || z == Chunk.ChunkSize - 1)
+                                    {
+                                        s1 = _world.GetVoxelAt(origin.x + x + edge1.x, origin.y + y + edge1.y,
+                                            origin.z + z + edge1.z, scale);
+                                        delta = s1 - _world.GetVoxelAt(origin.x + x + edge2.x,
+                                            origin.y + y + edge2.y, origin.z + z + edge2.z, scale);
+                                    }
+                                    else
+                                    {
+                                        s1 = voxels[Chunk.PosToIndex(x + (int) edge1.x, y + (int) edge1.y,
+                                            z + (int) edge1.z)];
+                                        delta = s1 - voxels[Chunk.PosToIndex(x + (int) edge2.x,
+                                            y + (int) edge2.y, z + (int) edge2.z)];
+                                    }
+
                                     if (delta == 0.0f)
                                         ofst = 0.5f;
                                     else

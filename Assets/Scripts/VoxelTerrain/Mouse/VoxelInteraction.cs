@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VoxelTerrain.Grid;
 using VoxelTerrain.Voxel;
@@ -51,6 +52,8 @@ namespace VoxelTerrain.Mouse
             Chunk chunk;
             Vector3 voxPos;
             Vector3 newPos;
+            List<Chunk> chunkList;
+            List<Vector3> posList;
             switch (_shape)
             {
                 case FlattenShape.Single:
@@ -64,6 +67,8 @@ namespace VoxelTerrain.Mouse
                     chunk.SetMesh(chunkPos);
                     break;
                 case FlattenShape.Square:
+                    chunkList = new List<Chunk>();
+                    posList = new List<Vector3>();
                     for (float i = hitPos.x - _xRadius; i < hitPos.x + _xRadius; i += Size)
                     {
                         for (float j = hitPos.z - _zRadius; j < hitPos.z + _zRadius; j += Size)
@@ -73,6 +78,12 @@ namespace VoxelTerrain.Mouse
                             chunk = _engine.WorldData.GetChunkAt(chunkPos);
 
                             if (chunk == null) continue;
+                            
+                            if (!chunkList.Contains(chunk))
+                            {
+                                chunkList.Add(chunk);
+                                posList.Add(chunkPos);
+                            }
 
                             voxPos = (newPos - chunkPos) / Size;
 
@@ -81,9 +92,16 @@ namespace VoxelTerrain.Mouse
                             chunk.SetMesh(chunkPos);
                         }
                     }
+                    
+                    for (int i = 0; i < chunkList.Count; i++)
+                    {
+                        chunkList[i].SetMesh(posList[i]);
+                    }
 
                     break;
                 case FlattenShape.Circular:
+                    chunkList = new List<Chunk>();
+                    posList = new List<Vector3>();
                     for (float i = hitPos.x - _xRadius; i < hitPos.x + _xRadius; i += Size)
                     {
                         for (float j = hitPos.z - _zRadius; j < hitPos.z + _zRadius; j += Size)
@@ -93,14 +111,24 @@ namespace VoxelTerrain.Mouse
                             chunk = _engine.WorldData.GetChunkAt(chunkPos);
 
                             if (chunk == null) continue;
+                            
+                            if (!chunkList.Contains(chunk))
+                            {
+                                chunkList.Add(chunk);
+                                posList.Add(chunkPos);
+                            }
 
                             if (!InRange(newPos, hitPos)) continue;
                         
                             voxPos = (newPos - chunkPos) / Size;
                             if (voxelType == VoxelType.Default) chunk.SetVoxel(voxPos, voxelType);
                             else Flatten(voxPos, voxelType, chunk);
-                            chunk.SetMesh(chunkPos);
                         }
+                    }
+
+                    for (int i = 0; i < chunkList.Count; i++)
+                    {
+                        chunkList[i].SetMesh(posList[i]);
                     }
                     break;
                 default:
