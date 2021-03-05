@@ -45,8 +45,7 @@ namespace VoxelTerrain.Voxel
             //Update mesh
             mesh.vertices = meshCreator.Vertices.ToArray();
             mesh.triangles = meshCreator.Triangles.ToArray();
-            mesh.uv = new Vector2[mesh.vertices.Length];
-            mesh.SetColors(meshCreator.Colors);
+            
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();
             
