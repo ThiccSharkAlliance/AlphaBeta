@@ -28,15 +28,15 @@ namespace VoxelTerrain.Voxel.Dependencies
 
         public Chunk GetChunkAt(Vector3 pos) => Chunks.ContainsKey(ChunkId.FromWorldPos(pos.x, pos.y, pos.z)) ? Chunks[ChunkId.FromWorldPos(pos.x, pos.y, pos.z)] : null;
         
-        public int GetVoxelAt(float x, float y, float z, float scale)
+        public float GetVoxelAt(float x, float y, float z, float scale)
         {
             var chunkPos = NearestChunk(new Vector3(x, y, z), scale);
             var chunk = GetChunkAt(chunkPos);
 
-            if (chunk == null) return SetVoxelType(x, y, z); 
+            if (chunk == null) return SetVoxelType(x * scale, y * scale, z * scale); 
 
-            var voxPos = new Vector3(x, y, z) - chunkPos;
-            return (int) chunk[voxPos.x, voxPos.y, voxPos.z];
+            var voxPos = (new Vector3(x, y, z) - chunkPos) / scale;
+            return chunk[voxPos.x, voxPos.y, voxPos.z];
         }
         
         public Vector3 NearestChunk(Vector3 pos, float scale)
