@@ -40,21 +40,21 @@ public class Manager : MonoBehaviour
     int currentSelection = 0;
 
     /// 
-    private void OnEnable()
-    {
-        if (manager == null)
-        {
-            manager = this;
-        }
-        else
-        {
-            if (manager != this)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-        DontDestroyOnLoad(this.gameObject);
-    }//Singleton Enrico
+    //private void OnEnable()
+    //{
+    //    if (manager == null)
+    //    {
+    //        manager = this;
+    //    }
+    //    else
+    //    {
+    //        if (manager != this)
+    //        {
+    //            Destroy(this.gameObject);
+    //        }
+    //    }
+    //    DontDestroyOnLoad(this.gameObject);
+    //}//Singleton Enrico
     ///
 
     private void Awake()

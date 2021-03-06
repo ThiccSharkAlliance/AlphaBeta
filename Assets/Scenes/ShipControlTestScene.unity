@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -229,6 +229,159 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &547486980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 547486982}
+  - component: {fileID: 547486981}
+  - component: {fileID: 547486984}
+  - component: {fileID: 547486985}
+  - component: {fileID: 547486983}
+  m_Layer: 0
+  m_Name: DEV_LOGIN_TO_REMOVE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &547486981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547486980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff43707c2eae31443b819b14ddfbe206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loginRequest:
+    InfoRequestParameters:
+      GetCharacterInventories: 1
+      GetCharacterList: 0
+      GetPlayerProfile: 1
+      GetPlayerStatistics: 1
+      GetTitleData: 1
+      GetUserAccountInfo: 1
+      GetUserData: 1
+      GetUserInventory: 1
+      GetUserReadOnlyData: 0
+      GetUserVirtualCurrency: 1
+      PlayerStatisticNames: []
+      ProfileConstraints:
+        ShowAvatarUrl: 0
+        ShowBannedUntil: 0
+        ShowCampaignAttributions: 0
+        ShowContactEmailAddresses: 0
+        ShowCreated: 0
+        ShowDisplayName: 0
+        ShowExperimentVariants: 0
+        ShowLastLogin: 0
+        ShowLinkedAccounts: 0
+        ShowLocations: 0
+        ShowMemberships: 0
+        ShowOrigination: 0
+        ShowPushNotificationRegistrations: 0
+        ShowStatistics: 0
+        ShowTags: 0
+        ShowTotalValueToDateInUsd: 0
+        ShowValuesToDate: 0
+      TitleDataKeys: []
+      UserDataKeys: []
+      UserReadOnlyDataKeys: []
+    Password: 
+    TitleId: 
+    Username: 
+  infoRequest:
+    GetCharacterInventories: 1
+    GetCharacterList: 0
+    GetPlayerProfile: 1
+    GetPlayerStatistics: 1
+    GetTitleData: 1
+    GetUserAccountInfo: 1
+    GetUserData: 1
+    GetUserInventory: 1
+    GetUserReadOnlyData: 0
+    GetUserVirtualCurrency: 1
+    PlayerStatisticNames: []
+    ProfileConstraints:
+      ShowAvatarUrl: 0
+      ShowBannedUntil: 0
+      ShowCampaignAttributions: 0
+      ShowContactEmailAddresses: 0
+      ShowCreated: 0
+      ShowDisplayName: 0
+      ShowExperimentVariants: 0
+      ShowLastLogin: 0
+      ShowLinkedAccounts: 0
+      ShowLocations: 0
+      ShowMemberships: 0
+      ShowOrigination: 0
+      ShowPushNotificationRegistrations: 0
+      ShowStatistics: 0
+      ShowTags: 0
+      ShowTotalValueToDateInUsd: 0
+      ShowValuesToDate: 0
+    TitleDataKeys: []
+    UserDataKeys: []
+    UserReadOnlyDataKeys: []
+--- !u!4 &547486982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547486980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &547486983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547486980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88cc717918070e242b3700458b8293c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &547486984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547486980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069c848484e9b8f44a03a89603ce7e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &547486985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547486980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99cb5b66a2a041b47b34ec7af8e3a0b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gotCurrency: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1671917563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,7 +1172,7 @@ PrefabInstance:
     - target: {fileID: 2929511488373839930, guid: 070856fc9ae042b49a3107d5ddbfbebd,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
         type: 3}
@@ -1278,7 +1431,7 @@ PrefabInstance:
     - target: {fileID: 6145805133548518495, guid: 97a020c0a2161804099537fb1648bb4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97a020c0a2161804099537fb1648bb4e, type: 3}
