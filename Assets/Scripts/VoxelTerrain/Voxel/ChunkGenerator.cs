@@ -2,6 +2,7 @@
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
+using VoxelTerrain.SaveLoad;
 using VoxelTerrain.Voxel.Dependencies;
 using VoxelTerrain.Voxel.Jobs;
 
@@ -9,6 +10,7 @@ namespace VoxelTerrain.Voxel
 {
     public class ChunkGenerator : MonoBehaviour
     {
+        [SerializeField] private ChunkLoader _chunkLoader;
         public VoxelEngine Engine { get; set; }
 
         struct JobHolder
@@ -33,7 +35,12 @@ namespace VoxelTerrain.Voxel
                 {
                     handle.Complete();
 
-                    chunk.VoxelsFromJob(job);
+                    chunk.Voxels = job.voxels.ToArray();
+                    job.voxels.Dispose();
+
+                    //chunk.VoxelsFromJob(job);
+                    
+                    if (_chunkLoader) _chunkLoader.SaveChunk(chunk, new ChunkId(worldOrigin.x, worldOrigin.y, worldOrigin.z));
 
                     _jobs.Remove(worldOrigin);
 
@@ -59,7 +66,12 @@ namespace VoxelTerrain.Voxel
                 {
                     holder.Handle.Complete();
                     
-                    chunk.VoxelsFromJob(holder.Job);
+                    chunk.Voxels = holder.Job.voxels.ToArray();
+                    holder.Job.voxels.Dispose();
+                    
+                    //chunk.VoxelsFromJob(holder.Job);
+                    
+                    if (_chunkLoader) _chunkLoader.SaveChunk(chunk, new ChunkId(worldOrigin.x, worldOrigin.y, worldOrigin.z));
 
                     _jobs.Remove(worldOrigin);
 
@@ -70,7 +82,7 @@ namespace VoxelTerrain.Voxel
             return null;
         }
         
-        private Chunk LoadChunkAt(Vector3 worldOrigin) => Engine.WorldData.Chunks.ContainsKey(ChunkId.FromWorldPos(worldOrigin.x, worldOrigin.y, worldOrigin.z)) ? Engine.WorldData.Chunks[ChunkId.FromWorldPos(worldOrigin.x, worldOrigin.y, worldOrigin.z)] : new Chunk(worldOrigin.x, worldOrigin.y, worldOrigin.z, Engine.ChunkInfo.VoxelSize, Engine);
+        private Chunk LoadChunkAt(Vector3 worldOrigin) => Engine.WorldData.Chunks.ContainsKey(ChunkId.FromWorldPos(worldOrigin.x, worldOrigin.y, worldOrigin.z)) ? Engine.WorldData.Chunks[ChunkId.FromWorldPos(worldOrigin.x, worldOrigin.y, worldOrigin.z)] : new Chunk(Engine);
         
         private void OnDestroy()
         {
@@ -98,7 +110,7 @@ namespace VoxelTerrain.Voxel
                 scale = scale,
                 resolution = resolution,
                 origin = origin,
-                voxels = new NativeArray<float>((Chunk.ChunkSize + 1) * (Chunk.ChunkHeight + 1) * (Chunk.ChunkSize + 1), Allocator.Persistent),
+                voxels = new NativeArray<byte>((Chunk.ChunkSize + 1) * (Chunk.ChunkHeight + 1) * (Chunk.ChunkSize + 1), Allocator.Persistent),
                 seed = Engine.Seed,
                 StoneDepth = stoneDepth,
                 SnowHeight = snowHeight,

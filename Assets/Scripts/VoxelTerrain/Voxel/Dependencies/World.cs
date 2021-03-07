@@ -11,7 +11,7 @@ namespace VoxelTerrain.Voxel.Dependencies
         public Dictionary<ChunkId, GameObject> ChunkObjects = new Dictionary<ChunkId, GameObject>();
         public VoxelEngine Engine { get; set; }
 
-        public float this[int x, int y, int z]
+        public byte this[int x, int y, int z]
         {
             get
             {

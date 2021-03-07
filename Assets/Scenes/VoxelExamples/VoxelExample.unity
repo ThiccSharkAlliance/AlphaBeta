@@ -128,7 +128,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1219288309642976018}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1219288309642976019}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b650019544c210a4a8945ae2b27800be, type: 3}
@@ -147,8 +147,12 @@ PrefabInstance:
       objectReference: {fileID: 201202581}
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _shape
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _chunkLoader
+      value: 
+      objectReference: {fileID: 1219288309642976020}
     - target: {fileID: 1561188667314874129, guid: a11bfa0f202cd184e949e58420e9eee5,
         type: 3}
       propertyPath: m_Name
@@ -569,5 +573,35 @@ PrefabInstance:
       propertyPath: _voxelSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7941170911782372764, guid: 2b7228255036a30479393ef9a76b8464,
+        type: 3}
+      propertyPath: _chunkLoader
+      value: 
+      objectReference: {fileID: 1219288309642976020}
+    - target: {fileID: 7941170911782372765, guid: 2b7228255036a30479393ef9a76b8464,
+        type: 3}
+      propertyPath: _chunkLoader
+      value: 
+      objectReference: {fileID: 1219288309642976020}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b7228255036a30479393ef9a76b8464, type: 3}
+--- !u!1 &1219288309642976019 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1219288309473230982, guid: 2b7228255036a30479393ef9a76b8464,
+    type: 3}
+  m_PrefabInstance: {fileID: 1219288309642976018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1219288309642976020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219288309642976019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a53ef923e2a61e47be103ca2eeee4e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chunkDirectoryName: Chunks
+  _enableSaving: 1

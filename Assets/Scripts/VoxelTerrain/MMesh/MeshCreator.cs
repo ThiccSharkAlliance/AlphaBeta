@@ -11,6 +11,7 @@ namespace VoxelTerrain.MMesh
         public readonly List<Vector3> Vertices;
         public readonly List<int> Triangles;
         public readonly List<Color> Colors;
+        public readonly List<Vector3> UV;
         private static readonly Color32[] _colors = {new Color32(66, 177, 0, 255), new Color32(87, 51, 0, 255), new Color32(85, 85, 85, 255), new Color32(255, 176, 0, 255), new Color32(255, 255, 255, 255), new Color32(0, 0, 255, 255), new Color32(110, 70, 0, 255)  };
         private Vector3 _pos;
         private int _numFaces;
@@ -24,9 +25,10 @@ namespace VoxelTerrain.MMesh
             Vertices = new List<Vector3>();
             Triangles = new List<int>();
             Colors = new List<Color>();
+            UV = new List<Vector3>();
             _numFaces = 0;
             
-            CubeVertices = new Vector3[] {
+            CubeVertices = new [] {
                 new Vector3 (0, 0, 0), //0
                 new Vector3 (1 * size, 0, 0), //1
                 new Vector3 (1 * size, 1 * size, 0), //2
@@ -64,7 +66,7 @@ namespace VoxelTerrain.MMesh
         //     0, 1, 6
         // };
 
-        public async void SetMesh(float[] Voxels, float x, float y, float z, float size)
+        public async void SetMesh(byte[] Voxels, float x, float y, float z, float size)
         {
             MarchingCubes(Voxels, size, new Vector3(x, y, z), true);
             /*
@@ -78,7 +80,7 @@ namespace VoxelTerrain.MMesh
             //_chunk.CreateMesh();
         }
 
-        private void MarchingCubes(float[] voxels, float scale, Vector3 origin, bool interpolate)
+        private void MarchingCubes(byte[] voxels, float scale, Vector3 origin, bool interpolate)
         {
             int flagIndex = 0;
             int index = 0;
@@ -164,10 +166,10 @@ namespace VoxelTerrain.MMesh
                                     float delta;
                                     if (x == Chunk.ChunkSize - 1 || z == Chunk.ChunkSize - 1)
                                     {
-                                        s1 = _world.GetVoxelAt(origin.x + x + edge1.x, origin.y + y + edge1.y,
-                                            origin.z + z + edge1.z, scale);
-                                        delta = s1 - _world.GetVoxelAt(origin.x + x + edge2.x,
-                                            origin.y + y + edge2.y, origin.z + z + edge2.z, scale);
+                                        s1 = _world.GetVoxelAt(origin.x + x + (int) edge1.x, origin.y + y + (int) edge1.y,
+                                            origin.z + z + (int) edge1.z, scale);
+                                        delta = s1 - _world.GetVoxelAt(origin.x + x + (int) edge2.x,
+                                            origin.y + y + (int) edge2.y, origin.z + z + (int) edge2.z, scale);
                                     }
                                     else
                                     {
