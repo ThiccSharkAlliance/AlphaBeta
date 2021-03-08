@@ -12,6 +12,7 @@ namespace VoxelTerrain.MMesh
         public readonly List<int> Triangles;
         public readonly List<Vector4> uv0;
         public readonly List<Vector4> uv1;
+        static readonly Vector4[] barycentricCoords = new Vector4[3] {new Vector4(1, 0, 0, 1), new Vector4(0, 1, 0, 1), new Vector4(0, 0, 1, 1)};
         public readonly List<Color> Colors;
         public readonly List<Vector3> UV;
         private static readonly Color32[] _colors = {new Color32(66, 177, 0, 255), new Color32(87, 51, 0, 255), new Color32(85, 85, 85, 255), new Color32(255, 176, 0, 255), new Color32(255, 255, 255, 255), new Color32(0, 0, 255, 255), new Color32(110, 70, 0, 255)  };
@@ -244,18 +245,7 @@ namespace VoxelTerrain.MMesh
                             for (int i = 0; i < 3; i++)
                             {
                                 uv0.Add(voxelTypes);
-                                if (i == 0)
-                                {
-                                    uv1.Add(new Vector4(1, 0, 0, 1));
-                                }
-                                else if (i == 1)
-                                {
-                                    uv1.Add(new Vector4(0, 1, 0, 1));
-                                }
-                                else
-                                {
-                                    uv1.Add(new Vector4(0, 0, 1, 1));
-                                }
+                                uv1.Add(barycentricCoords[i]);
                             }
                         }
                     }
