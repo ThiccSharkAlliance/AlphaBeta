@@ -10,6 +10,9 @@ namespace VoxelTerrain.MMesh
     {
         public readonly List<Vector3> Vertices;
         public readonly List<int> Triangles;
+        public readonly List<Vector4> uv0;
+        public readonly List<Vector4> uv1;
+        static readonly Vector4[] barycentricCoords = new Vector4[3] {new Vector4(1, 0, 0, 1), new Vector4(0, 1, 0, 1), new Vector4(0, 0, 1, 1)};
         public readonly List<Color> Colors;
         public readonly List<Vector3> UV;
         private static readonly Color32[] _colors = {new Color32(66, 177, 0, 255), new Color32(87, 51, 0, 255), new Color32(85, 85, 85, 255), new Color32(255, 176, 0, 255), new Color32(255, 255, 255, 255), new Color32(0, 0, 255, 255), new Color32(110, 70, 0, 255)  };
@@ -24,6 +27,8 @@ namespace VoxelTerrain.MMesh
             _world = world;
             Vertices = new List<Vector3>();
             Triangles = new List<int>();
+            uv0 = new List<Vector4>();
+            uv1 = new List<Vector4>();
             Colors = new List<Color>();
             UV = new List<Vector3>();
             _numFaces = 0;
@@ -87,6 +92,8 @@ namespace VoxelTerrain.MMesh
 
             Vertices.Clear();
             Triangles.Clear();
+            uv0.Clear();
+            uv1.Clear();
 
             float[] afCubes = new float[8];
 
@@ -147,6 +154,7 @@ namespace VoxelTerrain.MMesh
                             if (edgeIndex < 0)
                                 continue; //Skip if the edgeIndex is -1
 
+                            Vector4 voxelTypes = new Vector4(0, 0, 0, 1);
                             for (int triangleCorner = 0; triangleCorner < 3; triangleCorner++)
                             {
                                 edgeIndex =
@@ -190,8 +198,54 @@ namespace VoxelTerrain.MMesh
                                     middle = (edge1 + edge2) * 0.5f;
                                 }
 
+                                float voxel1;
+                                float voxel2;
+                                float voxelValue;
+                                if (x == Chunk.ChunkSize - 1 || z == Chunk.ChunkSize - 1)
+                                {
+                                    voxel1 = _world.GetVoxelAt(origin.x + x + (int)edge1.x, origin.y + y + (int)edge1.y,
+                                        origin.z + z + (int)edge1.z, scale);
+                                    voxel2 = _world.GetVoxelAt(origin.x + x + (int)edge2.x,
+                                        origin.y + y + (int)edge2.y, origin.z + z + (int)edge2.z, scale);
+                                }
+                                else
+                                {
+                                    voxel1 = voxels[Chunk.PosToIndex(x + (int)edge1.x, y + (int)edge1.y,
+                                        z + (int)edge1.z)];
+                                    voxel2 = voxels[Chunk.PosToIndex(x + (int)edge2.x,
+                                        y + (int)edge2.y, z + (int)edge2.z)];
+                                }
+
+                                if (voxel1 > 0)
+                                {
+                                    voxelValue = voxel1;
+                                }
+                                else
+                                {
+                                    voxelValue = voxel2;
+                                }
+
+                                if (triangleCorner == 0)
+                                {
+                                    voxelTypes.x = voxelValue;
+                                }
+                                else if (triangleCorner == 1)
+                                {
+                                    voxelTypes.y = voxelValue;
+                                }
+                                else
+                                {
+                                    voxelTypes.z = voxelValue;
+                                }
+
                                 Vertices.Add(offset + middle);
                                 Triangles.Add(index++);
+                            }
+
+                            for (int i = 0; i < 3; i++)
+                            {
+                                uv0.Add(voxelTypes);
+                                uv1.Add(barycentricCoords[i]);
                             }
                         }
                     }
