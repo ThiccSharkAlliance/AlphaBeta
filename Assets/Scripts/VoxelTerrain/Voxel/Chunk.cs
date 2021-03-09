@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VoxelTerrain.MMesh;
 using VoxelTerrain.Voxel.Jobs;
@@ -38,6 +39,10 @@ namespace VoxelTerrain.Voxel
             //Update mesh
             mesh.vertices = meshCreator.Vertices.ToArray();
             mesh.triangles = meshCreator.Triangles.ToArray();
+            
+            mesh.SetUVs(0, new List<Vector2>(mesh.vertices.Length));
+            mesh.SetUVs(1, meshCreator.uv0);
+            mesh.SetUVs(2, meshCreator.uv1);
             
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();

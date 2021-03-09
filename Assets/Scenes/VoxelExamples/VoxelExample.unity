@@ -604,4 +604,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chunkDirectoryName: Chunks
-  _enableSaving: 1
+  _enableSaving: 0
