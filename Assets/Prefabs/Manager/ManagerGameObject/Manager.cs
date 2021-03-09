@@ -6,15 +6,16 @@ using UnityEngine.UI;
 public class Manager : MonoBehaviour
 {
     [System.Serializable]
-    public class ResourceInfo
+    public class ResourceInfo 
     {
         public string resourceName;
         public int buildingCost;
         public bool unlocked;
         public Sprite iconSprite;
         public GameObject prefab;
+        public int Damage;
     }
-
+    
     public ResourceInfo[] resourceInfo;
 
     VirtualCurrency virtualCurrency;
@@ -39,22 +40,22 @@ public class Manager : MonoBehaviour
     int currentSelection = 0;
 
     /// 
-    private void OnEnable()
-    {
-        if (manager == null)
-        {
-            manager = this;
-        }
-        else
-        {
-            if (manager != this)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-        DontDestroyOnLoad(this.gameObject);
-    }//Singleton Enrico
-        ///
+    //private void OnEnable()
+    //{
+    //    if (manager == null)
+    //    {
+    //        manager = this;
+    //    }
+    //    else
+    //    {
+    //        if (manager != this)
+    //        {
+    //            Destroy(this.gameObject);
+    //        }
+    //    }
+    //    DontDestroyOnLoad(this.gameObject);
+    //}//Singleton Enrico
+    ///
 
     private void Awake()
     {

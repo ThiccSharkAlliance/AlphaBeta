@@ -8,8 +8,8 @@ public class VirtualCurrency : MonoBehaviour
 {
 
     //References
-    PlayFabAuth PFA;
-    
+    // PlayFabAuth PFA;
+    DEV_LOGIN dEV_LOGIN;
     //Currency Variebles
     protected int sealsCurrrency;
     protected  List<ItemInstance> inventoryItem = new List<ItemInstance>();
@@ -21,8 +21,8 @@ public class VirtualCurrency : MonoBehaviour
     
     private void Awake()
     {
-        
-        PFA = gameObject.GetComponent<PlayFabAuth>();
+        dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
+       // PFA = gameObject.GetComponent<PlayFabAuth>();
     }
 
     public void PurchaseUpgrade(string itemID, int price)
