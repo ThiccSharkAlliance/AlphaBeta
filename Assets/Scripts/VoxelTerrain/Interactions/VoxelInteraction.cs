@@ -229,10 +229,10 @@ namespace VoxelTerrain.Mouse
 
             do
             {
+                voxPos.y--;
                 if (chunk[voxPos.x, voxPos.y, voxPos.z] == (byte)voxelType) break; 
                 chunk.SetVoxel(voxPos, voxelType);
-                voxPos.y--;
-            } while (Vector3.Distance(pos, voxPos) <= digDepth);
+            } while (Vector3.Distance(voxPos, pos) <= digDepth);
         }
 
         private void Sphere(Vector3 origin, Vector3 pos, Vector3 newPos, float sphereRadius, VoxelType voxelType, Chunk chunk)
