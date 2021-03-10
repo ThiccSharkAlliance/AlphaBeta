@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using VoxelTerrain.Grid;
@@ -42,7 +43,7 @@ namespace VoxelTerrain.Mouse
 
             hitPos.y -= Size;
         
-            UpdateChunks(hitPos, VoxelType.Default);
+            StartCoroutine(UpdateChunks(hitPos, VoxelType.Default));
         }
     
         public void CreateVoxel()
@@ -53,10 +54,10 @@ namespace VoxelTerrain.Mouse
 
             var hitPos = GridSnapper.SnapToGrid(hit.point, Size, _offset);
         
-            UpdateChunks(hitPos, _setVoxelType);
+            StartCoroutine(UpdateChunks(hitPos, _setVoxelType));
         }
 
-        private void UpdateChunks(Vector3 hitPos, VoxelType voxelType)
+        private IEnumerator UpdateChunks(Vector3 hitPos, VoxelType voxelType)
         {
             Vector3 chunkPos;
             Chunk chunk;
@@ -70,12 +71,13 @@ namespace VoxelTerrain.Mouse
                     chunkPos = _engine.NearestChunk(hitPos);
                     chunk = _engine.WorldData.GetChunkAt(chunkPos);
 
-                    if (chunk == null) return;
+                    if (chunk == null) break;
 
                     voxPos = (hitPos - chunkPos) / Size;
                     chunk.SetVoxel(voxPos, voxelType);
                     chunk.SetMesh(chunkPos);
                     if (_chunkLoader) _chunkLoader.SaveChunk(chunk, new ChunkId(chunkPos.x, chunkPos.y, chunkPos.z));
+                    yield return null;
                     break;
                 case FlattenShape.Square:
                     chunkList = new List<Chunk>();
@@ -99,8 +101,9 @@ namespace VoxelTerrain.Mouse
                             voxPos = (newPos - chunkPos) / Size;
 
                             if (voxelType == VoxelType.Default) chunk.SetVoxel(voxPos, voxelType);
-                            else Flatten(voxPos, voxelType, chunk);
-                            chunk.SetMesh(chunkPos);
+                            else StartCoroutine(Flatten(voxPos, voxelType, chunk));
+                            yield return null;
+                            //chunk.SetMesh(chunkPos);
                         }
                     }
                     
@@ -108,6 +111,7 @@ namespace VoxelTerrain.Mouse
                     {
                         chunkList[i].SetMesh(posList[i]);
                         if (_chunkLoader) _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        yield return null;
                     }
 
                     break;
@@ -134,7 +138,8 @@ namespace VoxelTerrain.Mouse
                         
                             voxPos = (newPos - chunkPos) / Size;
                             if (voxelType == VoxelType.Default) chunk.SetVoxel(voxPos, voxelType);
-                            else Flatten(voxPos, voxelType, chunk);
+                            else StartCoroutine(Flatten(voxPos, voxelType, chunk));
+                            yield return null;
                         }
                     }
 
@@ -142,6 +147,7 @@ namespace VoxelTerrain.Mouse
                     {
                         chunkList[i].SetMesh(posList[i]);
                         if (_chunkLoader) _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        yield return null;
                     }
                     break;
                 default:
@@ -151,7 +157,7 @@ namespace VoxelTerrain.Mouse
 
         private bool InRange(Vector3 pos, Vector3 origin) => Vector3.Distance(origin, pos) < _circleRadius;
 
-        private void Flatten(Vector3 pos, VoxelType voxelType, Chunk chunk)
+        private IEnumerator Flatten(Vector3 pos, VoxelType voxelType, Chunk chunk)
         {
             Vector3 newPos = pos;
 
@@ -159,6 +165,7 @@ namespace VoxelTerrain.Mouse
             {
                 chunk.SetVoxel(newPos, VoxelType.Default);
                 newPos.y++;
+                yield return null;
             } while (Vector3.Distance(pos, newPos) <= _flattenHeight);
 
             newPos = pos;
@@ -167,6 +174,7 @@ namespace VoxelTerrain.Mouse
             {
                 if (chunk[newPos.x, newPos.y, newPos.z] == (float)VoxelType.Default) chunk.SetVoxel(newPos, voxelType);
                 newPos.y--;
+                yield return null;
             } while (Vector3.Distance(pos, newPos) <= _flattenHeight);
         }
     }
