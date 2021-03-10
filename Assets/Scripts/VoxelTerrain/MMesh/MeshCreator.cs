@@ -186,11 +186,7 @@ namespace VoxelTerrain.MMesh
                                         delta = s1 - voxels[Chunk.PosToIndex(x + (int) edge2.x,
                                             y + (int) edge2.y, z + (int) edge2.z)];
                                     }
-
-                                    if (delta == 0.0f)
-                                        ofst = 0.5f;
-                                    else
-                                        ofst = s1 / delta;
+                                    ofst = s1 / delta;
                                     middle = edge1 + ofst * (edge2 - edge1);
                                 }
                                 else
