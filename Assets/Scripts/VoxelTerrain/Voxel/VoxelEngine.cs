@@ -60,7 +60,9 @@ namespace VoxelTerrain.Voxel
             return LoadChunkAt(point);
         }
 
-        private Chunk LoadChunkAt(ChunkId point)
+        public Chunk LoadFromFile(Vector3 pos) => _worldGeneration.ChunkLoader.LoadChunkAt(pos);
+
+        public Chunk LoadChunkAt(ChunkId point)
         {
             var x = point.X;
             var z = point.Z;

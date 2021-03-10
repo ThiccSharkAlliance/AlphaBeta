@@ -74,9 +74,16 @@ namespace VoxelTerrain.Mouse
                         {
                             newChunkPos = new Vector3(i, hitPos.y, j);
                             chunkPos = _engine.NearestChunk(newChunkPos);
-                            chunk = _engine.WorldData.GetChunkAt(chunkPos);
+                            chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
 
-                            if (chunk == null) continue;
+                            while (chunk == null)
+                            {
+                                chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
+
+                                yield return null;
+                            }
+                            
+                            if (!_engine.WorldData.Chunks.ContainsValue(chunk)) _engine.WorldData.Chunks.Add(new ChunkId(chunkPos.x, chunkPos.y, chunkPos.z), chunk);
                             
                             if (!chunkList.Contains(chunk))
                             {
@@ -94,10 +101,21 @@ namespace VoxelTerrain.Mouse
                             yield return null;
                         }
                     }
+                    if (_chunkLoader)
+                    {
+                        for (int i = 0; i < chunkList.Count; i++)
+                        {
+                            chunkList[i].Position = posList[i];
+                            _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                            yield return null;
+                        }
+                    }
+
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (_chunkLoader) _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity())
+                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
                     break;
@@ -110,9 +128,15 @@ namespace VoxelTerrain.Mouse
                         {
                             newChunkPos = new Vector3(i, hitPos.y, j);
                             chunkPos = _engine.NearestChunk(newChunkPos);
-                            chunk = _engine.WorldData.GetChunkAt(chunkPos);
+                            chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
 
-                            if (chunk == null) continue;
+                            while (chunk == null)
+                            {
+                                chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
+                                yield return null;
+                            }
+                            
+                            if (!_engine.WorldData.Chunks.ContainsValue(chunk)) _engine.WorldData.Chunks.Add(new ChunkId(chunkPos.x, chunkPos.y, chunkPos.z), chunk);
                             
                             if (!chunkList.Contains(chunk))
                             {
@@ -126,11 +150,22 @@ namespace VoxelTerrain.Mouse
                             yield return null;
                         }
                     }
-                    
+
+                    if (_chunkLoader)
+                    {
+                        for (int i = 0; i < chunkList.Count; i++)
+                        {
+                            chunkList[i].Position = posList[i];
+                            _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                            yield return null;
+                        }
+                    }
+
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (_chunkLoader) _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity())
+                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
 
@@ -144,9 +179,14 @@ namespace VoxelTerrain.Mouse
                         {
                             newChunkPos = new Vector3(i, hitPos.y, j);
                             chunkPos = _engine.NearestChunk(newChunkPos);
-                            chunk = _engine.WorldData.GetChunkAt(chunkPos);
-
-                            if (chunk == null) continue;
+                            chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
+                            
+                            while (chunk == null)
+                            {
+                                chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
+                                yield return null;
+                            }
+                            if (!_engine.WorldData.Chunks.ContainsValue(chunk)) _engine.WorldData.Chunks.Add(new ChunkId(chunkPos.x, chunkPos.y, chunkPos.z), chunk);
                             
                             if (!chunkList.Contains(chunk))
                             {
@@ -163,10 +203,21 @@ namespace VoxelTerrain.Mouse
                         }
                     }
 
+                    if (_chunkLoader)
+                    {
+                        for (int i = 0; i < chunkList.Count; i++)
+                        {
+                            chunkList[i].Position = posList[i];
+                            _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                            yield return null;
+                        }
+                    }
+
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (_chunkLoader) _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity())
+                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
                     break;
@@ -179,9 +230,15 @@ namespace VoxelTerrain.Mouse
                         {
                             newChunkPos = new Vector3(i, hitPos.y, j);
                             chunkPos = _engine.NearestChunk(newChunkPos);
-                            chunk = _engine.WorldData.GetChunkAt(chunkPos);
+                            chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
 
-                            if (chunk == null) continue;
+                            while (chunk == null)
+                            {
+                                chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
+                                yield return null;
+                            }
+                            
+                            if (!_engine.WorldData.Chunks.ContainsValue(chunk)) _engine.WorldData.Chunks.Add(new ChunkId(chunkPos.x, chunkPos.y, chunkPos.z), chunk);
                             
                             if (!chunkList.Contains(chunk))
                             {
@@ -200,10 +257,21 @@ namespace VoxelTerrain.Mouse
                         }
                     }
 
+                    if (_chunkLoader)
+                    {
+                        for (int i = 0; i < chunkList.Count; i++)
+                        {
+                            chunkList[i].Position = posList[i];
+                            _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                            yield return null;
+                        }
+                    }
+
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (_chunkLoader) _chunkLoader.SaveChunk(chunkList[i], new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity())
+                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
                     break;

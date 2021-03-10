@@ -38,10 +38,6 @@ namespace VoxelTerrain.Voxel
                     chunk.Voxels = job.voxels.ToArray();
                     job.voxels.Dispose();
 
-                    //chunk.VoxelsFromJob(job);
-                    
-                    if (_chunkLoader) _chunkLoader.SaveChunk(chunk, new ChunkId(worldOrigin.x, worldOrigin.y, worldOrigin.z));
-
                     _jobs.Remove(worldOrigin);
 
                     return chunk;
@@ -68,10 +64,6 @@ namespace VoxelTerrain.Voxel
                     
                     chunk.Voxels = holder.Job.voxels.ToArray();
                     holder.Job.voxels.Dispose();
-                    
-                    //chunk.VoxelsFromJob(holder.Job);
-                    
-                    if (_chunkLoader) _chunkLoader.SaveChunk(chunk, new ChunkId(worldOrigin.x, worldOrigin.y, worldOrigin.z));
 
                     _jobs.Remove(worldOrigin);
 
@@ -110,7 +102,7 @@ namespace VoxelTerrain.Voxel
                 scale = scale,
                 resolution = resolution,
                 origin = origin,
-                voxels = new NativeArray<byte>((Chunk.ChunkSize + 1) * (Chunk.ChunkHeight + 1) * (Chunk.ChunkSize + 1), Allocator.Persistent),
+                voxels = new NativeArray<byte>((Chunk.ChunkSize) * (Chunk.ChunkHeight) * (Chunk.ChunkSize), Allocator.Persistent),
                 seed = Engine.Seed,
                 StoneDepth = stoneDepth,
                 SnowHeight = snowHeight,

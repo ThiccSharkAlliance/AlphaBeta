@@ -10,6 +10,8 @@ namespace VoxelTerrain.Voxel.Dependencies
         [SerializeField] private ChunkGenerator _chunkGenerator;
         [SerializeField] private ChunkLoader _chunkLoader;
 
+        public ChunkLoader ChunkLoader => _chunkLoader;
+
         public void GenerateWorld(Vector3 origin, float distance, float size)
         {
             _chunkGenerator.Engine = _engine;

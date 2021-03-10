@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VoxelTerrain.MMesh;
+using VoxelTerrain.Voxel.Dependencies;
 using VoxelTerrain.Voxel.Jobs;
 
 namespace VoxelTerrain.Voxel
@@ -13,6 +14,7 @@ namespace VoxelTerrain.Voxel
         public byte[] Voxels;
         private VoxelEngine Engine;
         private GameObject Entity;
+        public Vector3 Position;
 
         //Used to find voxel at position
         public byte this[float x, float y, float z]
@@ -22,12 +24,15 @@ namespace VoxelTerrain.Voxel
         }
 
         public void AddEntity(GameObject entity) => Entity = entity;
+        public GameObject GetEntity() => Entity ? Entity : null;
         public void AddEngine(VoxelEngine engine) => Engine = engine;
 
         public void SetVoxel(Vector3 pos, VoxelType vox) => this[(int) pos.x, (int) pos.y, (int) pos.z] = (byte) vox;
 
         public void SetMesh(Vector3 origin)
         {
+            Position = origin;
+            if (!Entity) return;
             var meshCreator = new MeshCreator(origin, Engine.ChunkInfo.VoxelSize, Engine.WorldData);
 
             meshCreator.SetMesh(Voxels, origin.x, origin.y, origin.z,
