@@ -23,6 +23,10 @@ namespace VoxelTerrain.Mouse
                     if (Input.GetMouseButtonDown(0)) _voxelInteraction.DestroyVoxel();
                     else if (Input.GetMouseButtonDown(1)) _voxelInteraction.CreateVoxel();
                     break;
+                case FlattenShape.Sphere:
+                    if (Input.GetMouseButtonDown(0)) _voxelInteraction.DestroyVoxel();
+                    else if (Input.GetMouseButtonDown(1)) _voxelInteraction.CreateVoxel();
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

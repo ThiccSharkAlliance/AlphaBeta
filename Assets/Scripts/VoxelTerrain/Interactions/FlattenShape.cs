@@ -4,6 +4,7 @@
     {
         Single,
         Square,
-        Circular
+        Circular,
+        Sphere
     }
 }
