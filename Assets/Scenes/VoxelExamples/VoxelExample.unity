@@ -142,6 +142,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionEvents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _engine
       value: 
       objectReference: {fileID: 201202581}
