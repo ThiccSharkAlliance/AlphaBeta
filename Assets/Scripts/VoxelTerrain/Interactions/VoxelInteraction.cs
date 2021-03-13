@@ -42,7 +42,7 @@ namespace VoxelTerrain.Mouse
 
             hitPos.y -= Size;
             
-            if (_interactionEvents[0] != null) _interactionEvents[0].Invoke();
+            if (_interactionEvents.Length > 0 && _interactionEvents[0] != null) _interactionEvents[0].Invoke();
 
             StartCoroutine(UpdateChunks(hitPos, VoxelType.Default));
         }
