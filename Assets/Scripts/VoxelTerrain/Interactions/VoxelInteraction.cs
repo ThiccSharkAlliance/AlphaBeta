@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 using VoxelTerrain.Grid;
 using VoxelTerrain.SaveLoad;
 using VoxelTerrain.Voxel;
@@ -17,7 +18,7 @@ namespace VoxelTerrain.Mouse
         [SerializeField] private InteractionSettings _interactionSettings;
         [SerializeField] private FlattenShape _shape = FlattenShape.Single;
         [SerializeField] private ChunkLoader _chunkLoader;
-        [SerializeField] private UnityEvent[] _interactionEvents;
+        [SerializeField] private VfxInteraction[] _interactionEvents;
         
         private float _offset = 0;
         
@@ -31,6 +32,7 @@ namespace VoxelTerrain.Mouse
         private float Size => _engine.ChunkInfo.VoxelSize;
 
         public void SetShape(FlattenShape shape) => Shape = shape;
+        public void VfxSwitch(VisualEffect thing) => thing.enabled = !thing.enabled;
 
         public void DestroyVoxel()
         {
@@ -42,7 +44,7 @@ namespace VoxelTerrain.Mouse
 
             hitPos.y -= Size;
             
-            if (_interactionEvents.Length > 0 && _interactionEvents[0] != null) _interactionEvents[0].Invoke();
+            if (_interactionEvents.Length > 0) _interactionEvents[0].VfxPlaya(hitPos, _shape);
 
             StartCoroutine(UpdateChunks(hitPos, VoxelType.Default));
         }
@@ -55,8 +57,7 @@ namespace VoxelTerrain.Mouse
 
             var hitPos = GridSnapper.SnapToGrid(hit.point, Size, _offset);
             
-            if ((byte)_setVoxelType < _interactionEvents.Length 
-                && _interactionEvents[(byte)_setVoxelType] != null) _interactionEvents[(byte)_setVoxelType].Invoke();
+            if ((byte)_setVoxelType < _interactionEvents.Length) _interactionEvents[(byte)_setVoxelType].VfxPlaya(hitPos, _shape);
 
             StartCoroutine(UpdateChunks(hitPos, _setVoxelType));
         }
@@ -125,8 +126,7 @@ namespace VoxelTerrain.Mouse
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)voxelType < _interactionEvents.Length 
-                        && _interactionEvents[(byte)voxelType] != null) _interactionEvents[(byte)voxelType].Invoke();
+                    if ((byte)voxelType < _interactionEvents.Length) _interactionEvents[(byte)voxelType].VfxStopa();
                     break;
                 case FlattenShape.Square:
                     chunkList = new List<Chunk>();
@@ -177,8 +177,7 @@ namespace VoxelTerrain.Mouse
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)voxelType < _interactionEvents.Length 
-                        && _interactionEvents[(byte)voxelType] != null) _interactionEvents[(byte)voxelType].Invoke();
+                    if ((byte)voxelType < _interactionEvents.Length) _interactionEvents[(byte)voxelType].VfxStopa();
                     break;
                 case FlattenShape.Circular:
                     chunkList = new List<Chunk>();
@@ -230,8 +229,7 @@ namespace VoxelTerrain.Mouse
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)voxelType < _interactionEvents.Length 
-                        && _interactionEvents[(byte)voxelType] != null) _interactionEvents[(byte)voxelType].Invoke();
+                    if ((byte)voxelType < _interactionEvents.Length) _interactionEvents[(byte)voxelType].VfxStopa();
                     break;
                 case FlattenShape.Sphere:
                     chunkList = new List<Chunk>();
@@ -286,8 +284,7 @@ namespace VoxelTerrain.Mouse
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)voxelType < _interactionEvents.Length 
-                        && _interactionEvents[(byte)voxelType] != null) _interactionEvents[(byte)voxelType].Invoke();
+                    if ((byte)voxelType < _interactionEvents.Length) _interactionEvents[(byte)voxelType].VfxStopa();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
