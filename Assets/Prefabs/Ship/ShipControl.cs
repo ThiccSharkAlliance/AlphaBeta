@@ -8,7 +8,7 @@ public class ShipControl : MonoBehaviour
     public Material blueMat, redMat;
     Camera mainCam;
     Vector3 mainCamTransformForward, mainCamTransformRight;
-    const float heightOffGround = 0.3f;
+    const float heightOffGround = 0.6f;
     Vector3 shipMovement;
     Rigidbody rb;
     float shipSpeed = 5f;
@@ -24,13 +24,17 @@ public class ShipControl : MonoBehaviour
     Material targetMat;
     int targetColour = 0; //0 = red, 1 = blue
     bool buildMode = false; //0= fire 1=building
-    public Manager manager;
+
+    Manager manager => FindObjectOfType<Manager>().GetComponent<Manager>();  
+
+
     void Start()
     {
         mainCam = Camera.main;
         rb = GetComponent<Rigidbody>();
-       gunPoint = GameObject.Find("GunPoint").transform;
+        gunPoint = GameObject.Find("GunPoint").transform;
         targetMat = target.GetComponent<MeshRenderer>().material;
+        
     }
 
     void Update()
