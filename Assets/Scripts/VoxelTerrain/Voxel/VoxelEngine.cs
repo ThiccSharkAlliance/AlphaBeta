@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using VoxelTerrain.SaveLoad;
 using VoxelTerrain.Voxel.Dependencies;
 using VoxelTerrain.Voxel.InfoData;
 
@@ -16,7 +15,7 @@ namespace VoxelTerrain.Voxel
         [SerializeField] private VoxelTypeHeights _voxelTypeHeights;
         [SerializeField] private WorldGenerationFunctions _worldGeneration;
         [SerializeField] private float _noiseScale;
-        [SerializeField] private int seed;
+        [SerializeField] private int _seed;
         
         private float _maxMagnitude;
 
@@ -27,7 +26,7 @@ namespace VoxelTerrain.Voxel
         public VoxelTypeHeights VoxelTypeHeights => _voxelTypeHeights;
         public float NoiseScale => _noiseScale;
 
-        public int Seed => seed;
+        public int Seed => _seed;
 
         public WorldInfo WorldInfo => _worldInfo;
 
@@ -43,7 +42,37 @@ namespace VoxelTerrain.Voxel
             var corner = new Vector3(-_worldInfo.Distance, 0, -_worldInfo.Distance);
             _maxMagnitude = (Position - corner).magnitude;
         }
+        
+        private void Update()
+        {
+            var point = NearestChunk(Position);
 
+            for (var x = -_worldInfo.Distance; x <= _worldInfo.Distance; x += ChunkSize)
+            {
+                for (var z = -_worldInfo.Distance; z <= _worldInfo.Distance; z += ChunkSize)
+                {
+                    var pointToCheck = new ChunkId(point.x + x, -ChunkHeight / 2, point.z + z);
+                    //check position is within distance, rounds off view area.
+                    if (Vector3.Distance(new Vector3(pointToCheck.X, -ChunkHeight / 2, pointToCheck.Z), Position) >
+                        _worldInfo.Distance) continue;
+
+                    //check for chunk in the world data, in case it has already been spawned
+                    var c = ChunkAt(pointToCheck, false);
+
+                    //if chunk is not found, attempt to load one
+                    //Update repeatedly checks until we have a chunk
+                    if (c == null)
+                    {
+                        c = LoadChunkAt(pointToCheck);
+                        
+                        if (c != null) SpawnChunk(c, new Vector3(point.x + x, -ChunkHeight / 2, point.z + z));
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Voxel Methods
         //Convert position to the nearest chunk position
         public Vector3 NearestChunk(Vector3 pos)
         {
@@ -118,34 +147,6 @@ namespace VoxelTerrain.Voxel
             var difference = Position - pos;
 
             return difference.magnitude <= _maxMagnitude;
-        }
-
-        private void Update()
-        {
-            var point = NearestChunk(Position);
-
-            for (var x = -_worldInfo.Distance; x <= _worldInfo.Distance; x += ChunkSize)
-            {
-                for (var z = -_worldInfo.Distance; z <= _worldInfo.Distance; z += ChunkSize)
-                {
-                    var pointToCheck = new ChunkId(point.x + x, -ChunkHeight / 2, point.z + z);
-                    //check position is within distance, rounds off view area.
-                    if (Vector3.Distance(new Vector3(pointToCheck.X, -ChunkHeight / 2, pointToCheck.Z), Position) >
-                        _worldInfo.Distance) continue;
-
-                    //check for chunk in the world data, in case it has already been spawned
-                    var c = ChunkAt(pointToCheck, false);
-
-                    //if chunk is not found, attempt to load one
-                    //Update repeatedly checks until we have a chunk
-                    if (c == null)
-                    {
-                        c = LoadChunkAt(pointToCheck);
-                        
-                        if (c != null) SpawnChunk(c, new Vector3(point.x + x, -ChunkHeight / 2, point.z + z));
-                    }
-                }
-            }
         }
         #endregion
     }

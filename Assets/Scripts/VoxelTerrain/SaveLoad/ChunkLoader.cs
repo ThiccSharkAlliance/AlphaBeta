@@ -14,6 +14,17 @@ namespace VoxelTerrain.SaveLoad
         [SerializeField] private bool _enableSaving;
         private string _chunkDirectory;
 
+        public string ChunkDirectoryName
+        {
+            get => _chunkDirectoryName;
+            set => _chunkDirectoryName = value;
+        }
+
+        public void SetDirectoryName(string name)
+        {
+            ChunkDirectoryName = name;
+        }
+
         private void Awake()
         {
             _chunkDirectory = Application.persistentDataPath + "/" + "Worlds" + "/" + _chunkDirectoryName + "/";
