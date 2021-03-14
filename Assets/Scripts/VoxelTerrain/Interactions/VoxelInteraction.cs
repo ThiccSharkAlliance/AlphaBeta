@@ -61,7 +61,7 @@ namespace VoxelTerrain.Mouse
             StartCoroutine(UpdateChunks(hitPos, _setVoxelType));
         }
 
-        private IEnumerator UpdateChunks(Vector3 hitPos, VoxelType voxelType)
+        public IEnumerator UpdateChunks(Vector3 hitPos, VoxelType voxelType)
         {
             Vector3 chunkPos;
             Chunk chunk;

@@ -52,7 +52,7 @@ namespace VoxelTerrain.Voxel
             return new Vector3(curChunkPosX, -ChunkHeight / 2, curChunkPosZ);
         }
 
-        private Chunk ChunkAt(ChunkId point, bool forceLoad = true)
+        public Chunk ChunkAt(ChunkId point, bool forceLoad = true)
         {
             if (WorldData.Chunks.ContainsKey(point)) return WorldData.Chunks[point];
             if (!forceLoad) return null;
