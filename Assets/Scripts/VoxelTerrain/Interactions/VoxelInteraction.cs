@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 using VoxelTerrain.Grid;
 using VoxelTerrain.Mouse;
 using VoxelTerrain.SaveLoad;
@@ -20,7 +21,7 @@ namespace VoxelTerrain.Interactions
         [SerializeField] private InteractionSettings _interactionSettings;
         [SerializeField] private FlattenShape _shape = FlattenShape.Single;
         [SerializeField] private ChunkLoader _chunkLoader;
-        [SerializeField] private UnityEvent[] _interactionEvents;
+        [SerializeField] private VfxInteraction[] _interactionEvents;
         
         private float _offset = 0;
         
@@ -38,6 +39,8 @@ namespace VoxelTerrain.Interactions
         private float Size => _engine.ChunkInfo.VoxelSize;
 
         public void SetShape(FlattenShape shape) => Shape = shape;
+        public void VfxSwitch(VisualEffect thing) => thing.enabled = !thing.enabled;
+
         public void SetVoxelType(VoxelType type) => Voxel = type;
 
         public void EditVoxels()
@@ -50,8 +53,7 @@ namespace VoxelTerrain.Interactions
             var hitPos = GridSnapper.SnapToGrid(hit.point, Size, _offset);
             
             //Run vfx if we have it
-            if ((byte)Voxel < _interactionEvents.Length 
-                && _interactionEvents[(byte)Voxel] != null) _interactionEvents[(byte)Voxel].Invoke();
+            if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].Invoke();
 
             StartCoroutine(UpdateChunks(hitPos));
         }
@@ -134,11 +136,9 @@ namespace VoxelTerrain.Interactions
                         if (!chunkList[i].GetEntity())
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
-                    }
-                    
+                    }                  
                     //Stop vfx from running
-                    if ((byte)Voxel < _interactionEvents.Length 
-                        && _interactionEvents[(byte)Voxel] != null) _interactionEvents[(byte)Voxel].Invoke();
+                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].Invoke();
                     break;
                 //Square can work in cubic space. Height and dig values affect its height range
                 //Whereas at default it just effects a square area on x and z
@@ -198,11 +198,9 @@ namespace VoxelTerrain.Interactions
                         if (!chunkList[i].GetEntity())
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
-                    }
-                    
+                    }                    
                     //stop any vfx
-                    if ((byte)Voxel < _interactionEvents.Length 
-                        && _interactionEvents[(byte)Voxel] != null) _interactionEvents[(byte)Voxel].Invoke();
+                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].Invoke();
                     break;
                 
                 //Circular works on a round space, if height and depth values are set then it will act cylindrical
@@ -257,8 +255,7 @@ namespace VoxelTerrain.Interactions
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)Voxel < _interactionEvents.Length 
-                        && _interactionEvents[(byte)Voxel] != null) _interactionEvents[(byte)Voxel].Invoke();
+                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].Invoke();
                     break;
                 //Spherical effects a 3D sphere space, but unlike mouse is only run on one click.
                 //This allows spherical types to run on a larger area, because it takes ages.
@@ -315,8 +312,7 @@ namespace VoxelTerrain.Interactions
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)Voxel < _interactionEvents.Length 
-                        && _interactionEvents[(byte)Voxel] != null) _interactionEvents[(byte)Voxel].Invoke();
+                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].Invoke();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
