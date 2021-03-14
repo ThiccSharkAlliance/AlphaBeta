@@ -745,6 +745,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VoxelEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1219288309642976020, guid: 2b7228255036a30479393ef9a76b8464,
+        type: 3}
+      propertyPath: _chunkDirectoryName
+      value: IansLand
+      objectReference: {fileID: 0}
     - target: {fileID: 7941170911782372762, guid: 2b7228255036a30479393ef9a76b8464,
         type: 3}
       propertyPath: _origin
