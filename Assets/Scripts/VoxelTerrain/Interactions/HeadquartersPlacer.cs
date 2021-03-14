@@ -49,7 +49,7 @@ namespace VoxelTerrain.Interactions
             var pos = transform.position;
             pos.y -= 1;
 
-            StartCoroutine(_interaction.UpdateChunks(pos, VoxelType.Dirt));
+            StartCoroutine(_interaction.UpdateChunks(pos));
         }
     }
 }

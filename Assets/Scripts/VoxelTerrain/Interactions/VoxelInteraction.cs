@@ -14,6 +14,8 @@ namespace VoxelTerrain.Mouse
     {
         [SerializeField] private VoxelEngine _engine;
         [SerializeField] private VoxelType _setVoxelType;
+        [Tooltip("Overrides voxel type, will destroy all voxels above position. Voxel type still sets at and below position")]
+        [SerializeField] private bool _destroyAboveGround;
         [SerializeField] private InteractionSettings _interactionSettings;
         [SerializeField] private FlattenShape _shape = FlattenShape.Single;
         [SerializeField] private ChunkLoader _chunkLoader;
@@ -44,7 +46,7 @@ namespace VoxelTerrain.Mouse
             
             if (_interactionEvents.Length > 0 && _interactionEvents[0] != null) _interactionEvents[0].Invoke();
 
-            StartCoroutine(UpdateChunks(hitPos, VoxelType.Default));
+            StartCoroutine(UpdateChunks(hitPos));
         }
     
         public void CreateVoxel()
@@ -58,10 +60,10 @@ namespace VoxelTerrain.Mouse
             if ((byte)_setVoxelType < _interactionEvents.Length 
                 && _interactionEvents[(byte)_setVoxelType] != null) _interactionEvents[(byte)_setVoxelType].Invoke();
 
-            StartCoroutine(UpdateChunks(hitPos, _setVoxelType));
+            StartCoroutine(UpdateChunks(hitPos));
         }
 
-        public IEnumerator UpdateChunks(Vector3 hitPos, VoxelType voxelType)
+        public IEnumerator UpdateChunks(Vector3 hitPos)
         {
             Vector3 chunkPos;
             Chunk chunk;
@@ -104,7 +106,7 @@ namespace VoxelTerrain.Mouse
                             newHitPos = hitPos;
                             newHitPos.x = i;
                             newHitPos.z = j;
-                            Sphere(hitPos, voxPos, newHitPos, _interactionSettings.MouseSize, voxelType, chunk);
+                            Sphere(hitPos, voxPos, newHitPos, _interactionSettings.MouseSize, _setVoxelType, chunk);
                             yield return null;
                         }
                     }
@@ -125,8 +127,8 @@ namespace VoxelTerrain.Mouse
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)voxelType < _interactionEvents.Length 
-                        && _interactionEvents[(byte)voxelType] != null) _interactionEvents[(byte)voxelType].Invoke();
+                    if ((byte)_setVoxelType < _interactionEvents.Length 
+                        && _interactionEvents[(byte)_setVoxelType] != null) _interactionEvents[(byte)_setVoxelType].Invoke();
                     break;
                 case FlattenShape.Square:
                     chunkList = new List<Chunk>();
@@ -155,7 +157,7 @@ namespace VoxelTerrain.Mouse
 
                             voxPos = (newChunkPos - chunkPos) / Size;
                             
-                            Flatten(voxPos, voxelType, _interactionSettings.Height, _interactionSettings.Dig, chunk);
+                            Flatten(voxPos, _setVoxelType, _interactionSettings.Height, _interactionSettings.Dig, chunk);
                             yield return null;
                         }
                     }
@@ -177,8 +179,8 @@ namespace VoxelTerrain.Mouse
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)voxelType < _interactionEvents.Length 
-                        && _interactionEvents[(byte)voxelType] != null) _interactionEvents[(byte)voxelType].Invoke();
+                    if ((byte)_setVoxelType < _interactionEvents.Length 
+                        && _interactionEvents[(byte)_setVoxelType] != null) _interactionEvents[(byte)_setVoxelType].Invoke();
                     break;
                 case FlattenShape.Circular:
                     chunkList = new List<Chunk>();
@@ -208,7 +210,7 @@ namespace VoxelTerrain.Mouse
                         
                             voxPos = (newChunkPos - chunkPos) / Size;
 
-                            Flatten(voxPos, voxelType, _interactionSettings.Height, _interactionSettings.Dig, chunk);
+                            Flatten(voxPos, _setVoxelType, _interactionSettings.Height, _interactionSettings.Dig, chunk);
                             yield return null;
                         }
                     }
@@ -230,8 +232,8 @@ namespace VoxelTerrain.Mouse
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)voxelType < _interactionEvents.Length 
-                        && _interactionEvents[(byte)voxelType] != null) _interactionEvents[(byte)voxelType].Invoke();
+                    if ((byte)_setVoxelType < _interactionEvents.Length 
+                        && _interactionEvents[(byte)_setVoxelType] != null) _interactionEvents[(byte)_setVoxelType].Invoke();
                     break;
                 case FlattenShape.Sphere:
                     chunkList = new List<Chunk>();
@@ -264,7 +266,7 @@ namespace VoxelTerrain.Mouse
                             newHitPos = hitPos;
                             newHitPos.x = i;
                             newHitPos.z = j;
-                            Sphere(hitPos, voxPos, newHitPos, _interactionSettings.SphereRadius, voxelType, chunk);
+                            Sphere(hitPos, voxPos, newHitPos, _interactionSettings.SphereRadius, _setVoxelType, chunk);
                             yield return null;
                         }
                     }
@@ -286,8 +288,8 @@ namespace VoxelTerrain.Mouse
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)voxelType < _interactionEvents.Length 
-                        && _interactionEvents[(byte)voxelType] != null) _interactionEvents[(byte)voxelType].Invoke();
+                    if ((byte)_setVoxelType < _interactionEvents.Length 
+                        && _interactionEvents[(byte)_setVoxelType] != null) _interactionEvents[(byte)_setVoxelType].Invoke();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -299,11 +301,12 @@ namespace VoxelTerrain.Mouse
         private void Flatten(Vector3 pos, VoxelType voxelType, float flattenHeight, float digDepth, Chunk chunk)
         {
             Vector3 voxPos = pos;
+            var voxType = voxelType;
 
             do
             {
-                if (chunk[voxPos.x, voxPos.y, voxPos.z] == (byte)voxelType) break;
-                chunk.SetVoxel(voxPos, voxelType);
+                chunk.SetVoxel(voxPos, voxType);
+                if (_destroyAboveGround) voxType = VoxelType.Default;
                 voxPos.y++;
             } while (Vector3.Distance(pos, voxPos) <= flattenHeight);
 
@@ -312,7 +315,6 @@ namespace VoxelTerrain.Mouse
             do
             {
                 voxPos.y--;
-                if (chunk[voxPos.x, voxPos.y, voxPos.z] == (byte)voxelType) break; 
                 chunk.SetVoxel(voxPos, voxelType);
             } while (Vector3.Distance(voxPos, pos) <= digDepth);
         }

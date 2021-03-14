@@ -652,13 +652,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _engine: {fileID: 201202581}
   _setVoxelType: 2
+  _destroyAboveGround: 1
   _interactionSettings:
     _mouseSize: 0
     _cubeXDistance: 5
     _cubeZDistance: 5
     _circleRadius: 0
     _sphereRadius: 0
-    _height: 0
+    _height: 20
     _dig: 0
   _shape: 1
   _chunkLoader: {fileID: 1219288309642976020}
