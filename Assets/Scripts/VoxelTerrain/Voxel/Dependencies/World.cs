@@ -35,6 +35,7 @@ namespace VoxelTerrain.Voxel.Dependencies
             var chunkPos = NearestChunk(new Vector3(x, y, z), scale);
             Chunk chunk = null;
             
+            //Neighbour checking for chunks
             if (currentChunk != null && chunkPos == currentChunk.Position) chunk = currentChunk;
             else if (rightChunk != null && chunkPos == rightChunk.Position) chunk = rightChunk;
             else if (forwardChunk != null && chunkPos == forwardChunk.Position) chunk = forwardChunk;

@@ -2,16 +2,14 @@
 {
     public enum VoxelType
     {
-        Default = 0,
+        Default,
     
-        Grass = 1,
+        Grass,
         Dirt,
         Stone,
         Sand,
         Snow,
         Water,
-        Wood,
-
-        NumTypes
+        Wood
     }
 }
