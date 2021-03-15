@@ -52,8 +52,7 @@ namespace VoxelTerrain.Interactions
             //If we have hit something, snap the hit position to a voxel position
             var hitPos = GridSnapper.SnapToGrid(hit.point, Size, _offset);
             
-            //Run vfx if we have it
-            if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].Invoke();
+           
 
             StartCoroutine(UpdateChunks(hitPos));
         }
@@ -61,6 +60,8 @@ namespace VoxelTerrain.Interactions
         //For updating chunk voxel data. Includes updating chunks that don't exist in the scene.
         public IEnumerator UpdateChunks(Vector3 hitPos)
         {
+            //Run vfx if we have it
+            if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxPlaya(hitPos, Shape);
             Vector3 chunkPos;
             Chunk chunk;
             Vector3 voxPos;
@@ -136,9 +137,9 @@ namespace VoxelTerrain.Interactions
                         if (!chunkList[i].GetEntity())
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
-                    }                  
+                    }
                     //Stop vfx from running
-                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].Invoke();
+                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxStopa(); 
                     break;
                 //Square can work in cubic space. Height and dig values affect its height range
                 //Whereas at default it just effects a square area on x and z
@@ -200,7 +201,7 @@ namespace VoxelTerrain.Interactions
                         yield return null;
                     }                    
                     //stop any vfx
-                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].Invoke();
+                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxStopa();
                     break;
                 
                 //Circular works on a round space, if height and depth values are set then it will act cylindrical
@@ -255,7 +256,7 @@ namespace VoxelTerrain.Interactions
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].Invoke();
+                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxStopa();
                     break;
                 //Spherical effects a 3D sphere space, but unlike mouse is only run on one click.
                 //This allows spherical types to run on a larger area, because it takes ages.
@@ -312,7 +313,7 @@ namespace VoxelTerrain.Interactions
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].Invoke();
+                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxStopa();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
