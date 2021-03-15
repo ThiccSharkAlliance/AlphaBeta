@@ -17,3 +17,6 @@ preview13 - 0.2.10
 
 ## Burst Compiler Package
 preview12 - 1.3.0
+
+### Visual Effects Graph Package
+7.3.1

@@ -2088,6 +2088,8 @@ VFXRenderer:
   m_Materials:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2123,7 +2125,10 @@ VisualEffect:
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.009
+        m_Name: SphereRadius
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -2199,7 +2204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _interactionSettings._sphereRadius
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _interactionSettings._height
@@ -2247,11 +2252,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _interactionEvents.Array.data[0]._spawnRate
-      value: 100
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _interactionEvents.Array.data[0]._spawnPointStringId
       value: DestructionSP
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionEvents.Array.data[0]._sphereRadiusStringId
+      value: SphereRadius
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionEvents.Array.data[0]._sphereRadius
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionEvents.Array.data[0]._particleRingCountStringId
+      value: RingSpawnCount
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionEvents.Array.data[0]._particleLife
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionEvents.Array.data[0]._particleLifeStringId
+      value: DestructionParticleLife
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionEvents.Array.data[0]._sparkSpawnRateStringId
+      value: SparksSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionEvents.Array.data[0]._sparkSpawnRate
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1561188667314874129, guid: a11bfa0f202cd184e949e58420e9eee5,
         type: 3}

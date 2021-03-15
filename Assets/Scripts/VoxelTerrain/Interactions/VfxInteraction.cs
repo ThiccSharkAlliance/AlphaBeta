@@ -27,9 +27,15 @@ public struct VfxInteraction
     [SerializeField] private string _planeRadiusStringId;
     [SerializeField] private float _planeRadius;
 
-    public void VfxPlaya(Vector3 spawnPoint, FlattenShape shape)
+    [SerializeField] private string _particleRingCountStringId;
+    [SerializeField] private float _particleRingCount;
+    
+    [SerializeField] private string _sparkSpawnRateStringId;
+    [SerializeField] private int _sparkSpawnRate;
+
+    public void VfxPlaya(Vector3 spawnPoint, FlattenShape shape, InteractionSettings _interactionSettings)
     {
-        _vfx.SetInt(_spawnRateStringId, _spawnRate);
+       
         switch (shape)
         {
             case FlattenShape.Single:
@@ -49,10 +55,11 @@ public struct VfxInteraction
                 break;
             case FlattenShape.Sphere:
                 _vfx.SetInt(_spawnRateStringId, _spawnRate);
-               // _vfx.SetFloat(_particleLifeStringId, _particleLife);
-               // _vfx.SetFloat(_sphereRadiusStringId, _sphereRadius);
+                _vfx.SetFloat(_particleLifeStringId, _particleLife);
+                _vfx.SetFloat(_sphereRadiusStringId, _sphereRadius = _interactionSettings.SphereRadius / 100f + 0.04f);
                 _vfx.SetVector3(_spawnPointStringId, spawnPoint); 
-
+                _vfx.SetFloat(_particleRingCountStringId, _spawnRate); // this is not an accidient, ring count needs to be the same as the spawn rate or higher
+                _vfx.SetInt(_sparkSpawnRateStringId, _sparkSpawnRate); 
 
                 break;
             default:
@@ -63,5 +70,6 @@ public struct VfxInteraction
     public void VfxStopa()
     {
         _vfx.SetInt(_spawnRateStringId, 0);
+        _vfx.SetInt(_sparkSpawnRateStringId, 0);
     }
 }

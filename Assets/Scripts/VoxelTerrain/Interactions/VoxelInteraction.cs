@@ -61,7 +61,7 @@ namespace VoxelTerrain.Interactions
         public IEnumerator UpdateChunks(Vector3 hitPos)
         {
             //Run vfx if we have it
-            if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxPlaya(hitPos, Shape);
+            if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxPlaya(hitPos, Shape, _interactionSettings);
             Vector3 chunkPos;
             Chunk chunk;
             Vector3 voxPos;
