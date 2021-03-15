@@ -22,31 +22,34 @@ namespace VoxelTerrain.Voxel
 
         private Dictionary<Vector3, JobHolder> _jobs = new Dictionary<Vector3, JobHolder>();
 
+        //Create jobs to run that will create all of the chunk data
         public Chunk CreateChunkJob(Vector3 worldOrigin)
         {
             if (!_jobs.ContainsKey(worldOrigin))
             {
+                //If we don't have a job set up, lets load in chunk data
                 var chunk = LoadChunkAt(worldOrigin);
                 
+                //Create a job for the current chunk data
                 var job = CreateJob(worldOrigin);
                 var handle = job.Schedule();
 
+                //if it completed hella quick, then lets complete
                 if (handle.IsCompleted)
                 {
                     handle.Complete();
 
+                    //set voxel data and dispose of job
                     chunk.Voxels = job.voxels.ToArray();
                     job.voxels.Dispose();
 
-                    //chunk.VoxelsFromJob(job);
-                    
-                    if (_chunkLoader) _chunkLoader.SaveChunk(chunk, new ChunkId(worldOrigin.x, worldOrigin.y, worldOrigin.z));
-
+                    //remove job from the dictionary, it isn't needed anymore
                     _jobs.Remove(worldOrigin);
 
                     return chunk;
                 }
 
+                //otherwise, lets create a holder and add it to the dictionary
                 var holder = new JobHolder()
                 {
                     Job = job,
@@ -59,6 +62,8 @@ namespace VoxelTerrain.Voxel
 
             else
             {
+                //If we already have a job, load in the chunk data and check job is complete.
+                //If so, set data and remove job from dictionary
                 var holder = _jobs[worldOrigin];
                 var chunk = LoadChunkAt(worldOrigin);
 
@@ -68,10 +73,6 @@ namespace VoxelTerrain.Voxel
                     
                     chunk.Voxels = holder.Job.voxels.ToArray();
                     holder.Job.voxels.Dispose();
-                    
-                    //chunk.VoxelsFromJob(holder.Job);
-                    
-                    if (_chunkLoader) _chunkLoader.SaveChunk(chunk, new ChunkId(worldOrigin.x, worldOrigin.y, worldOrigin.z));
 
                     _jobs.Remove(worldOrigin);
 
@@ -82,6 +83,7 @@ namespace VoxelTerrain.Voxel
             return null;
         }
         
+        //Check if the world data already contains the chunk, if not create one
         private Chunk LoadChunkAt(Vector3 worldOrigin) => Engine.WorldData.Chunks.ContainsKey(ChunkId.FromWorldPos(worldOrigin.x, worldOrigin.y, worldOrigin.z)) ? Engine.WorldData.Chunks[ChunkId.FromWorldPos(worldOrigin.x, worldOrigin.y, worldOrigin.z)] : new Chunk(Engine);
         
         private void OnDestroy()
@@ -94,6 +96,7 @@ namespace VoxelTerrain.Voxel
             }
         }
 
+        //create chunk job for setting voxel data with noise values
         private ChunkVoxelSetter CreateJob(Vector3 origin)
         {
             var resolution = Engine.ChunkInfo.VoxelSize;
@@ -102,6 +105,8 @@ namespace VoxelTerrain.Voxel
             var snowHeight = Engine.VoxelTypeHeights.SnowHeight;
             var caveStartHeight = Engine.VoxelTypeHeights.CaveStartHeight;
             var groundLevel = Engine.WorldInfo.GroundLevel;
+            var seed = Engine.WorldInfo.Seed;
+            var numGen = Engine.WorldInfo.NumGen;
 
             return new ChunkVoxelSetter
             {
@@ -110,12 +115,13 @@ namespace VoxelTerrain.Voxel
                 scale = scale,
                 resolution = resolution,
                 origin = origin,
-                voxels = new NativeArray<byte>((Chunk.ChunkSize + 1) * (Chunk.ChunkHeight + 1) * (Chunk.ChunkSize + 1), Allocator.Persistent),
-                seed = Engine.Seed,
+                voxels = new NativeArray<byte>((Chunk.ChunkSize) * (Chunk.ChunkHeight) * (Chunk.ChunkSize), Allocator.Persistent),
+                seed = seed,
                 StoneDepth = stoneDepth,
                 SnowHeight = snowHeight,
                 CaveStartHeight = caveStartHeight,
-                groundLevel = groundLevel
+                groundLevel = groundLevel,
+                numGen = numGen
             };
         }
     }

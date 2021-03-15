@@ -10,6 +10,8 @@ namespace VoxelTerrain.Voxel.Dependencies
         [SerializeField] private ChunkGenerator _chunkGenerator;
         [SerializeField] private ChunkLoader _chunkLoader;
 
+        public ChunkLoader ChunkLoader => _chunkLoader;
+
         public void GenerateWorld(Vector3 origin, float distance, float size)
         {
             _chunkGenerator.Engine = _engine;
@@ -22,14 +24,17 @@ namespace VoxelTerrain.Voxel.Dependencies
             }
         }
 
+        //Checking and creating chunk data
         public Chunk GenerateChunkData(Vector3 pos)
         {
             Chunk c;
-
+            
+            //Check if data exists already
             c = _chunkLoader.LoadChunkAt(pos);
 
             if (c != null) return c;
             
+            //if no data is found, create some
             c = _chunkGenerator.CreateChunkJob(pos);
 
             return c;

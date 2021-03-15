@@ -21,6 +21,7 @@ namespace VoxelTerrain.Voxel.Jobs
         public Vector3 origin;
         public NativeArray<byte> voxels;
         public int seed;
+        public Unity.Mathematics.Random numGen;
 
         public void Execute()
         {
@@ -30,6 +31,7 @@ namespace VoxelTerrain.Voxel.Jobs
                 {
                     for (var j = 0; j < height; j++)
                     {
+                        //set voxel based on noise world position
                         voxels[Chunk.PosToIndex(i, j, k)] = SetVoxelType(origin.x + i * resolution, origin.y + j * resolution,
                             origin.z + k * resolution);
                     }
@@ -38,6 +40,7 @@ namespace VoxelTerrain.Voxel.Jobs
         }
 
         //set individual voxel type using noise function
+        //eventually this will be replaced by Josephs noise types
         public byte SetVoxelType(float x, float y, float z)
         {
             var blockType = VoxelType.Default;
