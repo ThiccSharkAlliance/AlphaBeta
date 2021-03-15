@@ -21,6 +21,7 @@ namespace VoxelTerrain.Voxel.Jobs
         public Vector3 origin;
         public NativeArray<byte> voxels;
         public int seed;
+        public Unity.Mathematics.Random numGen;
 
         public void Execute()
         {

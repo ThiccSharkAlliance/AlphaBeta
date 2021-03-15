@@ -120,7 +120,8 @@ namespace VoxelTerrain.Voxel
                 StoneDepth = stoneDepth,
                 SnowHeight = snowHeight,
                 CaveStartHeight = caveStartHeight,
-                groundLevel = groundLevel
+                groundLevel = groundLevel,
+                numGen = numGen
             };
         }
     }
