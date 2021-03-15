@@ -15,8 +15,7 @@ namespace VoxelTerrain.Voxel
         [SerializeField] private VoxelTypeHeights _voxelTypeHeights;
         [SerializeField] private WorldGenerationFunctions _worldGeneration;
         [SerializeField] private float _noiseScale;
-        [SerializeField] private int _seed;
-        
+
         private float _maxMagnitude;
 
         private Vector3 Position => _worldInfo.Origin != null ? new Vector3(_worldInfo.Origin.position.x, -ChunkHeight / 2, _worldInfo.Origin.position.z) : Vector3.zero;
@@ -25,8 +24,6 @@ namespace VoxelTerrain.Voxel
         private float ChunkHeight => Chunk.ChunkHeight * _chunkInfo.VoxelSize;
         public VoxelTypeHeights VoxelTypeHeights => _voxelTypeHeights;
         public float NoiseScale => _noiseScale;
-
-        public int Seed => _seed;
 
         public WorldInfo WorldInfo => _worldInfo;
 

@@ -105,6 +105,8 @@ namespace VoxelTerrain.Voxel
             var snowHeight = Engine.VoxelTypeHeights.SnowHeight;
             var caveStartHeight = Engine.VoxelTypeHeights.CaveStartHeight;
             var groundLevel = Engine.WorldInfo.GroundLevel;
+            var seed = Engine.WorldInfo.Seed;
+            var numGen = Engine.WorldInfo.NumGen;
 
             return new ChunkVoxelSetter
             {
@@ -114,7 +116,7 @@ namespace VoxelTerrain.Voxel
                 resolution = resolution,
                 origin = origin,
                 voxels = new NativeArray<byte>((Chunk.ChunkSize) * (Chunk.ChunkHeight) * (Chunk.ChunkSize), Allocator.Persistent),
-                seed = Engine.Seed,
+                seed = seed,
                 StoneDepth = stoneDepth,
                 SnowHeight = snowHeight,
                 CaveStartHeight = caveStartHeight,
