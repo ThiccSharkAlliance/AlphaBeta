@@ -46,7 +46,7 @@ namespace VoxelTerrain.Voxel.Jobs
             var blockType = VoxelType.Default;
 
             //3D noise for heightmap
-            var simplex1 = Noise.Generate2DNoiseValue( x, z, scale, seed, groundLevel);
+            var simplex1 = Noise.Generate2DNoiseValue( x, z, scale, numGen, groundLevel);
 
             //under the surface, dirt block
             if (y <= simplex1)
