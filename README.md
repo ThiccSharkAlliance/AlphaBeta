@@ -17,3 +17,10 @@ preview13 - 0.2.10
 
 ## Burst Compiler Package
 preview12 - 1.3.0
+
+## newtonsoft-json
+2.0.0
+
+If you don't have this package then edit your  *YourUnityProject*/Packages/manifest.json and add the following line to the dependencies object.
+
+"com.unity.nuget.": "2.0.0",
