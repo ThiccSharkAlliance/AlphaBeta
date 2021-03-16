@@ -44,9 +44,9 @@ public class PlayFabAuth : MonoBehaviour
 
     private void Awake()
     {
-        vC = gameObject.GetComponent<VirtualCurrency>();
-        gps = gameObject.GetComponent<GetPlayerStats>();
-        inventory = gameObject.GetComponent<Inventory>();
+        vC = gameObject.GetComponent<VirtualCurrency>();  // todo INJECT  
+        gps = gameObject.GetComponent<GetPlayerStats>();  // todo INJECT  
+        inventory = gameObject.GetComponent<Inventory>(); // todo INJECT  
     }
 
     private void Start()
@@ -75,7 +75,6 @@ public class PlayFabAuth : MonoBehaviour
             if(gps.gotCurrency == false)
             {
                 gps.FetchCurrency();
-
                 inventory.GetCatalog();
             }
             
