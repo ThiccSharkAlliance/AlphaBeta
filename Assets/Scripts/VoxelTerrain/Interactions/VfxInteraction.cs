@@ -39,17 +39,17 @@ public struct VfxInteraction
         switch (shape)
         {
             case FlattenShape.Single:
-                _vfx.SetInt(_spawnRateStringId, _spawnRate);
+              
 
 
                 break;
             case FlattenShape.Square:
-                _vfx.SetInt(_spawnRateStringId, _spawnRate);
+           
 
 
                 break;
             case FlattenShape.Circular:
-                _vfx.SetInt(_spawnRateStringId, _spawnRate);
+           
 
 
                 break;
