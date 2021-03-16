@@ -32,13 +32,13 @@ namespace VoxelTerrain.Voxel.Jobs
                     for (var j = 0; j < height; j++)
                     {
                         //set voxel based on noise world position
-                        voxels[Chunk.PosToIndex(i, j, k)] = SetVoxelType(origin.x + i * resolution, origin.y + j * resolution,
-                            origin.z + k * resolution);
+                        voxels[Chunk.PosToIndex(i, j, k)] = BiomeGenerator.GenerateVoxelType(origin.x + i * resolution, origin.y + j * resolution, origin.z + k * resolution, scale, numGen);
                     }
                 }
             }
         }
 
+        /*
         //set individual voxel type using noise function
         //eventually this will be replaced by Josephs noise types
         public byte SetVoxelType(float x, float y, float z)
@@ -63,5 +63,6 @@ namespace VoxelTerrain.Voxel.Jobs
 
             return (byte) blockType;
         }
+        */
     }
 }
