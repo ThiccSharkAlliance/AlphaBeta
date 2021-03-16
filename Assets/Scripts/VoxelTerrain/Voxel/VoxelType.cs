@@ -10,6 +10,8 @@
         Sand,
         Snow,
         Water,
-        Wood
+        Forest,
+        Beach,
+        Plains
     }
 }

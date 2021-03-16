@@ -41,7 +41,7 @@ namespace VoxelTerrain.Voxel.Dependencies
             else if (forwardChunk != null && chunkPos == forwardChunk.Position) chunk = forwardChunk;
             else if (rightForwardChunk != null && chunkPos == rightForwardChunk.Position) chunk = rightForwardChunk;
 
-            if (chunk == null) return SetVoxelType(x * scale, y * scale, z * scale); 
+            if (chunk == null) return BiomeGenerator.GenerateVoxelType(x * scale, y * scale, z * scale, Engine.NoiseScale, Engine.WorldInfo.NumGen);
 
             var voxPos = (new Vector3(x, y, z) - chunkPos) / scale;
             return chunk[voxPos.x, voxPos.y, voxPos.z];
@@ -55,12 +55,13 @@ namespace VoxelTerrain.Voxel.Dependencies
             return new Vector3(curChunkPosX, -(Chunk.ChunkHeight * scale) / 2, curChunkPosZ);
         }
         
+        /*
         private int SetVoxelType(float x, float y, float z)
         {
             var blockType = VoxelType.Default;
 
             // noise for heightmap
-            var simplex1 = Noise.Generate2DNoiseValue( x, z, Engine.NoiseScale, Engine.WorldInfo.Seed, Engine.WorldInfo.GroundLevel);
+            var simplex1 = Noise.Generate2DNoiseValue( x, z, Engine.NoiseScale, Engine.WorldInfo.NumGen, Engine.WorldInfo.GroundLevel);
 
             //under the surface, dirt block
             if (y <= simplex1)
@@ -77,5 +78,6 @@ namespace VoxelTerrain.Voxel.Dependencies
 
             return (int) blockType;
         }
+        */
     }
 }
