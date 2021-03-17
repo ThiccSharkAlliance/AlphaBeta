@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using VoxelTerrain.Mouse;
 using VoxelTerrain.Voxel;
 using VoxelTerrain.Voxel.Dependencies;
 

@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.VFX;
 using VoxelTerrain.Grid;
-using VoxelTerrain.Mouse;
 using VoxelTerrain.SaveLoad;
 using VoxelTerrain.Voxel;
 using VoxelTerrain.Voxel.Dependencies;
