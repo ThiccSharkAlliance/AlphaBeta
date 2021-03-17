@@ -58,7 +58,6 @@ namespace VoxelTerrain.Interactions
 
         //For updating chunk voxel data. Includes updating chunks that don't exist in the scene.
         public IEnumerator UpdateChunks(Vector3 hitPos)
-        {
             Vector3 chunkPos;
             Chunk chunk;
             Vector3 voxPos;
