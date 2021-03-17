@@ -9,18 +9,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 203193443f1e4a44d87146572f793444, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d7c4ac7e0597e245996d54cf99c7261, type: 3}
   m_Name: Vfx Interaction
   m_EditorClassIdentifier: 
-  _vfx: {fileID: 0}
-  _spawnRateStringId: Enter ID
-  _spawnRate: 0
-  _spawnPointStringId: Enter ID
-  _particleLifeStringId: Enter ID
-  _particleLife: 0
-  _sphereRadiusStringId: Hello Dave
-  _sphereRadius: 0
-  _boxRadiusStringId: Enter ID
-  _boxRadius: 0
-  _planeRadiusStringId: Enter ID
-  _planeRadius: 0
+  _vfxInteraction:
+    _vfx: {fileID: 0}
+    _spawnRateStringId: Enter ID
+    _spawnRate: 100
+    _spawnPointStringId: Enter ID
+    _particleLifeStringId: Enter ID
+    _particleLife: 50
+    _sphereRadiusStringId: HELLO
+    _sphereRadius: 0
+    _boxRadiusStringId: DAVE
+    _boxRadius: 0
+    _planeRadiusStringId: Enter ID
+    _planeRadius: 0
+    Vfx:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}

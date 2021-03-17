@@ -14,14 +14,14 @@ namespace VoxelTerrain.Interactions
     public class VoxelInteraction : MonoBehaviour
     {
         [SerializeField] private VoxelEngine _engine;
+        [SerializeField] private ChunkLoader _chunkLoader;
+        [SerializeField] private ScriptableVfxInteract _interactionEvents;
         [SerializeField] private VoxelType _setVoxelType;
         [Tooltip("Overrides voxel type, will destroy all voxels above position. Voxel type still sets at and below position")]
         [SerializeField] private bool _destroyAboveGround;
         [SerializeField] private InteractionSettings _interactionSettings;
         [SerializeField] private FlattenShape _shape = FlattenShape.Single;
-        [SerializeField] private ChunkLoader _chunkLoader;
-        [SerializeField] private VfxInteraction[] _interactionEvents;
-        
+
         private float _offset = 0;
         
         public FlattenShape Shape
@@ -59,8 +59,6 @@ namespace VoxelTerrain.Interactions
         //For updating chunk voxel data. Includes updating chunks that don't exist in the scene.
         public IEnumerator UpdateChunks(Vector3 hitPos)
         {
-            //Run vfx if we have it
-            if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxPlaya(hitPos, Shape);
             Vector3 chunkPos;
             Chunk chunk;
             Vector3 voxPos;
@@ -68,6 +66,17 @@ namespace VoxelTerrain.Interactions
             Vector3 newHitPos;
             List<Chunk> chunkList;
             List<Vector3> posList;
+
+            //Run vfx if we have it
+            if (_interactionEvents)
+            {
+                //Search for a chunk
+                newChunkPos = new Vector3(hitPos.x, hitPos.y, hitPos.z);
+                chunkPos = _engine.NearestChunk(newChunkPos);
+                chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
+                voxPos = (newChunkPos - chunkPos) / Size;
+                _interactionEvents.VFXInteraction.VfxPlaya(hitPos, chunk[voxPos.x, voxPos.y, voxPos.z], Shape);
+            }
             
             //Pick the shape type
             switch (_shape)
@@ -138,7 +147,7 @@ namespace VoxelTerrain.Interactions
                         yield return null;
                     }
                     //Stop vfx from running
-                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxStopa(); 
+                    if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa(); 
                     break;
                 //Square can work in cubic space. Height and dig values affect its height range
                 //Whereas at default it just effects a square area on x and z
@@ -200,7 +209,7 @@ namespace VoxelTerrain.Interactions
                         yield return null;
                     }                    
                     //stop any vfx
-                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxStopa();
+                    if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa();
                     break;
                 
                 //Circular works on a round space, if height and depth values are set then it will act cylindrical
@@ -255,7 +264,7 @@ namespace VoxelTerrain.Interactions
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxStopa();
+                    if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa();
                     break;
                 //Spherical effects a 3D sphere space, but unlike mouse is only run on one click.
                 //This allows spherical types to run on a larger area, because it takes ages.
@@ -312,7 +321,7 @@ namespace VoxelTerrain.Interactions
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if ((byte)Voxel < _interactionEvents.Length) _interactionEvents[(byte)Voxel].VfxStopa();
+                    if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

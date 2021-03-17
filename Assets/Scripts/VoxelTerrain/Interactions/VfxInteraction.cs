@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using VoxelTerrain.Voxel;
 
 namespace VoxelTerrain.Interactions
 {
-    [CreateAssetMenu(fileName = "Vfx Interaction", menuName = "VFX/Interaction", order = 1), Serializable]
-    public class VfxInteraction : ScriptableObject
+    [Serializable]
+    public class VfxInteraction
     {
-        [SerializeField] private VisualEffect _vfx;
+        private VisualEffect _vfx;
 
         [SerializeField] private string _spawnRateStringId = "Enter ID";
         [SerializeField] private int _spawnRate;
@@ -25,6 +27,8 @@ namespace VoxelTerrain.Interactions
 
         [SerializeField] private string _planeRadiusStringId = "Enter ID";
         [SerializeField] private float _planeRadius;
+
+        public VisualEffect[] Vfx = new VisualEffect[10];
     
         public FlattenShape Shape { get; set; }
 
@@ -97,8 +101,11 @@ namespace VoxelTerrain.Interactions
 
         #endregion
 
-        public void VfxPlaya(Vector3 spawnPoint, FlattenShape shape)
+        public void VfxPlaya(Vector3 spawnPoint, byte voxelType, FlattenShape shape = FlattenShape.Single)
         {
+
+            if (_vfx == null || _vfx != Vfx[voxelType]) _vfx = Vfx[voxelType];
+            
             _vfx.SetInt(_spawnRateStringId, _spawnRate);
             switch (shape)
             {
