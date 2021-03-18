@@ -58,6 +58,7 @@ namespace VoxelTerrain.Interactions
 
         //For updating chunk voxel data. Includes updating chunks that don't exist in the scene.
         public IEnumerator UpdateChunks(Vector3 hitPos)
+        {
             Vector3 chunkPos;
             Chunk chunk;
             Vector3 voxPos;
@@ -74,7 +75,7 @@ namespace VoxelTerrain.Interactions
                 chunkPos = _engine.NearestChunk(newChunkPos);
                 chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
                 voxPos = (newChunkPos - chunkPos) / Size;
-                _interactionEvents.VFXInteraction.VfxPlaya(hitPos, chunk[voxPos.x, voxPos.y, voxPos.z], Shape);
+                _interactionEvents.VFXInteraction.VfxPlaya(hitPos, chunk[voxPos.x, voxPos.y, voxPos.z], _interactionSettings, Shape);
             }
             
             //Pick the shape type

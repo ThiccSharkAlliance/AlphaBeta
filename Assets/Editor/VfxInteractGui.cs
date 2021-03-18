@@ -173,8 +173,8 @@ namespace Editor
                     EditorGUILayout.BeginHorizontal();
                     //Set box radius ID and value
                     EditorGUILayout.LabelField("Box Radius", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
-                    vi.VFXInteraction.BoxRadiusStringId = EditorGUILayout.TextField(vi.VFXInteraction.BoxRadiusStringId, GUILayout.Width(100f));
-                    vi.VFXInteraction.BoxRadius = EditorGUILayout.FloatField(vi.VFXInteraction.BoxRadius, GUILayout.Width(60f));
+                    vi.VFXInteraction.BoxRadiusXStringId = EditorGUILayout.TextField(vi.VFXInteraction.BoxRadiusXStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.BoxRadiusX = EditorGUILayout.FloatField(vi.VFXInteraction.BoxRadiusX, GUILayout.Width(60f));
                     EditorGUILayout.EndHorizontal();
                     
                     #endregion
