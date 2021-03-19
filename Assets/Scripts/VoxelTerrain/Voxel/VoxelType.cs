@@ -14,10 +14,12 @@
         Beach,
         Plains,
         Sandstone,
+        SavannahGrass,
         SavannahForest,
         JungleForest,
         PineForest,
         SwampForest,
-        Mud
+        Mud,
+        Ice,
     }
 }
