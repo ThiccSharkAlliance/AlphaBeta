@@ -612,7 +612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _engine: {fileID: 201202581}
   _chunkLoader: {fileID: 1219288309642976020}
-  _interactionEvents: {fileID: 11400000, guid: 3488a8de9fcba5a4783e68e26b761284, type: 2}
+  _interactionEvents: {fileID: 0}
   _setVoxelType: 2
   _destroyAboveGround: 1
   _interactionSettings:
