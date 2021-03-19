@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c15bd00648bc814ba5ce5fd7f9a109b, type: 3}
+  m_Name: DarrensBase
+  m_EditorClassIdentifier: 
+  basePlate: {fileID: 1917014331532121430, guid: 0be51f8416d6c34499b73bfa8a169f6c,
+    type: 3}
+  playerShip: {fileID: 5407925156624412859, guid: 9885f98d4e87fb34291b7237f1ac4648,
+    type: 3}
+  basePlatePostion: {x: 513, y: 1, z: 475}
+  baseBuildings:
+  - buildingPosOffset: {x: -1, y: 0, z: 0}
+    buildingRot: 0
+    type: {fileID: 11400000, guid: acc01ffbb1b655b46b606c42feb083ee, type: 2}
+  - buildingPosOffset: {x: -2, y: 0, z: 0}
+    buildingRot: 90
+    type: {fileID: 11400000, guid: acc01ffbb1b655b46b606c42feb083ee, type: 2}
+  - buildingPosOffset: {x: -3, y: 0, z: 0}
+    buildingRot: 180
+    type: {fileID: 11400000, guid: acc01ffbb1b655b46b606c42feb083ee, type: 2}
+  - buildingPosOffset: {x: -4, y: 0, z: 0}
+    buildingRot: 270
+    type: {fileID: 11400000, guid: acc01ffbb1b655b46b606c42feb083ee, type: 2}
+  - buildingPosOffset: {x: -5, y: 0, z: 0}
+    buildingRot: 0
+    type: {fileID: 11400000, guid: 1855869e06cc67949b3c0b3b7b062256, type: 2}
+  - buildingPosOffset: {x: -6, y: 1, z: 0}
+    buildingRot: 0
+    type: {fileID: 11400000, guid: 835cb835261898e4ebfaf03f9aad9dd3, type: 2}
+  - buildingPosOffset: {x: 0, y: 0, z: -3}
+    buildingRot: 0
+    type: {fileID: 11400000, guid: 1855869e06cc67949b3c0b3b7b062256, type: 2}
+  - buildingPosOffset: {x: 0, y: 0, z: -2}
+    buildingRot: 0
+    type: {fileID: 11400000, guid: df52c7f97ce587242a59f366e7176b1e, type: 2}
+  shipHealth: 0
+  shipDamage: 0

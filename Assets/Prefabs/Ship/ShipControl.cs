@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ShipControl : MonoBehaviour
 {
-    public GameObject target;
+    GameObject target;
     public Material blueMat, redMat;
     Camera mainCam;
     Vector3 mainCamTransformForward, mainCamTransformRight;
-    const float heightOffGround = 0.6f;
+    const float heightOffGround = 0.4f;
     Vector3 shipMovement;
     Rigidbody rb;
     float shipSpeed = 5f;
@@ -31,6 +31,8 @@ public class ShipControl : MonoBehaviour
     void Start()
     {
         mainCam = Camera.main;
+        mainCam.GetComponent<CameraControl>().playerPoint = this.gameObject;
+        target = transform.Find("Target").gameObject;
         rb = GetComponent<Rigidbody>();
         gunPoint = GameObject.Find("GunPoint").transform;
         targetMat = target.GetComponent<MeshRenderer>().material;

@@ -12,12 +12,16 @@ public class Inventory : MonoBehaviour
 
     //Instance Refs
     private Manager manager;
-
+    Resources allResources;
 
     public void GetCatalog()
     {
         manager = FindObjectOfType<Manager>().GetComponent<Manager>();
-
+        allResources = manager.allResources;
+        foreach(var res in allResources.resourceInfo)
+        {
+            print(res.resourceName);
+        }
         GetCatalogItemsRequest catalogItems = new GetCatalogItemsRequest();
         catalogItems.CatalogVersion = "Upgrades";
 
@@ -36,7 +40,7 @@ public class Inventory : MonoBehaviour
                 JsonDataHolder jsonSet = JsonUtility.FromJson<JsonDataHolder>(read);     // Apply the read data and set the data the json class.
                 ////////////////////////////////////////////////
                 
-                foreach (var info in manager.resourceInfo)
+                foreach (var info in allResources.resourceInfo)
                 {
                     if (info.resourceName == i.DisplayName)
                     {
@@ -45,7 +49,7 @@ public class Inventory : MonoBehaviour
                         ////Apply Json Values to the player.
                         if(jsonSet != null)
                         {
-                            info.Damage = jsonSet.Damage;
+                            info.damage = jsonSet.Damage;
                         }
                         Debug.Log("cost " + cost + " name " + i.DisplayName);
                     }

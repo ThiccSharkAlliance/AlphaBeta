@@ -9,7 +9,11 @@ namespace VoxelTerrain.Voxel.InfoData
         [SerializeField] private float _groundLevel;
         
         public float Distance => _distance;
-        public Transform Origin => _origin;
+        public Transform Origin
+        {
+            get => _origin;
+            set => _origin = value;
+        }
 
         public float GroundLevel => _groundLevel;
     }
