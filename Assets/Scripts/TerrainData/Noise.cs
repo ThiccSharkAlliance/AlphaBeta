@@ -81,8 +81,8 @@ namespace TerrainData
             float noiseReturn = 0;
 
             // Local variables per coordinate
-            float amplitude = 1; // Vertical scale of noise
-            float frequency = 1; // Horizontal scale of noise
+            float amplitude = 0.8f; // Vertical scale of noise
+            float frequency = 0.2f; // Horizontal scale of noise
 
             for (int i = 0; i < octaves; i++)
             {
@@ -118,6 +118,7 @@ namespace TerrainData
                 frequency *= lacunarity;
             }
 
+            /*
             if (!threeDimensions)
             {
                 // Set the value at the current coordinate and subtract ground level
@@ -129,6 +130,7 @@ namespace TerrainData
                     noiseReturn = 0;
                 }
             }
+            */
 
             return noiseReturn * scale;
         }

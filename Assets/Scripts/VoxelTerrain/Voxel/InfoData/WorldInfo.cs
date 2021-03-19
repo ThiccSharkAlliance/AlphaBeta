@@ -14,6 +14,7 @@ namespace VoxelTerrain.Voxel.InfoData
         public Transform Origin => _origin;
         public float GroundLevel => _groundLevel;
         public int Seed => _seed;
-        public Unity.Mathematics.Random NumGen => new Unity.Mathematics.Random((uint) Seed);
+        public Unity.Mathematics.Random NumGenAltitude => new Unity.Mathematics.Random((uint) Seed);
+        public Unity.Mathematics.Random NumGenMoisture => new Unity.Mathematics.Random((uint) Seed + 1000);
     }
 }
