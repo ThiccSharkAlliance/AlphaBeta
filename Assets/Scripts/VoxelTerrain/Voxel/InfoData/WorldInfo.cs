@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.Mathematics;
+using UnityEngine;
 
 namespace VoxelTerrain.Voxel.InfoData
 {
@@ -7,6 +8,7 @@ namespace VoxelTerrain.Voxel.InfoData
         [SerializeField] private float _distance;
         [SerializeField] private Transform _origin;
         [SerializeField] private float _groundLevel;
+        [SerializeField] private int _seed;
         
         public float Distance => _distance;
         public Transform Origin
@@ -14,7 +16,9 @@ namespace VoxelTerrain.Voxel.InfoData
             get => _origin;
             set => _origin = value;
         }
-
         public float GroundLevel => _groundLevel;
+        public int Seed => _seed;
+        public Unity.Mathematics.Random NumGenAltitude => new Unity.Mathematics.Random((uint) Seed);
+        public Unity.Mathematics.Random NumGenMoisture => new Unity.Mathematics.Random((uint) Seed + 1000);
     }
 }

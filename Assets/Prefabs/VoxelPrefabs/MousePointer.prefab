@@ -60,12 +60,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _engine: {fileID: 0}
+  _chunkLoader: {fileID: 0}
+  _interactionEvents: {fileID: 11400000, guid: 3488a8de9fcba5a4783e68e26b761284, type: 2}
   _setVoxelType: 1
-  _xRadius: 5
-  _zRadius: 5
-  _circleRadius: 5
-  _flattenHeight: 2
-  _shape: 1
+  _destroyAboveGround: 0
+  _interactionSettings:
+    _mouseSize: 3
+    _cubeXDistance: 5
+    _cubeZDistance: 10
+    _circleRadius: 5
+    _sphereRadius: 5
+    _height: 3
+    _dig: 5
+  _shape: 3
 --- !u!114 &5892777494403041969
 MonoBehaviour:
   m_ObjectHideFlags: 0

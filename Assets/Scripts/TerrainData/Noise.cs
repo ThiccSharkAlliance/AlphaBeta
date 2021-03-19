@@ -20,7 +20,7 @@ namespace TerrainData
         /// <param name="groundLevel">Ground level to limit lowest value</param>
         /// <param name="viewPos">Displayed position of the map</param>
         /// <returns>Noise values in 2D array</returns>
-        public static float[,] GenerateNoiseMap(int width, int height, float scale, int seed, float groundLevel, Vector2 viewPos)
+        public static float[,] GenerateNoiseMap(int width, int height, float scale, Unity.Mathematics.Random numGen, float groundLevel, Vector2 viewPos)
         {
             // 2D array to store noise values
             float[,] noiseMap = new float[width, height];
@@ -31,7 +31,7 @@ namespace TerrainData
                 for (int x = 0; x < width; x++)
                 {
                     // Generate a singular noise sample for this coordinate
-                    noiseMap[x, y] = GenerateSample(new float3(x, y, 0), scale, seed, groundLevel, viewPos, false);
+                    noiseMap[x, y] = GenerateSample(new float3(x, y, 0), scale, numGen, groundLevel, viewPos, false);
                 }
             }
 
@@ -47,9 +47,9 @@ namespace TerrainData
         /// <param name="seed">Seed of the generation</param>
         /// <param name="groundLevel">Ground level to limit lowest value</param>
         /// <returns>Singular 2D noise value</returns>
-        public static float Generate2DNoiseValue(float x, float y, float scale, int seed, float groundLevel)
+        public static float Generate2DNoiseValue(float x, float y, float scale, Unity.Mathematics.Random numGen, float groundLevel)
         {
-            return GenerateSample(new float3(x, y, 0), scale, seed, groundLevel, Vector2.zero, false);
+            return GenerateSample(new float3(x, y, 0), scale, numGen, groundLevel, Vector2.zero, false);
         }
 
         /// <summary>
@@ -61,9 +61,9 @@ namespace TerrainData
         /// <param name="scale">Zoom level of the noise when displayed</param>
         /// <param name="seed">Seed of the generation</param>
         /// <returns>Singular 3D noise value</returns>
-        public static float Generate3DNoiseValue(float x, float y, float z, float scale, int seed)
+        public static float Generate3DNoiseValue(float x, float y, float z, float scale, Unity.Mathematics.Random numGen)
         {
-            return GenerateSample(new float3(x, y, z), scale, seed, 0, Vector2.zero, true);
+            return GenerateSample(new float3(x, y, z), scale, numGen, 0, Vector2.zero, true);
         }
 
         /// <summary>
@@ -76,14 +76,13 @@ namespace TerrainData
         /// <param name="viewPos">Displayed position of the map</param>
         /// <param name="threeDimensions">Is the noise 3D</param>
         /// <returns>Singular 2D noise sample</returns>
-        private static float GenerateSample(float3 coords, float scale, int seed,  float groundLevel, Vector2 viewPos, bool threeDimensions)
+        private static float GenerateSample(float3 coords, float scale, Unity.Mathematics.Random numGen,  float groundLevel, Vector2 viewPos, bool threeDimensions)
         {
             float noiseReturn = 0;
 
             // Local variables per coordinate
-            float amplitude = 1; // Vertical scale of noise
-            float frequency = 1; // Horizontal scale of noise
-            Unity.Mathematics.Random numGen = new Unity.Mathematics.Random((uint)seed); // Number generator
+            float amplitude = 0.8f; // Vertical scale of noise
+            float frequency = 0.2f; // Horizontal scale of noise
 
             for (int i = 0; i < octaves; i++)
             {
@@ -119,6 +118,7 @@ namespace TerrainData
                 frequency *= lacunarity;
             }
 
+            /*
             if (!threeDimensions)
             {
                 // Set the value at the current coordinate and subtract ground level
@@ -130,6 +130,7 @@ namespace TerrainData
                     noiseReturn = 0;
                 }
             }
+            */
 
             return noiseReturn * scale;
         }

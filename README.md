@@ -24,3 +24,7 @@ preview12 - 1.3.0
 If you don't have this package then edit your  *YourUnityProject*/Packages/manifest.json and add the following line to the dependencies object.
 
 "com.unity.nuget.": "2.0.0",
+
+### Visual Effects Graph Package
+7.3.1
+
