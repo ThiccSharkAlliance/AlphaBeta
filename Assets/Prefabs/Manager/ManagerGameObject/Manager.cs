@@ -122,6 +122,9 @@ public class Manager : MonoBehaviour
                 unlockedBuildOptionsList.Add(i);
                 print("Adding " + i + " = " + allResources.resourceInfo[i].resourceName);
                 GameObject go = GameObject.Instantiate(allResources.resourceInfo[i].prefab,newPlaceIndicator.transform.position,newPlaceIndicator.transform.rotation);
+
+                go.name = allResources.resourceInfo[i].prefab.name;////////////////////////////////////////// THIS REMOVES THE "(CLONE)" IN THE NAME OF THE ITEM. Needed to pass a sting for the purchase
+
                 go.transform.parent = newPlaceIndicator.transform;
                 placeHolderPrefabs.Add(go);
             }
@@ -258,14 +261,16 @@ public class Manager : MonoBehaviour
         {
             GameObject toBeCloned = placeHolderPrefabs[currentSelection];
             GameObject newBuilding = GameObject.Instantiate(toBeCloned, newPlaceIndicator.transform.position, newPlaceIndicator.transform.rotation);
-
-           // newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, placeIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);
+            // newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, placeIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);
 
             newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, newPlaceIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);
             //  Material newMat = new Material(newBuilding.GetComponent<MeshRenderer>().material);
             //  newBuilding.GetComponent<MeshRenderer>().material = newMat;
             //Note for Jack. Use one material.
-            virtualCurrency.SealsCurrency -= allResources.resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost;
+
+            //USING THE "toBeCloned" NAME AS A STRING FOR THE ITEM PUCHASE ON CLOUD
+            virtualCurrency.PurchaseUpgrade(toBeCloned.name, allResources.resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost);
+            // virtualCurrency.SealsCurrency -= allResources.resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost; // Removed as PurchaseUpgrade does that.
 
             moneyText.text = virtualCurrency.SealsCurrency.ToString();
 
@@ -277,8 +282,13 @@ public class Manager : MonoBehaviour
     {
         if (started)
         {
-
             moneyText.text = virtualCurrency.SealsCurrency.ToString();
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                virtualCurrency.AddCurrency();
+            }
+
+
             if (buildSelectorVisible)
             {
                 buildTabScroll.transform.position = Input.mousePosition + new Vector3(iconSize, 0f);

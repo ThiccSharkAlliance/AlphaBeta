@@ -78,6 +78,7 @@ public class DEV_LOGIN : MonoBehaviour
                     inventory.GetCatalog();
                 
                     gps.FetchCurrency();
+                    vC.GetUserInventory();
                 
                 }
 

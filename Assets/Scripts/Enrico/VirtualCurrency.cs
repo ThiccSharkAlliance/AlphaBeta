@@ -10,6 +10,8 @@ public class VirtualCurrency : MonoBehaviour
     //References
     // PlayFabAuth PFA;
     DEV_LOGIN dEV_LOGIN;
+    GetPlayerStats gps;
+
     //Currency Variebles
     protected int sealsCurrrency;
     protected  List<ItemInstance> inventoryItem = new List<ItemInstance>();
@@ -21,13 +23,13 @@ public class VirtualCurrency : MonoBehaviour
     
     private void Awake()
     {
+        gps = gameObject.GetComponent<GetPlayerStats>();
         dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
        // PFA = gameObject.GetComponent<PlayFabAuth>();
     }
 
     public void PurchaseUpgrade(string itemID, int price)
     {
-
         PurchaseItemRequest purchaseRequest = new PurchaseItemRequest();
         purchaseRequest.CatalogVersion = "Upgrades";
         purchaseRequest.ItemId = itemID;
@@ -36,42 +38,113 @@ public class VirtualCurrency : MonoBehaviour
 
         GetUserInventoryRequest  userInventory = new GetUserInventoryRequest();
 
-        
+            PlayFabClientAPI.PurchaseItem(purchaseRequest, result =>{
+                SealsCurrency -= price;
+                Debug.Log(" PURCHASED");
+            }, error => { Debug.Log(error.ErrorMessage); });
+    }
+
+    public void GetUserInventory()
+    {
+        GetUserInventoryRequest userInventory = new GetUserInventoryRequest();
+
         PlayFabClientAPI.GetUserInventory(userInventory, inventoryResult => 
+        { 
+            InventoryItems = inventoryResult.Inventory;
+            Debug.Log("UPDATED INv"); 
+
+        }, error => {
+        
+        });
+
+        
+    }
+
+    public void ConsumeItem()
+    {
+        ConsumeItemRequest itemRequest = new ConsumeItemRequest();
+
+        //GetUserInventory();
+
+        Debug.Log("calledConsume");
+
+        GetUserInventoryRequest userInventory = new GetUserInventoryRequest();
+
+        PlayFabClientAPI.GetUserInventory(userInventory, inventoryResult =>
         {
             InventoryItems = inventoryResult.Inventory;
-           
-            bool hasItem = false;
-            foreach (ItemInstance items in InventoryItems )
+            Debug.Log("UPDATED INv");
+
+            foreach (ItemInstance item in InventoryItems)
             {
-                if(InventoryItems.Count == 0)
+                if(item.ItemId == "Wall")
                 {
-                    hasItem = false;
-                }
-                if(items.ItemId == itemID)
-                {
-                    // item alredy in inventory/purchaesed
-                    hasItem = true;
-                    Debug.LogWarning("Item " + items.DisplayName + " Already purchased");
-                }
-                else
-                {
-                    hasItem = false;
-                    Debug.Log(hasItem);
+                    Debug.Log("INNNNNNN");
+                    itemRequest.ItemInstanceId = item.ItemInstanceId;
+                    itemRequest.ConsumeCount = 1;
+                    Debug.Log(itemRequest.ItemInstanceId);
+
+                    PlayFabClientAPI.ConsumeItem(itemRequest, consumeReq =>
+                    {
+                        Debug.Log("CONSUMED");
+                        //gps.RefreshCurrency();
+
+                    }, error =>
+                    {
+
+                    });
                 }
             }
-            if (hasItem == false)
-            {
+        }, error => {
 
-                PlayFabClientAPI.PurchaseItem(purchaseRequest, result =>{
-                    SealsCurrency -= price;
-                    Debug.Log(SealsCurrency);
-
-                }, error => { Debug.Log(error.ErrorMessage); });
-            }
-        }, error => { Debug.Log(error.ErrorMessage); }); 
+        });
     }
+
+    public void AddCurrency()
+    {
+        AddUserVirtualCurrencyRequest currencyRequest = new AddUserVirtualCurrencyRequest();
+        currencyRequest.VirtualCurrency = "SL";
+        currencyRequest.Amount = 10000;
+
+        PlayFabClientAPI.AddUserVirtualCurrency(currencyRequest, result => {
+            Debug.Log("adding money");
+
+
+        }, error => {
+            Debug.LogError(error.ErrorMessage);
+        });
+            gps.RefreshCurrency();
+    }
+
 }
 
+        //PlayFabClientAPI.GetUserInventory(userInventory, inventoryResult => 
+        //{
+        //    InventoryItems = inventoryResult.Inventory;
+
+        //   // bool hasItem = false;
+        //   // foreach (ItemInstance items in InventoryItems) ////////////  For First Welcome Gift. 
+        //   // {
+        //   //     if (InventoryItems.Count == 0)
+        //   //     {
+        //   //         hasItem = false;
+        //   //     }
+        //   //     if (items.ItemId == itemID)
+        //   //     {
+        //   //         // item alredy in inventory/purchaesed
+        //   //         hasItem = true;
+        //   //         Debug.LogWarning("Item " + items.DisplayName + " Already purchased");
+        //   //         //ConsumeItem();
+        //   //     }
+        //   //     else
+        //   //     {
+        //   //         hasItem = false;
+        //   //         Debug.Log(hasItem);
+        //   //     }
+        //   // }
+        //   //// if (hasItem == false)
+        //   // {
+        //    //}
+        //}, error => { Debug.Log(error.ErrorMessage); }); 
    
 

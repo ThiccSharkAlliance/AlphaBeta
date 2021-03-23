@@ -89,8 +89,32 @@ public class GetPlayerStats : MonoBehaviour
     //        {
     //            SceneManager.LoadScene("ShipControlTestScene");
     //            gotCurrency = false;
-                
+
     //        }
     //    }
     //}
+
+    public void RefreshCurrency()
+    {
+        //PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result => {
+
+        //    virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
+        //    gotCurrency = true;
+
+        //}, error => {
+        //    Debug.Log("Error ritriving you currency");
+
+        //}, null);
+
+        PlayFabClientAPI.LoginWithPlayFab(dEV_LOGIN.loginRequest, result2 => {
+
+            virtualCurrency.SealsCurrency = result2.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
+            gotCurrency = true;
+            Debug.Log("NEW CURRENCY VALUE");
+        }, error => {
+            // Debug.Log("Error ritriving you currency");
+            Debug.LogError(error.ErrorMessage);
+
+        }, null);
+    }
 }
