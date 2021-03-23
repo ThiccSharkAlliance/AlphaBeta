@@ -18,6 +18,18 @@ public class Base_Range : MonoBehaviour
         collider = GetComponent<SphereCollider>();
         collider.radius = Area_Of_Control - (Area_Of_Control/100 * 75);
     }
+
+    private void Update()
+    {
+        for (int i = 0; i < Enemies.Count; i++)
+        {
+            if (Enemies[i] == null)
+            {
+                Enemies.RemoveAt(i);
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == Enemy)

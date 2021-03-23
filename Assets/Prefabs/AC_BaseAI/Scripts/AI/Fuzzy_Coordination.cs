@@ -12,6 +12,9 @@ public class Fuzzy_Coordination : MonoBehaviour
     public GameObject Enemy_Base;
     public List<Transform> Enemy_Turrets = new List<Transform>();
 
+    [SerializeField]
+    public string Enemy;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -5,12 +5,15 @@ using UnityEngine.AI;
 
 public class Bake_NavMesh : MonoBehaviour
 {
-    public NavMeshSurface Surface;
+    public NavMeshSurface[] Surfaces;
 
     // Start is called before the first frame update
     void Start()
     {
-        Surface.BuildNavMesh();
+        foreach (NavMeshSurface Surface in Surfaces)
+        {
+            Surface.BuildNavMesh();
+        }
     }
 
     // Update is called once per frame

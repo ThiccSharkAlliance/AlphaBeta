@@ -7,7 +7,6 @@ public class Units : MonoBehaviour
 {
     [SerializeField]
     public Base_Range Base;
-    //public Transform Player;
 
     public NavMeshAgent Agent;
 
@@ -22,13 +21,47 @@ public class Units : MonoBehaviour
 
     Transform Turret;
 
-    void Start()
+    [SerializeField]
+    public int Health;
+
+    [SerializeField]
+    int Damage;
+
+    public Health_Bar HP;
+
+    int Damage_Taken;
+
+    public virtual void Start()
     {
         Action();
         Fuzzy_AI = GetComponentInParent<Fuzzy_Coordination>();
+
+        HP = GetComponentInChildren<Health_Bar>();
+        HP.Set_Max_Health(Health);
     }
 
     void Update()
+    {
+        Get_Functions();
+
+        Decide_Action();
+    }
+
+    void Get_Functions()
+    {
+        if(Fuzzy_AI == null)
+        {
+            Fuzzy_AI = GetComponentInParent<Fuzzy_Coordination>();
+        }
+
+        if(HP == null)
+        {
+            HP = GetComponentInChildren<Health_Bar>();
+            HP.Set_Max_Health(Health); 
+        }
+    }
+
+    void Decide_Action()
     {
         if (Action_Type == "Patrol" && ((Vector3.Distance(Agent.transform.position, Destination) <= 4) || (Agent.transform.position.x == Destination.x && Agent.transform.position.z == Destination.z)))
         {
@@ -45,6 +78,53 @@ public class Units : MonoBehaviour
         if (Action_Type == "Harvest" && ((Vector3.Distance(Agent.transform.position, Destination) <= 7) || (Vector3.Distance(Agent.transform.position, Base.transform.position) <= 4)))
         {
             Action();
+        }
+        if (Action_Type == "Shoot")
+        {
+            Action();
+        }
+        if (Action_Type == "Idle")
+        {
+            Action();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == Fuzzy_AI.Enemy)
+        {
+            int Damage_Taken = collision.gameObject.GetComponent<Units>().Damage;
+            Health -= Damage_Taken;
+
+            HP.Set_Health(Health);
+
+            if(Health <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+        //if(collision.transform.parent.tag == "Turret" && collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "Bullet")
+        {
+            if (collision.gameObject.GetComponent<Turret_Bullet>() != null)
+            {
+                Damage_Taken = collision.gameObject.GetComponent<Turret_Bullet>().Damage;
+            }
+            if(collision.gameObject.GetComponent<Tank_Bullet>() != null)
+            {
+                Damage_Taken = collision.gameObject.GetComponent<Tank_Bullet>().Damage;
+            }
+
+            Health -= Damage_Taken;
+
+            HP.Set_Health(Health);
+
+            Destroy(collision.gameObject);
+
+            if (Health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -109,6 +189,16 @@ public class Units : MonoBehaviour
                     {
                         Agent.SetDestination(Base.transform.position);
                     }
+                    return;
+                }
+            case "Shoot":
+                {
+                    Agent.Stop();
+                    Agent.ResetPath();
+                    return;
+                }
+            case "Idle":
+                {
                     return;
                 }
         }
