@@ -87,6 +87,7 @@ Material:
     m_Floats:
     - Vector1_2F69B1E5: 1
     - Vector1_71CEF9D4: 0
+    - Vector1_A2A26A18: -3.19
     - Vector1_B18A437A: 0.1
     - _AlphaClip: 0
     - _Blend: 0
@@ -133,7 +134,7 @@ Material:
     - Color_45C3BD9: {r: 0.06862745, g: 0.02058824, b: 0, a: 1}
     - Color_756EDD54: {r: 0.30188674, g: 0.110218175, b: 0, a: 1}
     - Color_AC0BCE7B: {r: 0.166462, g: 0.4627451, b: 0, a: 1}
-    - Vector3_BCEDB9BD: {r: 1.03, g: -0.8, b: 1, a: 1}
+    - Vector3_BCEDB9BD: {r: 1.03, g: -0.73, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
