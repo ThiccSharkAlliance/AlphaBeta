@@ -10,7 +10,7 @@ void BCFunction_float(float4 A, float B, out float4 Out)
         return;
     }
 
-    if (B > 0.3) B = 0.3;
+    if (B > 1) B = 1;
     float x = A.x - B;
     float y = A.y - B;
     float z = A.z - B;
