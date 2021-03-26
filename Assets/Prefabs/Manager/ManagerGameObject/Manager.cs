@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +31,7 @@ public class Manager : MonoBehaviour
     float initialisationPause = 1f;
     bool started = false;
 
+    #region Singleton
     private void OnEnable()
     {
         if (manager == null)
@@ -45,7 +47,7 @@ public class Manager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
     }//Singleton Enrico
-    
+    #endregion
 
     private void Awake()
     {
@@ -58,6 +60,7 @@ public class Manager : MonoBehaviour
     {
         //  StartCoroutine(StartAfterPause());
         OnStart();
+        StartCoroutine(CheckTimer());
     }
 
   //  IEnumerator StartAfterPause()
@@ -270,8 +273,6 @@ public class Manager : MonoBehaviour
 
             //USING THE "toBeCloned" NAME AS A STRING FOR THE ITEM PUCHASE ON CLOUD
             virtualCurrency.PurchaseUpgrade(toBeCloned.name, allResources.resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost);
-            // virtualCurrency.SealsCurrency -= allResources.resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost; // Removed as PurchaseUpgrade does that.
-
             moneyText.text = virtualCurrency.SealsCurrency.ToString();
 
             return true;
@@ -283,11 +284,8 @@ public class Manager : MonoBehaviour
         if (started)
         {
             moneyText.text = virtualCurrency.SealsCurrency.ToString();
-            if (Input.GetKeyDown(KeyCode.F5))
-            {
-                virtualCurrency.AddCurrency();
-            }
 
+            if (Input.GetKeyDown(KeyCode.F5)){virtualCurrency.AddCurrency();} //CHEAT FOR ADFDING MONEY TO INVENTORY
 
             if (buildSelectorVisible)
             {
@@ -338,4 +336,58 @@ public class Manager : MonoBehaviour
             }
         }
     }
+
+    #region LOOTBOX_TIMER
+    /// <summary>
+    /// Stuff for LootBox logic
+    /// </summary>
+
+
+    public Button rewardButton;
+    public Text timer;
+
+    public void callGrantLootBox()
+    {
+        virtualCurrency.GrantLootBox();
+        DateTime CurrentTime = DateTime.Now.AddMinutes(5); ///1440 minutes in a day. 
+        CurrentTime.SaveDate();
+        StopAllCoroutines();
+        StartCoroutine(CheckTimer());
+        Debug.Log(CurrentTime);
+    }
+
+    public IEnumerator CheckTimer()
+    {
+        DateTime SavedTime = DateTimeExtension.GetSavedDate();
+        TimeSpan RemaningTime = SavedTime.Subtract(DateTime.Now);
+        if (RemaningTime.TotalMinutes > 0)
+        {
+            rewardButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            rewardButton.gameObject.SetActive(true);
+            timer.text = "Collect Reward!!";
+        }
+
+        while (RemaningTime.TotalMinutes > 0)
+        {
+            RemaningTime = SavedTime.Subtract(DateTime.Now);
+            timer.text = "Wait For Reward \n" + RemaningTime.Hours + ":" + RemaningTime.Minutes + ":" + RemaningTime.Seconds;
+            yield return new WaitForSeconds(1f);
+        }
+        if (RemaningTime.TotalMinutes <= 0)
+        {
+            rewardButton.gameObject.SetActive(true);
+            timer.text = "Collect Reward!!";
+        }
+    }
 }
+
+public static class DateTimeExtension
+{
+    public static void SaveDate(this DateTime _date, string Key = "SavedDate") { string d = Convert.ToString(_date); PlayerPrefs.SetString(Key, d); }
+    public static DateTime GetSavedDate(string key = "SavedDate") { if (PlayerPrefs.HasKey("SavedDate")) { string d = PlayerPrefs.GetString("SavedDate"); return Convert.ToDateTime(d); } else { return DateTime.Now; } }
+}
+#endregion
+
