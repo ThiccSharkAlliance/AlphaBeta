@@ -700,9 +700,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1080,22 +1078,27 @@ PrefabInstance:
         type: 3}
       propertyPath: _origin
       value: 
-      objectReference: {fileID: 623733105}
+      objectReference: {fileID: 0}
     - target: {fileID: 7941170911782372762, guid: 2b7228255036a30479393ef9a76b8464,
         type: 3}
       propertyPath: _groundLevel
-      value: 1
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7941170911782372762, guid: 2b7228255036a30479393ef9a76b8464,
+        type: 3}
+      propertyPath: _distance
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 7941170911782372764, guid: 2b7228255036a30479393ef9a76b8464,
         type: 3}
       propertyPath: _chunkLoader
       value: 
-      objectReference: {fileID: 2055903235}
+      objectReference: {fileID: 2055903242}
     - target: {fileID: 7941170911782372765, guid: 2b7228255036a30479393ef9a76b8464,
         type: 3}
       propertyPath: _chunkLoader
       value: 
-      objectReference: {fileID: 2055903235}
+      objectReference: {fileID: 2055903242}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b7228255036a30479393ef9a76b8464, type: 3}
 --- !u!1 &390961336
@@ -2263,8 +2266,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2293,7 +2295,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800900765}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: a20d66c5bdb5ab14c80812dc4cd91443, type: 3}
+  m_Asset: {fileID: 0}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -2370,8 +2372,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3269,10 +3270,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3739,10 +3737,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4068,11 +4063,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4281,7 +4272,7 @@ PrefabInstance:
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _chunkLoader
       value: 
-      objectReference: {fileID: 2055903235}
+      objectReference: {fileID: 0}
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _interactionSettings._mouseSize
       value: 0
@@ -4685,36 +4676,28 @@ Transform:
   m_Father: {fileID: 630771401}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2055903234 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1219288309473230982, guid: 2b7228255036a30479393ef9a76b8464,
-    type: 3}
-  m_PrefabInstance: {fileID: 361907438}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2055903235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2055903234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a53ef923e2a61e47be103ca2eeee4e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _chunkDirectoryName: chunks
-  _enableSaving: 0
 --- !u!114 &2055903236 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1219288309473230983, guid: 2b7228255036a30479393ef9a76b8464,
     type: 3}
   m_PrefabInstance: {fileID: 361907438}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2055903234}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b650019544c210a4a8945ae2b27800be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2055903242 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1219288309642976020, guid: 2b7228255036a30479393ef9a76b8464,
+    type: 3}
+  m_PrefabInstance: {fileID: 361907438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a53ef923e2a61e47be103ca2eeee4e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2058957215
@@ -4867,10 +4850,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
