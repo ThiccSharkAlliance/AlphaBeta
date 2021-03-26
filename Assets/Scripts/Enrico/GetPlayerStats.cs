@@ -12,7 +12,7 @@ public class GetPlayerStats : MonoBehaviour
     private VirtualCurrency virtualCurrency;
     // private PlayFabAuth PFA;  ////// TO UNCOMMENT FOR THE LOGIN PANEL NOW USE DEV_LOGIN!!!!! 
     private DEV_LOGIN dEV_LOGIN; 
-    //private Inventory inventory;
+
     
     //Variables
     public bool gotCurrency = false;
@@ -25,7 +25,6 @@ public class GetPlayerStats : MonoBehaviour
         /// PFA = gameObject.GetComponent<PlayFabAuth>();
         dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
         manager = FindObjectOfType<Manager>();
-       // inventory = gameObject.GetComponent<Inventory>();
     }
 
     #region TO UNCOMMENT FOR FINAL

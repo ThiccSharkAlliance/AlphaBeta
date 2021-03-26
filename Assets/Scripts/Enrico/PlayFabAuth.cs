@@ -46,7 +46,6 @@ public class PlayFabAuth : MonoBehaviour
     {
         vC = gameObject.GetComponent<VirtualCurrency>();  // todo INJECT  
         gps = gameObject.GetComponent<GetPlayerStats>();  // todo INJECT  
-       // inventory = gameObject.GetComponent<Inventory>(); // todo INJECT  
     }
 
     private void Start()

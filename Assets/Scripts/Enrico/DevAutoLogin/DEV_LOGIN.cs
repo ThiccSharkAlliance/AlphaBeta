@@ -21,7 +21,6 @@ public class DEV_LOGIN : MonoBehaviour
     {
         vC = gameObject.GetComponent<VirtualCurrency>();  // todo INJECT  
         gps = gameObject.GetComponent<GetPlayerStats>();  // todo INJECT  
-        //inventory = gameObject.GetComponent<Inventory>(); // todo INJECT  
     }
 
     // Start is called before the first frame update
