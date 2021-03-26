@@ -45,6 +45,8 @@ namespace VoxelTerrain.Interactions
         public VisualEffect[] Vfx = new VisualEffect[18];
         public Color[] SecondWaveColour = new Color[18];
 
+        public bool ScanForVfx;
+
         public FlattenShape Shape { get; set; }
 
         #region Essentials

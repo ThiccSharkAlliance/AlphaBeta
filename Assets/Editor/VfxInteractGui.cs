@@ -204,10 +204,22 @@ namespace Editor
             #endregion
 
             EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Scan for Vfx"))
+            {
+                vi.VFXInteraction.ScanForVfx = !vi.VFXInteraction.ScanForVfx;
+            }
+
+            EditorGUILayout.LabelField(vi.VFXInteraction.ScanForVfx ? "Scanning" : "Idle", GUILayout.MinWidth(100f),
+                GUILayout.MaxWidth(130f));
+            
+            EditorGUILayout.EndHorizontal();
+
+
+            EditorGUILayout.BeginHorizontal();
             //Set VFX field. Leave this outside as only one VFX is needed
             EditorGUILayout.LabelField("VFX", GUILayout.MinWidth(30f), GUILayout.MaxWidth(60f));
             vi.VFXInteraction.Vfx[(int) _voxType] = (VisualEffect) EditorGUILayout.ObjectField(vi.VFXInteraction.Vfx[(int) _voxType], typeof(VisualEffect), true,
-                GUILayout.MinWidth(100f), GUILayout.MaxWidth(150f));
+                GUILayout.MinWidth(100f), GUILayout.MaxWidth(250f));
                     
             EditorGUILayout.EndHorizontal();
 

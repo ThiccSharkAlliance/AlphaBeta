@@ -19,9 +19,9 @@ MonoBehaviour:
     _spawnRateBox: 0
     _spawnPointStringId: DestructionSP
     _particleLifeStringId: DestructionParticleLife
-    _particleLife: 3
+    _particleLife: 2
     _sphereRadiusStringId: SphereRadius
-    _sphereRadius: 0.089999996
+    _sphereRadius: 0.08
     _boxRadiusXStringId: Enter ID
     _boxRadiusX: 0
     _boxRadiusZStringId: Enter ID
@@ -29,7 +29,7 @@ MonoBehaviour:
     _planeRadiusStringId: Enter ID
     _planeRadius: 0
     _particleRingCountStringId: RingSpawnCount
-    _particleRingCount: 100
+    _particleRingCount: 10
     _sparkSpawnRateStringId: SparksSpawn
     _sparkSpawnRate: 60
     _secondWaveColourStringId: SecondWaveColour
@@ -72,3 +72,4 @@ MonoBehaviour:
     - {r: 0.252759, g: 0.754717, b: 0.36965913, a: 1}
     - {r: 0.6415094, g: 0.29098985, b: 0, a: 1}
     - {r: 0.30647027, g: 0.8625855, b: 0.9150943, a: 1}
+    ScanForVfx: 1

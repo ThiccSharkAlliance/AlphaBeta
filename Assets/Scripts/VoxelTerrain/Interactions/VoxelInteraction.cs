@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.VFX;
@@ -11,11 +12,12 @@ using VoxelTerrain.Voxel.Dependencies;
 
 namespace VoxelTerrain.Interactions
 {
+    [ExecuteAlways]
     public class VoxelInteraction : MonoBehaviour
     {
         [SerializeField] private VoxelEngine _engine;
         [SerializeField] private ChunkLoader _chunkLoader;
-        [SerializeField] private ScriptableVfxInteract _interactionEvents;
+        [SerializeField] private ScriptableVfxInteract _interactionEvent;
         [SerializeField] private VoxelType _setVoxelType;
         [Tooltip("Overrides voxel type, will destroy all voxels above position. Voxel type still sets at and below position")]
         [SerializeField] private bool _destroyAboveGround;
@@ -129,6 +131,37 @@ namespace VoxelTerrain.Interactions
 
         #endregion
 
+        #region Vfx Filler
+        
+        private void Update()
+        {
+            if (Application.isPlaying) return;
+
+            if (!_interactionEvent) return;
+
+            if (!_interactionEvent.VFXInteraction.ScanForVfx) return;
+
+            if (_interactionEvent.VFXInteraction.Vfx.Length != 18)
+                _interactionEvent.VFXInteraction.Vfx = new VisualEffect[18];
+
+            var childVfx = GetComponentsInChildren<VfxVoxelType>();
+
+            for (int i = 0; i < 18; i++)
+            {
+                if (_interactionEvent.VFXInteraction.Vfx[i] != null) continue;
+                foreach (var cVoxelType in childVfx)
+                {
+                    if ((int)cVoxelType.VoxelType == i)
+                    {
+                        _interactionEvent.VFXInteraction.Vfx[i] = cVoxelType.GetComponent<VisualEffect>();
+                    }
+                }
+                
+                if (_interactionEvent.VFXInteraction.Vfx[i] == null) Debug.LogWarning("Vfx in children for Voxel Type " + (VoxelType)i + " is missing on " + gameObject.name);
+            }
+        }
+
+        #endregion
         public void EditVoxels()
         {
             var ray = CamMain.ViewportPointToRay(CamMain.ScreenToViewportPoint(Input.mousePosition));
@@ -160,7 +193,7 @@ namespace VoxelTerrain.Interactions
             var vox = chunk[voxPos.x, voxPos.y, voxPos.z];
 
             //Run vfx if we have it
-            if (_interactionEvents) _interactionEvents.VFXInteraction.VfxPlaya(hitPos, vox, _interactionSettings, Shape);
+            if (_interactionEvent) _interactionEvent.VFXInteraction.VfxPlaya(hitPos, vox, _interactionSettings, Shape);
             
             
             //Pick the shape type
@@ -232,7 +265,7 @@ namespace VoxelTerrain.Interactions
                         yield return null;
                     }
                     //Stop vfx from running
-                    if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa(_shape, vox); 
+                    if (_interactionEvent) _interactionEvent.VFXInteraction.VfxStopa(_shape, vox); 
                     break;
                 //Square can work in cubic space. Height and dig values affect its height range
                 //Whereas at default it just effects a square area on x and z
@@ -294,7 +327,7 @@ namespace VoxelTerrain.Interactions
                         yield return null;
                     }                    
                     //stop any vfx
-                    if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa(_shape, vox);
+                    if (_interactionEvent) _interactionEvent.VFXInteraction.VfxStopa(_shape, vox);
                     break;
                 
                 //Circular works on a round space, if height and depth values are set then it will act cylindrical
@@ -349,7 +382,7 @@ namespace VoxelTerrain.Interactions
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa(_shape, vox);
+                    if (_interactionEvent) _interactionEvent.VFXInteraction.VfxStopa(_shape, vox);
                     break;
                 //Spherical effects a 3D sphere space, but unlike mouse is only run on one click.
                 //This allows spherical types to run on a larger area, because it takes ages.
@@ -406,7 +439,7 @@ namespace VoxelTerrain.Interactions
                             _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
                         yield return null;
                     }
-                    if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa(_shape, vox);
+                    if (_interactionEvent) _interactionEvent.VFXInteraction.VfxStopa(_shape, vox);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

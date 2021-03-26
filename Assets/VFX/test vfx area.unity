@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 270031793}
   - component: {fileID: 270031795}
   - component: {fileID: 270031794}
+  - component: {fileID: 270031796}
   m_Layer: 0
   m_Name: Sphere Destruction Beach
   m_TagString: Untagged
@@ -470,12 +471,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270031792}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 9
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &270031794
 VFXRenderer:
@@ -555,6 +556,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &270031796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270031792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 8
 --- !u!1 &280544288
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +580,7 @@ GameObject:
   - component: {fileID: 280544289}
   - component: {fileID: 280544291}
   - component: {fileID: 280544290}
+  - component: {fileID: 280544292}
   m_Layer: 0
   m_Name: Sphere Destruction PF
   m_TagString: Untagged
@@ -580,12 +595,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280544288}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 16
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &280544290
 VFXRenderer:
@@ -665,6 +680,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &280544292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280544288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 14
 --- !u!1 &304149502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,6 +1140,7 @@ GameObject:
   - component: {fileID: 390961337}
   - component: {fileID: 390961339}
   - component: {fileID: 390961338}
+  - component: {fileID: 390961340}
   m_Layer: 0
   m_Name: Sphere Destruction Grass
   m_TagString: Untagged
@@ -1126,12 +1155,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390961336}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 2
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &390961338
 VFXRenderer:
@@ -1211,6 +1240,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &390961340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390961336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 1
 --- !u!1 &466061331
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,6 +1264,7 @@ GameObject:
   - component: {fileID: 466061332}
   - component: {fileID: 466061334}
   - component: {fileID: 466061333}
+  - component: {fileID: 466061335}
   m_Layer: 0
   m_Name: Sphere Destruction Snow
   m_TagString: Untagged
@@ -1236,12 +1279,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466061331}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 6
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &466061333
 VFXRenderer:
@@ -1321,6 +1364,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &466061335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466061331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 5
 --- !u!1 &490665572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,6 +1388,7 @@ GameObject:
   - component: {fileID: 490665573}
   - component: {fileID: 490665575}
   - component: {fileID: 490665574}
+  - component: {fileID: 490665576}
   m_Layer: 0
   m_Name: Sphere Destruction SF
   m_TagString: Untagged
@@ -1346,12 +1403,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490665572}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 14
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &490665574
 VFXRenderer:
@@ -1431,6 +1488,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &490665576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490665572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 12
 --- !u!1 &578725367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,6 +1512,7 @@ GameObject:
   - component: {fileID: 578725368}
   - component: {fileID: 578725370}
   - component: {fileID: 578725369}
+  - component: {fileID: 578725371}
   m_Layer: 0
   m_Name: Sphere Destruction JF
   m_TagString: Untagged
@@ -1456,12 +1527,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578725367}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 15
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &578725369
 VFXRenderer:
@@ -1541,6 +1612,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &578725371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578725367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 13
 --- !u!1 &623733102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,26 +1858,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1488799352}
-  - {fileID: 2046007785}
-  - {fileID: 390961337}
-  - {fileID: 883953072}
-  - {fileID: 1635569883}
-  - {fileID: 1902685466}
-  - {fileID: 466061332}
-  - {fileID: 1941543800}
-  - {fileID: 2043092867}
-  - {fileID: 270031793}
-  - {fileID: 1113940870}
-  - {fileID: 706879245}
-  - {fileID: 1326585234}
-  - {fileID: 1666573004}
-  - {fileID: 490665573}
-  - {fileID: 578725368}
-  - {fileID: 280544289}
-  - {fileID: 1975533784}
-  - {fileID: 1013402313}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2017,6 +2082,7 @@ GameObject:
   - component: {fileID: 706879245}
   - component: {fileID: 706879247}
   - component: {fileID: 706879246}
+  - component: {fileID: 706879248}
   m_Layer: 0
   m_Name: Sphere Destruction Mud
   m_TagString: Untagged
@@ -2031,12 +2097,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706879244}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 11
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &706879246
 VFXRenderer:
@@ -2116,6 +2182,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &706879248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706879244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 16
 --- !u!1 &724718029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,6 +2533,7 @@ GameObject:
   - component: {fileID: 883953072}
   - component: {fileID: 883953074}
   - component: {fileID: 883953073}
+  - component: {fileID: 883953075}
   m_Layer: 0
   m_Name: Sphere Destruction Dirt
   m_TagString: Untagged
@@ -2468,12 +2548,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883953071}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 3
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &883953073
 VFXRenderer:
@@ -2553,6 +2633,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &883953075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883953071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 2
 --- !u!1 &976427542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2679,6 +2772,7 @@ GameObject:
   - component: {fileID: 1013402313}
   - component: {fileID: 1013402315}
   - component: {fileID: 1013402314}
+  - component: {fileID: 1013402316}
   m_Layer: 0
   m_Name: Sphere Destruction SS
   m_TagString: Untagged
@@ -2693,12 +2787,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013402312}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 18
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &1013402314
 VFXRenderer:
@@ -2778,6 +2872,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &1013402316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013402312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 10
 --- !u!114 &1089641279 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5,
@@ -2801,6 +2908,7 @@ GameObject:
   - component: {fileID: 1113940870}
   - component: {fileID: 1113940872}
   - component: {fileID: 1113940871}
+  - component: {fileID: 1113940873}
   m_Layer: 0
   m_Name: Sphere Destruction Plains
   m_TagString: Untagged
@@ -2815,12 +2923,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113940869}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 10
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &1113940871
 VFXRenderer:
@@ -2900,6 +3008,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &1113940873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113940869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 9
 --- !u!1 &1326585233
 GameObject:
   m_ObjectHideFlags: 0
@@ -2911,6 +3032,7 @@ GameObject:
   - component: {fileID: 1326585234}
   - component: {fileID: 1326585236}
   - component: {fileID: 1326585235}
+  - component: {fileID: 1326585237}
   m_Layer: 0
   m_Name: Sphere Destruction Ice
   m_TagString: Untagged
@@ -2925,12 +3047,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326585233}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 12
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &1326585235
 VFXRenderer:
@@ -3010,6 +3132,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &1326585237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326585233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 17
 --- !u!1 &1485012311
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,6 +3271,7 @@ GameObject:
   - component: {fileID: 1488799352}
   - component: {fileID: 1488799351}
   - component: {fileID: 1488799350}
+  - component: {fileID: 1488799353}
   m_Layer: 0
   m_Name: Box Destruction Default
   m_TagString: Untagged
@@ -3228,13 +3364,26 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488799349}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 0
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1488799353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488799349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 0
 --- !u!1 &1559485111
 GameObject:
   m_ObjectHideFlags: 0
@@ -3352,6 +3501,7 @@ GameObject:
   - component: {fileID: 1635569883}
   - component: {fileID: 1635569885}
   - component: {fileID: 1635569884}
+  - component: {fileID: 1635569886}
   m_Layer: 0
   m_Name: Sphere Destruction Stone
   m_TagString: Untagged
@@ -3366,12 +3516,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635569882}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 4
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &1635569884
 VFXRenderer:
@@ -3451,6 +3601,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &1635569886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635569882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 3
 --- !u!1 &1666573003
 GameObject:
   m_ObjectHideFlags: 0
@@ -3462,6 +3625,7 @@ GameObject:
   - component: {fileID: 1666573004}
   - component: {fileID: 1666573006}
   - component: {fileID: 1666573005}
+  - component: {fileID: 1666573007}
   m_Layer: 0
   m_Name: Sphere Destruction SG
   m_TagString: Untagged
@@ -3476,12 +3640,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666573003}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 13
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &1666573005
 VFXRenderer:
@@ -3561,6 +3725,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &1666573007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666573003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 11
 --- !u!1 &1705439015
 GameObject:
   m_ObjectHideFlags: 0
@@ -3819,6 +3996,7 @@ GameObject:
   - component: {fileID: 1902685466}
   - component: {fileID: 1902685468}
   - component: {fileID: 1902685467}
+  - component: {fileID: 1902685469}
   m_Layer: 0
   m_Name: Sphere Destruction Sand
   m_TagString: Untagged
@@ -3833,12 +4011,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902685465}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 5
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &1902685467
 VFXRenderer:
@@ -3918,6 +4096,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &1902685469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902685465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 4
 --- !u!1 &1941543799
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,6 +4120,7 @@ GameObject:
   - component: {fileID: 1941543800}
   - component: {fileID: 1941543802}
   - component: {fileID: 1941543801}
+  - component: {fileID: 1941543803}
   m_Layer: 0
   m_Name: Sphere Destruction Water
   m_TagString: Untagged
@@ -3943,12 +4135,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941543799}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 7
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &1941543801
 VFXRenderer:
@@ -4028,6 +4220,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &1941543803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941543799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 6
 --- !u!1 &1945953924
 GameObject:
   m_ObjectHideFlags: 0
@@ -4151,6 +4356,7 @@ GameObject:
   - component: {fileID: 1975533784}
   - component: {fileID: 1975533786}
   - component: {fileID: 1975533785}
+  - component: {fileID: 1975533787}
   m_Layer: 0
   m_Name: Sphere Destruction SwF
   m_TagString: Untagged
@@ -4165,12 +4371,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975533783}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 17
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &1975533785
 VFXRenderer:
@@ -4250,6 +4456,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &1975533787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975533783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 15
 --- !u!1001 &1984160630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4389,6 +4608,15 @@ PrefabInstance:
       propertyPath: _setVoxelType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 3488a8de9fcba5a4783e68e26b761284,
+        type: 2}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _destroyAboveGround
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1561188667314874129, guid: a11bfa0f202cd184e949e58420e9eee5,
         type: 3}
       propertyPath: m_Name
@@ -4456,6 +4684,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+--- !u!4 &1984160631 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2225240555663359403, guid: a11bfa0f202cd184e949e58420e9eee5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1984160630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2043092866
 GameObject:
   m_ObjectHideFlags: 0
@@ -4467,6 +4701,7 @@ GameObject:
   - component: {fileID: 2043092867}
   - component: {fileID: 2043092869}
   - component: {fileID: 2043092868}
+  - component: {fileID: 2043092870}
   m_Layer: 0
   m_Name: Sphere Destruction Forest
   m_TagString: Untagged
@@ -4481,12 +4716,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043092866}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 8
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!73398921 &2043092868
 VFXRenderer:
@@ -4566,6 +4801,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &2043092870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043092866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 7
 --- !u!1 &2046007782
 GameObject:
   m_ObjectHideFlags: 0
@@ -4577,6 +4825,7 @@ GameObject:
   - component: {fileID: 2046007785}
   - component: {fileID: 2046007784}
   - component: {fileID: 2046007783}
+  - component: {fileID: 2046007786}
   m_Layer: 0
   m_Name: Sphere Destruction Default
   m_TagString: Untagged
@@ -4669,13 +4918,26 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046007782}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 630771401}
-  m_RootOrder: 1
+  m_Father: {fileID: 1984160631}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2046007786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046007782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242622df9543ccf4dbd6482dfccffc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _voxelType: 0
 --- !u!114 &2055903236 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1219288309473230983, guid: 2b7228255036a30479393ef9a76b8464,
