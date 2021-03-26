@@ -135,8 +135,6 @@ namespace VoxelTerrain.Interactions
         
         private void Update()
         {
-            if (Application.isPlaying) return;
-
             if (!_interactionEvent) return;
 
             if (!_interactionEvent.VFXInteraction.ScanForVfx) return;
