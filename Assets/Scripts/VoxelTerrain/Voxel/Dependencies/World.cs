@@ -30,21 +30,23 @@ namespace VoxelTerrain.Voxel.Dependencies
         
         public Chunk GetNonNullChunkAt(Vector3 pos) => Chunks.ContainsKey(ChunkId.FromWorldPos(pos.x, pos.y, pos.z)) ? Chunks[ChunkId.FromWorldPos(pos.x, pos.y, pos.z)] : Engine.LoadChunkAt(new ChunkId(pos.x, pos.y, pos.z));
         
-        public float GetVoxelAt(float x, float y, float z, float scale, Chunk currentChunk = null, Chunk rightChunk = null, Chunk forwardChunk = null, Chunk rightForwardChunk = null)
+        public float GetVoxelAt(float x, float y, float z, Vector3 chunkPos, float scale, Chunk currentChunk = null, Chunk rightChunk = null, Chunk forwardChunk = null, Chunk rightForwardChunk = null)
         {
-            var chunkPos = NearestChunk(new Vector3(x, y, z), scale);
+            //var chunkPos = new Vector3(); //NearestChunk(new Vector3(x, y, z), scale);
             Chunk chunk = null;
             
             //Neighbour checking for chunks
-            if (currentChunk != null && chunkPos == currentChunk.Position) chunk = currentChunk;
-            else if (rightChunk != null && chunkPos == rightChunk.Position) chunk = rightChunk;
-            else if (forwardChunk != null && chunkPos == forwardChunk.Position) chunk = forwardChunk;
-            else if (rightForwardChunk != null && chunkPos == rightForwardChunk.Position) chunk = rightForwardChunk;
+            if (currentChunk != null && x != Chunk.ChunkSize && z != Chunk.ChunkSize) chunk = currentChunk;
+            else if (rightChunk != null && x == Chunk.ChunkSize && z != Chunk.ChunkSize) chunk = rightChunk;
+            else if (forwardChunk != null && x != Chunk.ChunkSize && z == Chunk.ChunkSize) chunk = forwardChunk;
+            else if (rightForwardChunk != null && x == Chunk.ChunkSize && z == Chunk.ChunkSize) chunk = rightForwardChunk;
 
-            if (chunk == null) return BiomeGenerator.GenerateVoxelType(x * scale, y * scale, z * scale, Engine.NoiseScale, Engine.WorldInfo.NumGen);
+            if (chunk == null) return BiomeGenerator.GenerateVoxelType(chunkPos.x + x * scale, chunkPos.y + y * scale, chunkPos.z + z * scale, Engine.NoiseScale, Engine.WorldInfo.NumGenAltitude, Engine.WorldInfo.NumGenMoisture, Engine.WorldInfo.GroundLevel);
 
-            var voxPos = (new Vector3(x, y, z) - chunkPos) / scale;
-            return chunk[voxPos.x, voxPos.y, voxPos.z];
+            if (x == Chunk.ChunkSize) x = 0;
+            if (z == Chunk.ChunkSize) z = 0;
+            //var voxPos = (new Vector3(x, y, z) - chunkPos) / scale;
+            return chunk[x, y, z];
         }
         
         private Vector3 NearestChunk(Vector3 pos, float scale)

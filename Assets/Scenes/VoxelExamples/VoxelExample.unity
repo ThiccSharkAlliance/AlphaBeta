@@ -149,6 +149,34 @@ PrefabInstance:
       propertyPath: _chunkLoader
       value: 
       objectReference: {fileID: 1219288309642976020}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _shape
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionSettings._dig
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionSettings._height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionSettings._mouseSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionSettings._cubeXDistance
+      value: 4.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionSettings._cubeZDistance
+      value: 8.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
+      propertyPath: _interactionSettings._sphereRadius
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1561188667314874129, guid: a11bfa0f202cd184e949e58420e9eee5,
         type: 3}
       propertyPath: m_Name
@@ -612,7 +640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _engine: {fileID: 201202581}
   _chunkLoader: {fileID: 1219288309642976020}
-  _interactionEvents: {fileID: 11400000, guid: 3488a8de9fcba5a4783e68e26b761284, type: 2}
+  _interactionEvents: {fileID: 0}
   _setVoxelType: 2
   _destroyAboveGround: 1
   _interactionSettings:
@@ -708,13 +736,33 @@ PrefabInstance:
     - target: {fileID: 1219288309473230983, guid: 2b7228255036a30479393ef9a76b8464,
         type: 3}
       propertyPath: _noiseScale
-      value: 10
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219288309642976020, guid: 2b7228255036a30479393ef9a76b8464,
+        type: 3}
+      propertyPath: _enableSaving
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7941170911782372762, guid: 2b7228255036a30479393ef9a76b8464,
         type: 3}
       propertyPath: _origin
       value: 
       objectReference: {fileID: 1562540283}
+    - target: {fileID: 7941170911782372762, guid: 2b7228255036a30479393ef9a76b8464,
+        type: 3}
+      propertyPath: _groundLevel
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7941170911782372762, guid: 2b7228255036a30479393ef9a76b8464,
+        type: 3}
+      propertyPath: _distance
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7941170911782372763, guid: 2b7228255036a30479393ef9a76b8464,
+        type: 3}
+      propertyPath: _voxelSize
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b7228255036a30479393ef9a76b8464, type: 3}
 --- !u!114 &1219288309642976020 stripped

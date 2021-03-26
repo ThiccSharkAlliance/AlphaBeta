@@ -106,7 +106,8 @@ namespace VoxelTerrain.Voxel
             var caveStartHeight = Engine.VoxelTypeHeights.CaveStartHeight;
             var groundLevel = Engine.WorldInfo.GroundLevel;
             var seed = Engine.WorldInfo.Seed;
-            var numGen = Engine.WorldInfo.NumGen;
+            var numGenAltitude = Engine.WorldInfo.NumGenAltitude;
+            var numGenMoisture = Engine.WorldInfo.NumGenMoisture;
 
             return new ChunkVoxelSetter
             {
@@ -121,7 +122,8 @@ namespace VoxelTerrain.Voxel
                 SnowHeight = snowHeight,
                 CaveStartHeight = caveStartHeight,
                 groundLevel = groundLevel,
-                numGen = numGen
+                numGenAltitude = numGenAltitude,
+                numGenMoisture = numGenMoisture
             };
         }
     }

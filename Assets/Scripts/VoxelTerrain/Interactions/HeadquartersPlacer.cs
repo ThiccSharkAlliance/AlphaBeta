@@ -6,6 +6,7 @@ using VoxelTerrain.Voxel.Dependencies;
 
 namespace VoxelTerrain.Interactions
 {
+    [RequireComponent(typeof(VoxelInteraction))]
     public class HeadquartersPlacer : MonoBehaviour
     {
         [SerializeField] private VoxelEngine _engine;
@@ -13,7 +14,7 @@ namespace VoxelTerrain.Interactions
 
         private void Awake()
         {
-            StartCoroutine(SpawnHeadquarters());
+             StartCoroutine(SpawnHeadquarters());
         }
 
         private IEnumerator SpawnHeadquarters()

@@ -13,18 +13,25 @@ MonoBehaviour:
   m_Name: Vfx Interaction
   m_EditorClassIdentifier: 
   _vfxInteraction:
-    _vfx: {fileID: 0}
     _spawnRateStringId: Enter ID
     _spawnRate: 100
+    _spawnRateBoxStringId: Enter ID
+    _spawnRateBox: 0
     _spawnPointStringId: Enter ID
     _particleLifeStringId: Enter ID
     _particleLife: 50
     _sphereRadiusStringId: HELLO
     _sphereRadius: 0
-    _boxRadiusStringId: DAVE
-    _boxRadius: 0
+    _boxRadiusXStringId: Enter ID
+    _boxRadiusX: 0
+    _boxRadiusZStringId: Enter ID
+    _boxRadiusZ: 0
     _planeRadiusStringId: Enter ID
     _planeRadius: 0
+    _particleRingCountStringId: 
+    _particleRingCount: 0
+    _sparkSpawnRateStringId: 
+    _sparkSpawnRate: 0
     Vfx:
     - {fileID: 0}
     - {fileID: 0}
