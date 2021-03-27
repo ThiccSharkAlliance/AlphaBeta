@@ -132,7 +132,12 @@ namespace VoxelTerrain.Interactions
         #endregion
 
         #region Vfx Filler
-        
+
+        private void Awake()
+        {
+            if (Application.isPlaying) _interactionEvent.VFXInteraction.ScanForVfx = true;
+        }
+
         private void Update()
         {
             if (!_interactionEvent) return;
@@ -157,6 +162,8 @@ namespace VoxelTerrain.Interactions
                 
                 if (_interactionEvent.VFXInteraction.Vfx[i] == null) Debug.LogWarning("Vfx in children for Voxel Type " + (VoxelType)i + " is missing on " + gameObject.name);
             }
+
+            if (Application.isPlaying) _interactionEvent.VFXInteraction.ScanForVfx = false;
         }
 
         #endregion

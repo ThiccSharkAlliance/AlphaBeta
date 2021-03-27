@@ -4491,7 +4491,7 @@ PrefabInstance:
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _chunkLoader
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2055903242}
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _interactionSettings._mouseSize
       value: 0
