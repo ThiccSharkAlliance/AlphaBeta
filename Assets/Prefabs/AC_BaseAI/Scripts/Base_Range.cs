@@ -16,7 +16,7 @@ public class Base_Range : MonoBehaviour
     private void OnValidate()
     {
         collider = GetComponent<SphereCollider>();
-        collider.radius = Area_Of_Control - (Area_Of_Control/100 * 75);
+        collider.radius = Area_Of_Control + (Area_Of_Control * 150);
     }
 
     private void Update()
