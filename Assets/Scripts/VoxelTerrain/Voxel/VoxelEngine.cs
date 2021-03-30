@@ -118,6 +118,7 @@ namespace VoxelTerrain.Voxel
                     
             nonNullChunk.SetMesh(pos);
             
+            if (WorldData.ChunkObjects.ContainsKey(chunkId)) Debug.Log("Chunk: " + chunkId.X + ", " + chunkId.Y + ", " + chunkId.Z + " Exists");
             WorldData.ChunkObjects.Add(chunkId, go);
         }
         

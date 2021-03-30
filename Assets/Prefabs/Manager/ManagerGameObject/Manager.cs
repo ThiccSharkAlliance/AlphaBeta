@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using VoxelTerrain.Grid;
 
 public class Manager : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class Manager : MonoBehaviour
         //  yield return new WaitForSeconds(initialisationPause);
     
         
-        newPlaceIndicator = GameObject.Instantiate(newPlaceIndicatorPrefab, new Vector3(0f, -1000f, 0f), Quaternion.identity);
+        newPlaceIndicator = GameObject.Instantiate(newPlaceIndicatorPrefab, new Vector3(0f, 0, 0f), Quaternion.identity);
         buildTabScroll.transform.position = new Vector2(-1000f, -1000f);
         iconHolder = buildTabScroll.transform.Find("IconHolder").gameObject;
         RebuildSelectableBuildings();
@@ -319,9 +320,11 @@ public class Manager : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 1000f, ~ignoreLayer)) //if the ray hits something
                 {
-                    Vector3 weaponFocus = hit.point;
-                    Vector3 snap = new Vector3(Mathf.RoundToInt(weaponFocus.x), Mathf.RoundToInt(weaponFocus.y), Mathf.RoundToInt(weaponFocus.z));
-                    newPlaceIndicator.transform.position = snap;
+                    // Vector3 weaponFocus = hit.point;
+                    // Vector3 snap = new Vector3(Mathf.RoundToInt(weaponFocus.x), Mathf.RoundToInt(weaponFocus.y), Mathf.RoundToInt(weaponFocus.z));
+                    // newPlaceIndicator.transform.position = snap;
+
+                    newPlaceIndicator.transform.position = GridSnapper.SnapToGrid(hit.point);
                 }
 
             }

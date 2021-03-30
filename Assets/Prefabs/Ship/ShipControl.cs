@@ -8,7 +8,7 @@ public class ShipControl : MonoBehaviour
     public Material blueMat, redMat;
     Camera mainCam;
     Vector3 mainCamTransformForward, mainCamTransformRight;
-    const float heightOffGround = 0.4f;
+    const float heightOffGround = 2f;
     Vector3 shipMovement;
     Rigidbody rb;
     float shipSpeed = 5f;
@@ -24,38 +24,52 @@ public class ShipControl : MonoBehaviour
     Material targetMat;
     int targetColour = 0; //0 = red, 1 = blue
     bool buildMode = false; //0= fire 1=building
-
-    Manager manager => FindObjectOfType<Manager>().GetComponent<Manager>();  
-
+    activeThrusters at;
+    Manager manager => FindObjectOfType<Manager>().GetComponent<Manager>();
+    float shipRot = 0f;
+    Vector3 shipVel = Vector3.zero;
+    Transform[] thrusters = new Transform[6];
+    Transform shipTrans;
+    float rotDiff = 0;
 
     void Start()
     {
+        thrusters[0] = GameObject.Find("Bottom_Thruster").transform;
+        thrusters[1] = GameObject.Find("Bottom_Thruster1").transform;
+        thrusters[2] = GameObject.Find("Bottom_Thruster2").transform;
+        thrusters[3] = GameObject.Find("Bottom_Thruster3").transform;
+        thrusters[4] = GameObject.Find("Bottom_Thruster4").transform;
+        thrusters[5] = GameObject.Find("Bottom_Thruster5").transform;
+        shipTrans = GameObject.Find("Ship").transform;
+        at = GetComponent<activeThrusters>();
         mainCam = Camera.main;
         mainCam.GetComponent<CameraControl>().playerPoint = this.gameObject;
         target = transform.Find("Target").gameObject;
         rb = GetComponent<Rigidbody>();
         gunPoint = GameObject.Find("GunPoint").transform;
         targetMat = target.GetComponent<MeshRenderer>().material;
-        
+        GameObject VE = GameObject.Find("VoxelEngine");
+        VE.GetComponent<VoxelTerrain.Voxel.InfoData.WorldInfo>().Origin = transform;
     }
 
     void Update()
     {
-        Vector2 screenPos = Input.mousePosition; //Get the mouse position
+        at.isMoving = true;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //cast a ray
         RaycastHit hit;
-        
         if (Physics.Raycast(ray, out hit)) //if the ray hits something
         {
-            weaponFocus = hit.point;
             target.transform.position = weaponFocus = hit.point;
             shipForward = Vector3.Normalize(new Vector3(weaponFocus.x - transform.position.x, 0f, weaponFocus.z-transform.position.z));
-            transform.forward = shipForward;
+
+            transform.forward = Vector3.Lerp(transform.forward, shipForward, 0.1f);
+           // transform.forward = shipForward;
+
+
             if (Input.GetMouseButton(0) && !buildMode)
             {
                 if (timeSinceLastBullet > weaponFireRate)
                 {
-                    //print("bang!");
                     timeSinceLastBullet -= weaponFireRate;
                     gunPoint = GameObject.Find("GunPoint").transform;
                     Vector3 aimVector = Vector3.Normalize(weaponFocus - gunPoint.position);
@@ -64,7 +78,7 @@ public class ShipControl : MonoBehaviour
                 }
             }
             if (Input.GetMouseButton(0) && buildMode)
-            { //attemptToBuild
+            { 
                 print("Can I build it?");
                 buildMode = !manager.TryToBuild();
                 if (!buildMode)
@@ -79,7 +93,6 @@ public class ShipControl : MonoBehaviour
                 
                 if (targetColour != 1)
                 {
-                   // print("sET CLOUR BLUE");
                     target.GetComponent<MeshRenderer>().material = blueMat;
                     targetColour = 1;
                     manager.RebuildSelectableBuildings();
@@ -105,17 +118,77 @@ public class ShipControl : MonoBehaviour
         mainCamTransformForward = Vector3.Normalize(new Vector3(mainCam.transform.forward.x, 0f, mainCam.transform.forward.z));
         mainCamTransformRight = Vector3.Normalize(new Vector3(mainCam.transform.right.x, 0f, mainCam.transform.right.z));
 
+
+
+        rotDiff = transform.rotation.y - shipRot;
+
+        shipRot = transform.rotation.y;
+
+
+
+        //print("Rot diff = " + rotDiff);
+
         if(Physics.Raycast(transform.position, -transform.up, out hit))
         {
-            transform.Translate(0f, heightOffGround - hit.distance, 0f);
+            transform.Translate(0f, heightOffGround - hit.distance + (Mathf.Sin(Time.time)*0.2f), 0f);
         }
         shipMovement = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        shipVel = (mainCamTransformForward * shipMovement.z * shipSpeed) +(mainCamTransformRight * shipMovement.x * shipSpeed);
+
+        // ship transform (child) = something transform. rotation & ship Vel.
+
+        Debug.DrawLine(transform.position, transform.position+ transform.forward*5, Color.red);
+        Debug.DrawLine(transform.position, transform.position + shipVel.normalized * 5, Color.blue);
+
+        float angleOffset = Vector3.SignedAngle(transform.forward, shipVel.normalized,transform.up) * Mathf.Deg2Rad;
+        print(angleOffset);
+
+       
+
+        Vector3 rotOffset = new Vector3(-Mathf.Sin(angleOffset)*15f*shipVel.normalized.magnitude, shipTrans.localRotation.y -90f, -Mathf.Cos(angleOffset)*15f * shipVel.normalized.magnitude);
+        shipTrans.localRotation = Quaternion.Slerp(shipTrans.localRotation, Quaternion.Euler(rotOffset),0.1f);
+        print(rotOffset);
+
+        CalcTrhusterRot();
+
     }
 
     private void FixedUpdate()
     {
-        //  rb.velocity = new Vector3(mainCamTransformForward.x*shipMovement.x,0f,mainCamTransformForward.z*shipMovement.z)*shipSpeed;
-        rb.velocity = (mainCamTransformForward * shipMovement.z * shipSpeed) + (mainCamTransformRight * shipMovement.x * shipSpeed);
-    
+        rb.velocity = shipVel;
+    }
+
+    void CalcTrhusterRot()
+    {
+        if (shipVel == Vector3.zero)
+        { //ship is not moving
+            if(rotDiff > 0.0001f)
+            { //ship rotating cc
+                thrusters[3].localRotation = thrusters[0].localRotation = Quaternion.Slerp(thrusters[0].localRotation, Quaternion.Euler(315, 0, 0), 0.1f);
+                thrusters[4].localRotation = thrusters[1].localRotation = Quaternion.Slerp(thrusters[1].localRotation, Quaternion.Euler(45, 0, 0), 0.1f);
+                thrusters[5].localRotation = thrusters[2].localRotation = Quaternion.Slerp(thrusters[2].localRotation, Quaternion.Euler(0, 0, 0), 0.1f);
+            }
+            else if(rotDiff < -0.0001f)
+            { 
+                thrusters[3].localRotation = thrusters[0].localRotation = Quaternion.Slerp(thrusters[0].localRotation, Quaternion.Euler(45, 0, 0), 0.1f);
+                thrusters[4].localRotation = thrusters[1].localRotation = Quaternion.Slerp(thrusters[1].localRotation, Quaternion.Euler(315, 0, 0), 0.1f);
+                thrusters[5].localRotation = thrusters[2].localRotation = Quaternion.Slerp(thrusters[2].localRotation, Quaternion.Euler(0, 0, 0), 0.1f);
+            }
+            else
+            { //ship static
+                thrusters[3].localRotation = thrusters[0].localRotation = Quaternion.Slerp(thrusters[0].localRotation, Quaternion.Euler(30,0,30), 0.1f);
+                thrusters[4].localRotation = thrusters[1].localRotation = Quaternion.Slerp(thrusters[1].localRotation, Quaternion.Euler(45,0,0), 0.1f);
+                thrusters[5].localRotation = thrusters[2].localRotation = Quaternion.Slerp(thrusters[2].localRotation, Quaternion.Euler(30,0,330), 0.1f);
+            }
+        }
+        else
+        { //ship is moving
+            Vector3 svn = shipVel.normalized;
+            for (int i = 0; i < 6; i++){
+                thrusters[i].rotation = thrusters[i].rotation = Quaternion.Slerp(thrusters[i].rotation, Quaternion.Euler(svn.z*75, 0, -svn.x*75), 0.1f);
+            }
+            
+
+        }
     }
 }
