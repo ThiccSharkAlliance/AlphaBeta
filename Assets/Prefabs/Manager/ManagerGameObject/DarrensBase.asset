@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   playerShip: {fileID: 5407925156624412859, guid: 9885f98d4e87fb34291b7237f1ac4648,
     type: 3}
-  basePlatePostion: {x: 513, y: 1, z: 475}
+  basePlatePostion: {x: 513, y: 9, z: 475}
   baseBuildings:
   - buildingPosOffset: {x: -1, y: 0, z: 0}
     buildingRot: 0
