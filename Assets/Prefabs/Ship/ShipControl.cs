@@ -148,11 +148,6 @@ public class ShipControl : MonoBehaviour
         Vector3 rotOffset = new Vector3(-Mathf.Sin(angleOffset)*15f*shipVel.normalized.magnitude, shipTrans.localRotation.y -90f, -Mathf.Cos(angleOffset)*15f * shipVel.normalized.magnitude);
         shipTrans.localRotation = Quaternion.Slerp(shipTrans.localRotation, Quaternion.Euler(rotOffset),0.1f);
         print(rotOffset);
-        //shipTrans.forward = rotOffset;
-
-       // Debug.DrawLine(transform.position, transform.position + rotOffset * 5, Color.yellow);
-        // Vector3 rotOffset = (transform.forward*shipVel.magnitude) - shipVel.normalized * shipVel.magnitude;
-      //  print(rotOffset);
 
         CalcTrhusterRot();
 
@@ -161,7 +156,6 @@ public class ShipControl : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = shipVel;
-      //  print("World Vel = " + rb.velocity);
     }
 
     void CalcTrhusterRot()
@@ -191,10 +185,7 @@ public class ShipControl : MonoBehaviour
         { //ship is moving
             Vector3 svn = shipVel.normalized;
             for (int i = 0; i < 6; i++){
-
                 thrusters[i].rotation = thrusters[i].rotation = Quaternion.Slerp(thrusters[i].rotation, Quaternion.Euler(svn.z*75, 0, -svn.x*75), 0.1f);
-
-                //thrusters[i].rotation = Quaternion.LookRotation(shipVel.normalized, Vector3.right);
             }
             
 
