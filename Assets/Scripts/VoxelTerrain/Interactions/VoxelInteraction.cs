@@ -144,6 +144,9 @@ namespace VoxelTerrain.Interactions
         //For updating chunk voxel data. Includes updating chunks that don't exist in the scene.
         public IEnumerator UpdateChunks(Vector3 hitPos)
         {
+            if (!_engine) _engine = FindObjectOfType<VoxelEngine>();
+            if (!_chunkLoader) _chunkLoader = FindObjectOfType<ChunkLoader>();
+            
             Vector3 chunkPos;
             Chunk chunk;
             Vector3 voxPos;
@@ -428,7 +431,7 @@ namespace VoxelTerrain.Interactions
                 chunk.SetVoxel(voxPos, voxType);
                 if (_destroyAboveGround) voxType = VoxelType.Default;
                 voxPos.y++;
-            } while (Vector3.Distance(pos, voxPos) <= flattenHeight);
+            } while (Vector3.Distance(pos, voxPos) <= flattenHeight && voxPos.y < Chunk.ChunkHeight - 1);
 
             voxPos = pos;
 
@@ -437,7 +440,7 @@ namespace VoxelTerrain.Interactions
             {
                 voxPos.y--;
                 chunk.SetVoxel(voxPos, voxelType);
-            } while (Vector3.Distance(voxPos, pos) <= digDepth);
+            } while (Vector3.Distance(voxPos, pos) <= digDepth && voxPos.y > 1);
         }
 
         private void Sphere(Vector3 origin, Vector3 pos, Vector3 newPos, float sphereRadius, VoxelType voxelType, Chunk chunk)

@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4155022816193848989}
+  - component: {fileID: -3838811811693856207}
+  - component: {fileID: 8255767519198949880}
   m_Layer: 8
   m_Name: Wall
   m_TagString: Buildings
@@ -31,6 +33,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3838811811693856207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4155022816193848986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320e33d397c477549a944c817eb3d650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interaction: {fileID: 8255767519198949880}
+--- !u!114 &8255767519198949880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4155022816193848986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556f6ca82f1010c4690204222eac8792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _engine: {fileID: 0}
+  _chunkLoader: {fileID: 0}
+  _interactionEvents: {fileID: 0}
+  _setVoxelType: 2
+  _destroyAboveGround: 1
+  _interactionSettings:
+    _mouseSize: 0
+    _cubeXDistance: 1
+    _cubeZDistance: 1
+    _circleRadius: 0
+    _sphereRadius: 0
+    _height: 3
+    _dig: 0
+  _shape: 2
 --- !u!65 &7896823917325241110
 BoxCollider:
   m_ObjectHideFlags: 0

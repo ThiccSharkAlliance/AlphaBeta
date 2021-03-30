@@ -8,7 +8,7 @@ public class ShipControl : MonoBehaviour
     public Material blueMat, redMat;
     Camera mainCam;
     Vector3 mainCamTransformForward, mainCamTransformRight;
-    const float heightOffGround = 1.1f;
+    const float heightOffGround = 2f;
     Vector3 shipMovement;
     Rigidbody rb;
     float shipSpeed = 5f;
