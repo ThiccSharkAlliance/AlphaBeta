@@ -23,9 +23,9 @@ MonoBehaviour:
     _sphereRadiusStringId: SphereRadius
     _sphereRadius: 0.08
     _boxRadiusXStringId: Enter ID
-    _boxRadiusX: 0
+    _boxRadiusX: 2
     _boxRadiusZStringId: Enter ID
-    _boxRadiusZ: 0
+    _boxRadiusZ: 2
     _planeRadiusStringId: Enter ID
     _planeRadius: 0
     _particleRingCountStringId: RingSpawnCount

@@ -23,6 +23,7 @@ namespace VoxelTerrain.Interactions
         [SerializeField] private bool _destroyAboveGround;
         [SerializeField] private InteractionSettings _interactionSettings;
         [SerializeField] private FlattenShape _shape = FlattenShape.Single;
+        [SerializeField] private VisualEffect[] _vfx;        
 
         private float _offset = 0;
         
@@ -147,16 +148,18 @@ namespace VoxelTerrain.Interactions
             if (_interactionEvent.VFXInteraction.Vfx.Length != 18)
                 _interactionEvent.VFXInteraction.Vfx = new VisualEffect[18];
 
-            var childVfx = GetComponentsInChildren<VfxVoxelType>();
+            if (_vfx.Length != 18) _vfx = new VisualEffect[18];
 
             for (int i = 0; i < 18; i++)
             {
                 if (_interactionEvent.VFXInteraction.Vfx[i] != null) continue;
-                foreach (var cVoxelType in childVfx)
+                foreach (var vfx in _vfx)
                 {
+                    var cVoxelType = vfx.GetComponent<VfxVoxelType>();
+                    if (cVoxelType == null) continue;
                     if ((int)cVoxelType.VoxelType == i)
                     {
-                        _interactionEvent.VFXInteraction.Vfx[i] = cVoxelType.GetComponent<VisualEffect>();
+                        _interactionEvent.VFXInteraction.Vfx[i] = vfx;
                     }
                 }
                 
