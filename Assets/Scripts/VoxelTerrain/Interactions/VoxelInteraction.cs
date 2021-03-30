@@ -230,8 +230,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     //Stop vfx from running
@@ -292,8 +291,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }                    
                     //stop any vfx
@@ -348,8 +346,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa();
@@ -405,8 +402,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa();

@@ -118,7 +118,8 @@ namespace VoxelTerrain.Voxel
                     
             nonNullChunk.SetMesh(pos);
             
-            if (!WorldData.ChunkObjects.ContainsKey(chunkId)) WorldData.ChunkObjects.Add(chunkId, go);
+            if (WorldData.ChunkObjects.ContainsKey(chunkId)) Debug.Log("Chunk: " + chunkId.X + ", " + chunkId.Y + ", " + chunkId.Z + " Exists");
+            WorldData.ChunkObjects.Add(chunkId, go);
         }
         
         //Remove the chunk at this position, both data and gameobject
