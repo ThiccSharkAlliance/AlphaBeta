@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +31,7 @@ public class Manager : MonoBehaviour
     float initialisationPause = 1f;
     bool started = false;
 
+    #region Singleton
     private void OnEnable()
     {
         if (manager == null)
@@ -45,7 +47,7 @@ public class Manager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
     }//Singleton Enrico
-    
+    #endregion
 
     private void Awake()
     {
@@ -58,6 +60,7 @@ public class Manager : MonoBehaviour
     {
         //  StartCoroutine(StartAfterPause());
         OnStart();
+        StartCoroutine(CheckTimer());
     }
 
   //  IEnumerator StartAfterPause()
@@ -122,6 +125,9 @@ public class Manager : MonoBehaviour
                 unlockedBuildOptionsList.Add(i);
                 print("Adding " + i + " = " + allResources.resourceInfo[i].resourceName);
                 GameObject go = GameObject.Instantiate(allResources.resourceInfo[i].prefab,newPlaceIndicator.transform.position,newPlaceIndicator.transform.rotation);
+
+                go.name = allResources.resourceInfo[i].prefab.name;////////////////////////////////////////// THIS REMOVES THE "(CLONE)" IN THE NAME OF THE ITEM. Needed to pass a sting for the purchase
+
                 go.transform.parent = newPlaceIndicator.transform;
                 placeHolderPrefabs.Add(go);
             }
@@ -258,15 +264,15 @@ public class Manager : MonoBehaviour
         {
             GameObject toBeCloned = placeHolderPrefabs[currentSelection];
             GameObject newBuilding = GameObject.Instantiate(toBeCloned, newPlaceIndicator.transform.position, newPlaceIndicator.transform.rotation);
-
-           // newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, placeIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);
+            // newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, placeIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);
 
             newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, newPlaceIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);
             //  Material newMat = new Material(newBuilding.GetComponent<MeshRenderer>().material);
             //  newBuilding.GetComponent<MeshRenderer>().material = newMat;
             //Note for Jack. Use one material.
-            virtualCurrency.SealsCurrency -= allResources.resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost;
 
+            //USING THE "toBeCloned" NAME AS A STRING FOR THE ITEM PUCHASE ON CLOUD
+            virtualCurrency.PurchaseUpgrade(toBeCloned.name, allResources.resourceInfo[unlockedBuildOptionsList[currentSelection]].buildingCost);
             moneyText.text = virtualCurrency.SealsCurrency.ToString();
 
             return true;
@@ -277,8 +283,10 @@ public class Manager : MonoBehaviour
     {
         if (started)
         {
-
             moneyText.text = virtualCurrency.SealsCurrency.ToString();
+
+            if (Input.GetKeyDown(KeyCode.F5)){virtualCurrency.AddCurrency();} //CHEAT FOR ADFDING MONEY TO INVENTORY
+
             if (buildSelectorVisible)
             {
                 buildTabScroll.transform.position = Input.mousePosition + new Vector3(iconSize, 0f);
@@ -328,4 +336,58 @@ public class Manager : MonoBehaviour
             }
         }
     }
+
+    #region LOOTBOX_TIMER
+    /// <summary>
+    /// Stuff for LootBox logic
+    /// </summary>
+
+
+    public Button rewardButton;
+    public Text timer;
+
+    public void callGrantLootBox()
+    {
+        virtualCurrency.GrantLootBox();
+        DateTime CurrentTime = DateTime.Now.AddMinutes(5); ///1440 minutes in a day. 
+        CurrentTime.SaveDate();
+        StopAllCoroutines();
+        StartCoroutine(CheckTimer());
+        Debug.Log(CurrentTime);
+    }
+
+    public IEnumerator CheckTimer()
+    {
+        DateTime SavedTime = DateTimeExtension.GetSavedDate();
+        TimeSpan RemaningTime = SavedTime.Subtract(DateTime.Now);
+        if (RemaningTime.TotalMinutes > 0)
+        {
+            rewardButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            rewardButton.gameObject.SetActive(true);
+            timer.text = "Collect Reward!!";
+        }
+
+        while (RemaningTime.TotalMinutes > 0)
+        {
+            RemaningTime = SavedTime.Subtract(DateTime.Now);
+            timer.text = "Wait For Reward \n" + RemaningTime.Hours + ":" + RemaningTime.Minutes + ":" + RemaningTime.Seconds;
+            yield return new WaitForSeconds(1f);
+        }
+        if (RemaningTime.TotalMinutes <= 0)
+        {
+            rewardButton.gameObject.SetActive(true);
+            timer.text = "Collect Reward!!";
+        }
+    }
 }
+
+public static class DateTimeExtension
+{
+    public static void SaveDate(this DateTime _date, string Key = "SavedDate") { string d = Convert.ToString(_date); PlayerPrefs.SetString(Key, d); }
+    public static DateTime GetSavedDate(string key = "SavedDate") { if (PlayerPrefs.HasKey("SavedDate")) { string d = PlayerPrefs.GetString("SavedDate"); return Convert.ToDateTime(d); } else { return DateTime.Now; } }
+}
+#endregion
+
