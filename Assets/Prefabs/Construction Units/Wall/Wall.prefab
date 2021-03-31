@@ -65,11 +65,11 @@ MonoBehaviour:
   _destroyAboveGround: 1
   _interactionSettings:
     _mouseSize: 0
-    _cubeXDistance: 1
-    _cubeZDistance: 1
+    _cubeXDistance: 4
+    _cubeZDistance: 2
     _circleRadius: 0
     _sphereRadius: 0
-    _height: 3
+    _height: 5
     _dig: 0
   _shape: 2
 --- !u!65 &7896823917325241110
@@ -100,7 +100,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e39aa6222dad1b04387b95af6562156f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e39aa6222dad1b04387b95af6562156f,
         type: 3}
@@ -150,17 +150,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e39aa6222dad1b04387b95af6562156f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.0025
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e39aa6222dad1b04387b95af6562156f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.0025
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e39aa6222dad1b04387b95af6562156f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.0025
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: e39aa6222dad1b04387b95af6562156f,
         type: 3}
