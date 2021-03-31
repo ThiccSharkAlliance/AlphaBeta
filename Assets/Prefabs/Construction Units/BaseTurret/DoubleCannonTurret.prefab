@@ -142,7 +142,7 @@ Transform:
   m_GameObject: {fileID: 1025854130146903525}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 510, y: 22, z: 475}
-  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 4646491517250537610}
   - {fileID: 676853625151730281}
@@ -183,11 +183,11 @@ MonoBehaviour:
   _destroyAboveGround: 1
   _interactionSettings:
     _mouseSize: 0
-    _cubeXDistance: 1
-    _cubeZDistance: 1
+    _cubeXDistance: 3
+    _cubeZDistance: 3
     _circleRadius: 0
     _sphereRadius: 0
-    _height: 4
+    _height: 7
     _dig: 0
   _shape: 2
 --- !u!114 &8998687949752330908
