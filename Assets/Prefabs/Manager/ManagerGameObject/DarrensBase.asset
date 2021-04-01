@@ -16,30 +16,30 @@ MonoBehaviour:
     type: 3}
   playerShip: {fileID: 5407925156624412859, guid: 9885f98d4e87fb34291b7237f1ac4648,
     type: 3}
-  basePlatePostion: {x: 513, y: 1, z: 475}
+  basePlatePostion: {x: 513, y: 9, z: 475}
   baseBuildings:
   - buildingPosOffset: {x: -1, y: 0, z: 0}
     buildingRot: 0
     type: {fileID: 11400000, guid: acc01ffbb1b655b46b606c42feb083ee, type: 2}
-  - buildingPosOffset: {x: -2, y: 0, z: 0}
+  - buildingPosOffset: {x: -3, y: 0, z: 0}
     buildingRot: 90
     type: {fileID: 11400000, guid: acc01ffbb1b655b46b606c42feb083ee, type: 2}
-  - buildingPosOffset: {x: -3, y: 0, z: 0}
+  - buildingPosOffset: {x: -5, y: 0, z: 0}
     buildingRot: 180
     type: {fileID: 11400000, guid: acc01ffbb1b655b46b606c42feb083ee, type: 2}
-  - buildingPosOffset: {x: -4, y: 0, z: 0}
+  - buildingPosOffset: {x: -7, y: 0, z: 0}
     buildingRot: 270
     type: {fileID: 11400000, guid: acc01ffbb1b655b46b606c42feb083ee, type: 2}
-  - buildingPosOffset: {x: -5, y: 0, z: 0}
+  - buildingPosOffset: {x: -9, y: 0, z: 0}
     buildingRot: 0
     type: {fileID: 11400000, guid: 1855869e06cc67949b3c0b3b7b062256, type: 2}
-  - buildingPosOffset: {x: -6, y: 1, z: 0}
+  - buildingPosOffset: {x: -11, y: 1, z: 0}
     buildingRot: 0
     type: {fileID: 11400000, guid: 835cb835261898e4ebfaf03f9aad9dd3, type: 2}
-  - buildingPosOffset: {x: 0, y: 0, z: -3}
+  - buildingPosOffset: {x: 1, y: 0, z: 0}
     buildingRot: 0
     type: {fileID: 11400000, guid: 1855869e06cc67949b3c0b3b7b062256, type: 2}
-  - buildingPosOffset: {x: 0, y: 0, z: -2}
+  - buildingPosOffset: {x: 0, y: 0, z: -5}
     buildingRot: 0
     type: {fileID: 11400000, guid: df52c7f97ce587242a59f366e7176b1e, type: 2}
   shipHealth: 0

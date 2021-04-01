@@ -12,14 +12,14 @@ namespace VoxelTerrain.Voxel.Dependencies
 
         public ChunkLoader ChunkLoader => _chunkLoader;
 
-        public void GenerateWorld(Vector3 origin, float distance, float size)
+        public void GenerateWorld(Vector3 origin, float yPos, float distance, float size)
         {
             _chunkGenerator.Engine = _engine;
-            for (float x = origin.x - distance; x <= origin.x + distance; x += Chunk.ChunkSize)
+            for (float x = origin.x - distance; x <= origin.x + distance; x += size)
             {
-                for (float z = origin.z - distance; z <= origin.z + distance; z += Chunk.ChunkSize)
+                for (float z = origin.z - distance; z <= origin.z + distance; z += size)
                 {
-                    GenerateChunkData(new Vector3(x, 0, z));
+                    GenerateChunkData(new Vector3(x, yPos, z));
                 }
             }
         }

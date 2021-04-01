@@ -31,7 +31,7 @@ namespace VoxelTerrain.Voxel
         private void Awake()
         {
             WorldData.Engine = this;
-            _worldGeneration.GenerateWorld(transform.position, _worldInfo.Distance, _chunkInfo.VoxelSize);
+            _worldGeneration.GenerateWorld(transform.position, _worldInfo.Distance,  - (ChunkHeight / 2), _chunkInfo.VoxelSize);
         }
 
         private void Start()
@@ -48,9 +48,9 @@ namespace VoxelTerrain.Voxel
             {
                 for (var z = -_worldInfo.Distance; z <= _worldInfo.Distance; z += ChunkSize)
                 {
-                    var pointToCheck = new ChunkId(point.x + x, -ChunkHeight / 2, point.z + z);
+                    var pointToCheck = new ChunkId(point.x + x, -(ChunkHeight / 2), point.z + z);
                     //check position is within distance, rounds off view area.
-                    if (Vector3.Distance(new Vector3(pointToCheck.X, -ChunkHeight / 2, pointToCheck.Z), Position) >
+                    if (Vector3.Distance(new Vector3(pointToCheck.X, -(ChunkHeight / 2), pointToCheck.Z), Position) >
                         _worldInfo.Distance) continue;
 
                     //check for chunk in the world data, in case it has already been spawned
@@ -62,7 +62,7 @@ namespace VoxelTerrain.Voxel
                     {
                         c = LoadChunkAt(pointToCheck);
                         
-                        if (c != null) SpawnChunk(c, new Vector3(point.x + x, -ChunkHeight / 2, point.z + z));
+                        if (c != null) SpawnChunk(c, new Vector3(point.x + x, -(ChunkHeight / 2), point.z + z));
                     }
                 }
             }
@@ -76,7 +76,7 @@ namespace VoxelTerrain.Voxel
             var curChunkPosX = Mathf.FloorToInt(pos.x / ChunkSize) * ChunkSize;
             var curChunkPosZ = Mathf.FloorToInt(pos.z / ChunkSize) * ChunkSize;
 
-            return new Vector3(curChunkPosX, -ChunkHeight / 2, curChunkPosZ);
+            return new Vector3(curChunkPosX, -(ChunkHeight / 2), curChunkPosZ);
         }
 
         //Get the chunk at a current point. Use force load to make it return a chunk when there isn't one
@@ -97,7 +97,7 @@ namespace VoxelTerrain.Voxel
             var x = point.X;
             var z = point.Z;
 
-            var origin = new Vector3(x, -ChunkHeight / 2, z);
+            var origin = new Vector3(x, -(ChunkHeight / 2), z);
             
             return _worldGeneration.GenerateChunkData(origin);
         }
@@ -118,6 +118,7 @@ namespace VoxelTerrain.Voxel
                     
             nonNullChunk.SetMesh(pos);
             
+            if (WorldData.ChunkObjects.ContainsKey(chunkId)) Debug.Log("Chunk: " + chunkId.X + ", " + chunkId.Y + ", " + chunkId.Z + " Exists");
             WorldData.ChunkObjects.Add(chunkId, go);
         }
         
