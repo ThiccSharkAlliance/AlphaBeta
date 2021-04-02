@@ -43,43 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f8147bd3420bf743b81a6638f400215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceInfo:
-  - resourceName: Wall
-    buildingCost: 80
-    unlocked: 1
-    iconSprite: {fileID: 21300000, guid: 1a89e1a341f724748a663c41cb828de5, type: 3}
-    prefab: {fileID: 0}
-  - resourceName: Turret
-    buildingCost: 200
-    unlocked: 1
-    iconSprite: {fileID: 21300000, guid: a39b7c05f825d45478975de2fb504618, type: 3}
-    prefab: {fileID: 0}
-  - resourceName: Troop
-    buildingCost: 50
-    unlocked: 1
-    iconSprite: {fileID: 21300000, guid: 911646eda6c2fd344b61fd451ca04723, type: 3}
-    prefab: {fileID: 0}
-  - resourceName: Power Station
-    buildingCost: 500
-    unlocked: 1
-    iconSprite: {fileID: 21300000, guid: fc3113329d767a440ae94b29bf6c80c9, type: 3}
-    prefab: {fileID: 0}
-  - resourceName: Flying Saucer
-    buildingCost: 1000
-    unlocked: 1
-    iconSprite: {fileID: 21300000, guid: f5a20bc2143fc3a40be92ba2d4d9ff18, type: 3}
-    prefab: {fileID: 0}
-  - resourceName: Shark
-    buildingCost: 5000
-    unlocked: 1
-    iconSprite: {fileID: 21300000, guid: c6595ebce1e612e4281dda178d8b598d, type: 3}
-    prefab: {fileID: 0}
+  allResources: {fileID: 11400000, guid: a517b56f3df6a6544849ab7f5c3c617f, type: 2}
   buildTabScroll: {fileID: 0}
   nullIcon: {fileID: 21300000, guid: 56be7910c47d1264bbb8f7dd6d177dd4, type: 3}
-  iconHolder: {fileID: 0}
-  placeIndicator: {fileID: 0}
+  newPlaceIndicatorPrefab: {fileID: 7575854786492731024, guid: cff5d0a5f88f8274084fb53998958c04,
+    type: 3}
   theFont: {fileID: 12800000, guid: 47c0bc6729c694c4ea79b1d92842b6ee, type: 3}
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 768
   moneyText: {fileID: 0}
+  bases:
+  - {fileID: 11400000, guid: 2dad385e92ceb2d4985ae16321fbb6ee, type: 2}
