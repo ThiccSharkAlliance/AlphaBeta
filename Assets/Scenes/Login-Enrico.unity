@@ -670,6 +670,11 @@ PrefabInstance:
       propertyPath: message
       value: 
       objectReference: {fileID: 872098548}
+    - target: {fileID: 5604089194982308971, guid: 0dec85623854a3347b7172d1180dc2f5,
+        type: 3}
+      propertyPath: playFabCanvas
+      value: 
+      objectReference: {fileID: 1126842403}
     - target: {fileID: 5604089194982308973, guid: 0dec85623854a3347b7172d1180dc2f5,
         type: 3}
       propertyPath: m_LocalPosition.x

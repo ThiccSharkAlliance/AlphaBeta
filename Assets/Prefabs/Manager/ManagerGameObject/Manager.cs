@@ -70,7 +70,7 @@ public class Manager : MonoBehaviour
         //  yield return new WaitForSeconds(initialisationPause);
     
         
-        newPlaceIndicator = GameObject.Instantiate(newPlaceIndicatorPrefab, new Vector3(0f, 0, 0f), Quaternion.identity);
+        newPlaceIndicator = GameObject.Instantiate(newPlaceIndicatorPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
         buildTabScroll.transform.position = new Vector2(-1000f, -1000f);
         iconHolder = buildTabScroll.transform.Find("IconHolder").gameObject;
         RebuildSelectableBuildings();
@@ -333,7 +333,7 @@ public class Manager : MonoBehaviour
             else
             {
                 buildTabScroll.transform.position = new Vector2(-1000f, -1000f);
-                newPlaceIndicator.transform.position = new Vector3(0f, -1000f, 0f);
+                newPlaceIndicator.transform.position = new Vector3(0f, 0f, 0f);
                 //for (int i = 0; i < allResources.resourceInfo.Length; i++)
                 //{
                 //    allResources.resourceInfo[i].prefab.SetActive(false);

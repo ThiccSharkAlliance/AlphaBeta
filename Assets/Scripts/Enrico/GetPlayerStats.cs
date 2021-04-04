@@ -7,12 +7,12 @@ using PlayFab.ClientModels;
 
 public class GetPlayerStats : MonoBehaviour
 {
-   // public GameObject playFabCanvas;
     //References
     private Manager manager;
     private VirtualCurrency virtualCurrency;
     private PlayFabAuth PFA;  ////// TO UNCOMMENT FOR THE LOGIN PANEL NOW USE DEV_LOGIN!!!!! 
-                              // private DEV_LOGIN dEV_LOGIN; 
+                              
+    public GameObject playFabCanvas;
 
     [SerializeField]
     int scene;
@@ -128,6 +128,7 @@ public class GetPlayerStats : MonoBehaviour
         manager.virtualCurrency = FindObjectOfType<VirtualCurrency>();
         manager.OnStart();
         StartCoroutine(manager.CheckTimer());
+                playFabCanvas.SetActive(true);
     }
 
 }
