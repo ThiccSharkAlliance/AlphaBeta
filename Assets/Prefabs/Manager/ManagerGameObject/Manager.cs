@@ -9,7 +9,7 @@ public class Manager : MonoBehaviour
 {
 
     public Resources allResources;
-    VirtualCurrency virtualCurrency;
+    public VirtualCurrency virtualCurrency;
     Manager manager;
     public GameObject buildTabScroll;
     bool buildSelectorVisible = false;
@@ -50,22 +50,22 @@ public class Manager : MonoBehaviour
     }//Singleton Enrico
     #endregion
 
-    private void Awake()
-    {
+    //private void Awake()
+    //{
        
-        virtualCurrency = FindObjectOfType<VirtualCurrency>();
+    //    virtualCurrency = FindObjectOfType<VirtualCurrency>();
 
-    }
+    //}
 
-    private void Start()
-    {
-        //  StartCoroutine(StartAfterPause());
-        OnStart();
-        StartCoroutine(CheckTimer());
-    }
+    //private void Start()
+    //{
+    //    //  StartCoroutine(StartAfterPause());
+    //    OnStart();
+    //    StartCoroutine(CheckTimer());
+    //}
 
   //  IEnumerator StartAfterPause()
-    void OnStart()
+    public void OnStart()
     {
         //  yield return new WaitForSeconds(initialisationPause);
     
@@ -90,11 +90,13 @@ public class Manager : MonoBehaviour
             if (first)
             {
                 GameObject VE = GameObject.Find("VoxelEngine");
+                if (VE == null) { break; }
                 VE.GetComponent<VoxelTerrain.Voxel.InfoData.WorldInfo>().Origin = theBase.transform;
                 StartCoroutine(StartAfterPause(playerBase.basePlatePostion, playerBase.playerShip));
                 
 
             }
+
         }
     }
 

@@ -7,13 +7,15 @@ using PlayFab.ClientModels;
 
 public class GetPlayerStats : MonoBehaviour
 {
+   // public GameObject playFabCanvas;
     //References
     private Manager manager;
     private VirtualCurrency virtualCurrency;
-    // private PlayFabAuth PFA;  ////// TO UNCOMMENT FOR THE LOGIN PANEL NOW USE DEV_LOGIN!!!!! 
-    private DEV_LOGIN dEV_LOGIN; 
+    private PlayFabAuth PFA;  ////// TO UNCOMMENT FOR THE LOGIN PANEL NOW USE DEV_LOGIN!!!!! 
+                              // private DEV_LOGIN dEV_LOGIN; 
 
-    
+    [SerializeField]
+    int scene;
     //Variables
     public bool gotCurrency = false;
     private string sceneName = "ShipControlTestScene"; // Change with final game scene name.
@@ -22,9 +24,10 @@ public class GetPlayerStats : MonoBehaviour
     {
         // Instance refs---- -
          virtualCurrency = gameObject.GetComponent<VirtualCurrency>();
-        /// PFA = gameObject.GetComponent<PlayFabAuth>();
-        dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
+         PFA = gameObject.GetComponent<PlayFabAuth>();
+       // dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
         manager = FindObjectOfType<Manager>();
+        //playFabCanvas.SetActive(true);
     }
 
     #region TO UNCOMMENT FOR FINAL
@@ -43,8 +46,7 @@ public class GetPlayerStats : MonoBehaviour
 
     private void Update()
     {
-        // CheckStatsAndLoadScene();
-
+         CheckStatsAndLoadScene();
     }
     #endregion
 
@@ -52,57 +54,80 @@ public class GetPlayerStats : MonoBehaviour
     {
         if (gotCurrency) { return; }
 
-        #region TO UNCOMMENT FOR FINAL
-        //PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result => {
+        PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result =>
+        {
 
-        //    virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
-        //    gotCurrency = true;
-
-        //}, error => {
-        //    Debug.Log("Error ritriving you currency");
-
-        //}, null);
-        #endregion
-
-        PlayFabClientAPI.LoginWithPlayFab(dEV_LOGIN.loginRequest, result2 => {
-            virtualCurrency.SealsCurrency = result2.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
+            virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
             gotCurrency = true;
-        }, error => { Debug.LogError(error.ErrorMessage); }, null);
+
+        }, error =>
+        {
+            Debug.Log("Error ritriving you currency");
+
+        }, null);
+
+        #region TO UNCOMMENT FOR FINAL
+        //PlayFabClientAPI.LoginWithPlayFab(dEV_LOGIN.loginRequest, result2 => {
+        //    virtualCurrency.SealsCurrency = result2.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
+        //    gotCurrency = true;
+        //}, error => { Debug.LogError(error.ErrorMessage); }, null);
+        #endregion
     }
 
     #region TO UNCOMMENT FOR FINAL
     //UNCOMMENT FOR FINAL!!!
 
-    //private void CheckStatsAndLoadScene()
-    //{
-    //    if (gotCurrency == true)
-    //    {
-    //        if (sceneName != SceneManager.GetActiveScene().name)
-    //        {
-    //            SceneManager.LoadScene("ShipControlTestScene");
-    //            gotCurrency = false;
+    private void CheckStatsAndLoadScene()
+    {
+        if (gotCurrency == true)
+        {
+            //playFabCanvas.SetActive(false);
+            //gotCurrency = false;
+            if (sceneName != SceneManager.GetActiveScene().name)
+            {
+                //SceneManager.LoadScene("ShipControlTestScene");
 
-    //        }
-    //    }
-    //}
+
+                StartCoroutine(LoadScene());
+                gotCurrency = false;
+
+
+            }
+        }
+    }
     #endregion
 
     public void RefreshCurrency()
     {
         #region TO UNCOMMENT FOR FINAL
-        //PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result => {
+        PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result =>
+        {
 
-        //    virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
-        //    gotCurrency = true;
+            virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
+            gotCurrency = true;
 
-        //}, error => {
-        //    Debug.Log("Error ritriving you currency");
+        }, error =>
+        {
+            Debug.Log("Error ritriving you currency");
 
-        //}, null);
+        }, null);
         #endregion
 
-        PlayFabClientAPI.LoginWithPlayFab(dEV_LOGIN.loginRequest, result2 => {
-            virtualCurrency.SealsCurrency = result2.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
-        }, error => { Debug.LogError(error.ErrorMessage); }, null);
+        //PlayFabClientAPI.LoginWithPlayFab(dEV_LOGIN.loginRequest, result2 => {
+        //    virtualCurrency.SealsCurrency = result2.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
+        //}, error => { Debug.LogError(error.ErrorMessage); }, null);
     }
+
+    IEnumerator LoadScene()
+    {
+        AsyncOperation async = SceneManager.LoadSceneAsync(scene);
+        while (!async.isDone)
+        {
+            yield return null;
+        }
+        manager.virtualCurrency = FindObjectOfType<VirtualCurrency>();
+        manager.OnStart();
+        StartCoroutine(manager.CheckTimer());
+    }
+
 }

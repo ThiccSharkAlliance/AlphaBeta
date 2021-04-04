@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CanvasSingleton : MonoBehaviour
+public class Singleton : MonoBehaviour
 {
-    CanvasSingleton canvasSingleton;
+    Singleton singleton;
     private void OnEnable()
     {
-        if (canvasSingleton == null)
+        if (singleton == null)
         {
-            canvasSingleton = this;
+            singleton = this;
         }
         else
         {
-            if (canvasSingleton != this)
+            if (singleton != this)
             {
                 Destroy(this.gameObject);
             }
         }
         DontDestroyOnLoad(this.gameObject);
-        gameObject.SetActive(false);
+
     }//Singleton Enrico
 }

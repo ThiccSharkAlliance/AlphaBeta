@@ -8,8 +8,8 @@ public class VirtualCurrency : MonoBehaviour
 {
 
     //References
-    // PlayFabAuth PFA;
-    private DEV_LOGIN dEV_LOGIN;
+    PlayFabAuth PFA;
+    //private DEV_LOGIN dEV_LOGIN;
     private GetPlayerStats gps;
     private Manager manager;
     private Resources allResources;
@@ -26,8 +26,8 @@ public class VirtualCurrency : MonoBehaviour
     private void Awake()
     {
         gps = gameObject.GetComponent<GetPlayerStats>();
-        dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
-        // PFA = gameObject.GetComponent<PlayFabAuth>();
+       // dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
+         PFA = gameObject.GetComponent<PlayFabAuth>();
     }
 
 

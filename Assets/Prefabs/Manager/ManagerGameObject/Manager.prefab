@@ -55,3 +55,5 @@ MonoBehaviour:
   moneyText: {fileID: 0}
   bases:
   - {fileID: 11400000, guid: 2dad385e92ceb2d4985ae16321fbb6ee, type: 2}
+  rewardButton: {fileID: 0}
+  timer: {fileID: 0}

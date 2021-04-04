@@ -146,7 +146,8 @@ namespace VoxelTerrain.Interactions
         {
             if (!_engine) _engine = FindObjectOfType<VoxelEngine>();
             if (!_chunkLoader) _chunkLoader = FindObjectOfType<ChunkLoader>();
-            
+            if (!_engine || !_chunkLoader) yield break;
+
             Vector3 chunkPos;
             Chunk chunk;
             Vector3 voxPos;
