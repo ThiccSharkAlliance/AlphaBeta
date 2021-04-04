@@ -26,7 +26,7 @@ public class VirtualCurrency : MonoBehaviour
     private void Awake()
     {
         gps = gameObject.GetComponent<GetPlayerStats>();
-       // dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
+        //dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
          PFA = gameObject.GetComponent<PlayFabAuth>();
     }
 
