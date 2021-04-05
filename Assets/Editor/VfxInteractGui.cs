@@ -315,6 +315,13 @@ namespace Editor
                     vi.VFXInteraction.SecondWaveColour[(int)_voxType] = EditorGUILayout.ColorField(vi.VFXInteraction.SecondWaveColour[(int)_voxType], GUILayout.Width(60f));
                     EditorGUILayout.EndHorizontal();
 
+                    EditorGUILayout.BeginHorizontal();
+                    //Set the smoke spawn ID and Value
+                    EditorGUILayout.LabelField("Smoke Spawn", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.SmokeSpawnStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.SmokeSpawnStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.SmokeSpawn = EditorGUILayout.IntField(vi.VFXInteraction.SmokeSpawn, GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal();
                     #endregion
 
                     break;

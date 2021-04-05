@@ -21,7 +21,7 @@ MonoBehaviour:
     _particleLifeStringId: DestructionParticleLife
     _particleLife: 2
     _sphereRadiusStringId: SphereRadius
-    _sphereRadius: 0.08
+    _sphereRadius: 0.1
     _boxRadiusXStringId: Enter ID
     _boxRadiusX: 2
     _boxRadiusZStringId: Enter ID
@@ -29,11 +29,13 @@ MonoBehaviour:
     _planeRadiusStringId: Enter ID
     _planeRadius: 0
     _particleRingCountStringId: RingSpawnCount
-    _particleRingCount: 10
+    _particleRingCount: 100
     _sparkSpawnRateStringId: SparksSpawn
     _sparkSpawnRate: 60
     _secondWaveColourStringId: SecondWaveColour
     _secondWaveColour: {r: 0.06657174, g: 0.4811321, b: 0, a: 1}
+    _smokeSpawnStringId: SmokeSpawn
+    _smokeSpawn: 1
     Vfx:
     - {fileID: 0}
     - {fileID: 0}

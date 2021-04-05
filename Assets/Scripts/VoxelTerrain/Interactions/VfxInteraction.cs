@@ -40,7 +40,10 @@ namespace VoxelTerrain.Interactions
         [SerializeField] private int _sparkSpawnRate;
 
         [SerializeField] private string _secondWaveColourStringId = "Enter ID";
-        [SerializeField] private Color _secondWaveColour;
+        [SerializeField] private Color _secondWaveColour; 
+        
+        [SerializeField] private string _smokeSpawnStringId = "Enter ID";
+        [SerializeField] private int _smokeSpawn;
 
         public VisualEffect[] Vfx = new VisualEffect[18];
         public Color[] SecondWaveColour = new Color[18];
@@ -124,6 +127,16 @@ namespace VoxelTerrain.Interactions
         {
             get => _secondWaveColourStringId;
             set => _secondWaveColourStringId = value;
+        } 
+        public string SmokeSpawnStringId
+        {
+            get => _smokeSpawnStringId;
+            set => _smokeSpawnStringId = value;
+        } 
+        public int SmokeSpawn
+        {
+            get => _smokeSpawn;
+            set => _smokeSpawn = value;
         }
 
         #endregion
@@ -165,6 +178,7 @@ namespace VoxelTerrain.Interactions
                     Vfx[voxelType].SetVector3(_spawnPointStringId, spawnPoint);
                     Vfx[voxelType].SetInt(_sparkSpawnRateStringId, _sparkSpawnRate);
                     Vfx[voxelType].SetInt(_spawnRateStringId, 0);
+                    Vfx[voxelType].SetInt(_smokeSpawnStringId, 0);
                     break;
                 case FlattenShape.Circular:
                     Vfx[voxelType].SetInt(_spawnRateStringId, _spawnRate);
@@ -180,7 +194,8 @@ namespace VoxelTerrain.Interactions
                     Vfx[voxelType].SetFloat(_particleRingCountStringId,
                         _particleRingCount);
                     Vfx[voxelType].SetInt(_sparkSpawnRateStringId, _sparkSpawnRate);
-                    Vfx[voxelType].SetVector4(_secondWaveColourStringId, SecondWaveColour[voxelType]); 
+                    Vfx[voxelType].SetVector4(_secondWaveColourStringId, SecondWaveColour[voxelType]);
+                    Vfx[voxelType].SetInt(_smokeSpawnStringId, _smokeSpawn);
                     break;
                 default:
                     break;
@@ -191,6 +206,7 @@ namespace VoxelTerrain.Interactions
         {
             Vfx[voxelType].SetInt(_spawnRateStringId, 0);
             Vfx[voxelType].SetInt(_sparkSpawnRateStringId, 0);
+            Vfx[voxelType].SetInt(_smokeSpawnStringId, 0);
 
 
             switch (shape)
