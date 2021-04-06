@@ -211,7 +211,7 @@ PrefabInstance:
     - target: {fileID: 7941170911782372762, guid: 2b7228255036a30479393ef9a76b8464,
         type: 3}
       propertyPath: _groundLevel
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7941170911782372763, guid: 2b7228255036a30479393ef9a76b8464,
         type: 3}
@@ -240,7 +240,7 @@ PrefabInstance:
     - target: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5, type: 3}
       propertyPath: _engine
       value: 
-      objectReference: {fileID: 1126692835}
+      objectReference: {fileID: 0}
     - target: {fileID: 1561188667314874129, guid: a11bfa0f202cd184e949e58420e9eee5,
         type: 3}
       propertyPath: m_Name
@@ -255,7 +255,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _engine
       value: 
-      objectReference: {fileID: 1126692835}
+      objectReference: {fileID: 0}
     - target: {fileID: 2225240555663359403, guid: a11bfa0f202cd184e949e58420e9eee5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -552,6 +552,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chunkDirectoryName: chunks
   _enableSaving: 0
+--- !u!114 &585300014 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1219288309473230983, guid: 2b7228255036a30479393ef9a76b8464,
+    type: 3}
+  m_PrefabInstance: {fileID: 141698784}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585300006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b650019544c210a4a8945ae2b27800be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &585300016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585300006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45c7119581661742b0e33e4badb3e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _engine: {fileID: 585300014}
+  _interaction: {fileID: 1152301574}
+--- !u!114 &585300017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585300006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556f6ca82f1010c4690204222eac8792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _engine: {fileID: 0}
+  _chunkLoader: {fileID: 0}
+  _interactionEvents: {fileID: 0}
+  _setVoxelType: 0
+  _destroyAboveGround: 0
+  _interactionSettings:
+    _mouseSize: 0
+    _cubeXDistance: 0
+    _cubeZDistance: 0
+    _circleRadius: 0
+    _sphereRadius: 0
+    _height: 0
+    _dig: 0
+  _shape: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,16 +825,31 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &1126692835 stripped
+--- !u!114 &1126692835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585300006}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec3b6024b2f8d864bb71fbdfe3fab1f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMoving: 0
+  isBoost: 0
+  thrustersVFX: {fileID: 0}
+--- !u!114 &1152301574 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1498735670, guid: a11bfa0f202cd184e949e58420e9eee5,
+    type: 3}
+  m_PrefabInstance: {fileID: 303152234}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556f6ca82f1010c4690204222eac8792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1642235652 stripped
