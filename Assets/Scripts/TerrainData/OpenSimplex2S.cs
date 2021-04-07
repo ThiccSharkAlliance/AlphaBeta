@@ -16,7 +16,7 @@ using System.Runtime.CompilerServices;
 
 namespace SimplexNoise
 {
-    public struct OpenSimplex2S
+    public class OpenSimplex2S
     {
         private const int PSIZE = 2048;
         private const int PMASK = 2047;

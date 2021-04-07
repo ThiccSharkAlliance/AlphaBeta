@@ -20,7 +20,7 @@ namespace TerrainData
         /// <param name="groundLevel">Ground level to limit lowest value</param>
         /// <param name="viewPos">Displayed position of the map</param>
         /// <returns>Noise values in 2D array</returns>
-        public static float[,] GenerateNoiseMap(int width, int height, float scale, SimplexNoise.OpenSimplex2S simplex, float groundLevel, Vector2 viewPos)
+        public static float[,] GenerateNoiseMap(int width, int height, float scale, SimplexNoise.OpenSimplex2SJobs simplex, float groundLevel, Vector2 viewPos)
         {
             // 2D array to store noise values
             float[,] noiseMap = new float[width, height];
@@ -47,7 +47,7 @@ namespace TerrainData
         /// <param name="seed">Seed of the generation</param>
         /// <param name="groundLevel">Ground level to limit lowest value</param>
         /// <returns>Singular 2D noise value</returns>
-        public static float Generate2DNoiseValue(float x, float y, float scale, SimplexNoise.OpenSimplex2S simplex, float groundLevel)
+        public static float Generate2DNoiseValue(float x, float y, float scale, SimplexNoise.OpenSimplex2SJobs simplex, float groundLevel)
         {
             return GenerateSample(new float3(x, y, 0), scale, simplex, groundLevel, Vector2.zero, false);
         }
@@ -61,7 +61,7 @@ namespace TerrainData
         /// <param name="scale">Zoom level of the noise when displayed</param>
         /// <param name="seed">Seed of the generation</param>
         /// <returns>Singular 3D noise value</returns>
-        public static float Generate3DNoiseValue(float x, float y, float z, float scale, SimplexNoise.OpenSimplex2S simplex)
+        public static float Generate3DNoiseValue(float x, float y, float z, float scale, SimplexNoise.OpenSimplex2SJobs simplex)
         {
             return GenerateSample(new float3(x, y, z), scale, simplex, 0, Vector2.zero, true);
         }
@@ -76,7 +76,7 @@ namespace TerrainData
         /// <param name="viewPos">Displayed position of the map</param>
         /// <param name="threeDimensions">Is the noise 3D</param>
         /// <returns>Singular 2D noise sample</returns>
-        private static float GenerateSample(float3 coords, float scale, SimplexNoise.OpenSimplex2S simplex,  float groundLevel, Vector2 viewPos, bool threeDimensions)
+        private static float GenerateSample(float3 coords, float scale, SimplexNoise.OpenSimplex2SJobs simplex,  float groundLevel, Vector2 viewPos, bool threeDimensions)
         {
             float noiseReturn = 0;
 
