@@ -41,7 +41,7 @@ namespace VoxelTerrain.Voxel.Dependencies
             else if (forwardChunk != null && chunkPos == forwardChunk.Position) chunk = forwardChunk;
             else if (rightForwardChunk != null && chunkPos == rightForwardChunk.Position) chunk = rightForwardChunk;
 
-            if (chunk == null) return BiomeGenerator.GenerateVoxelType(x * scale, y * scale, z * scale, Engine.NoiseScale, Engine.WorldInfo.NumGenAltitude, Engine.WorldInfo.NumGenMoisture, Engine.WorldInfo.GroundLevel);
+            if (chunk == null) return BiomeGenerator.GenerateVoxelType(x * scale, y * scale, z * scale, Engine.NoiseScale, Engine.WorldInfo.SimplexAltitude, Engine.WorldInfo.SimplexMoisture, Engine.WorldInfo.GroundLevel);
 
             var voxPos = (new Vector3(x, y, z) - chunkPos) / scale;
             return chunk[voxPos.x, voxPos.y, voxPos.z];
