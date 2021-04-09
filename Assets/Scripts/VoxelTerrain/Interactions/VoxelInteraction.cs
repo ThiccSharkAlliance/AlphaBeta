@@ -145,6 +145,10 @@ namespace VoxelTerrain.Interactions
         //For updating chunk voxel data. Includes updating chunks that don't exist in the scene.
         public IEnumerator UpdateChunks(Vector3 hitPos)
         {
+            if (!_engine) _engine = FindObjectOfType<VoxelEngine>();
+            if (!_chunkLoader) _chunkLoader = FindObjectOfType<ChunkLoader>();
+            if (!_engine || !_chunkLoader) yield break;
+
             Vector3 chunkPos;
             Chunk chunk;
             Vector3 voxPos;
@@ -228,8 +232,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     //Stop vfx from running
@@ -290,8 +293,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }                    
                     //stop any vfx
@@ -346,8 +348,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa();
@@ -403,8 +404,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa();
@@ -442,7 +442,7 @@ namespace VoxelTerrain.Interactions
                 voxPos.y--;
                 if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y, voxPos.z])) break;
                 chunk.SetVoxel(voxPos, voxelType);
-            } while (Vector3.Distance(voxPos, pos) <= digDepth);
+            } while (Vector3.Distance(voxPos, pos) <= digDepth && voxPos.y > 1);
         }
 
         private void Sphere(Vector3 origin, Vector3 pos, Vector3 newPos, float sphereRadius, VoxelType voxelType, Chunk chunk)

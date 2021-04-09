@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CanvasSingleton : MonoBehaviour
 {
+    bool enabledOnce;
     CanvasSingleton canvasSingleton;
     private void OnEnable()
     {
@@ -19,5 +20,9 @@ public class CanvasSingleton : MonoBehaviour
             }
         }
         DontDestroyOnLoad(this.gameObject);
+        if (!enabledOnce) { gameObject.SetActive(false); }
+        enabledOnce = true;
+        
+
     }//Singleton Enrico
 }

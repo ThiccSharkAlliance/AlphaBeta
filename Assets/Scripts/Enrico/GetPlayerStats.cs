@@ -10,87 +10,56 @@ public class GetPlayerStats : MonoBehaviour
     //References
     private Manager manager;
     private VirtualCurrency virtualCurrency;
-    // private PlayFabAuth PFA;  ////// TO UNCOMMENT FOR THE LOGIN PANEL NOW USE DEV_LOGIN!!!!! 
-    private DEV_LOGIN dEV_LOGIN; 
-    private Inventory inventory;
-    
+    private PlayFabAuth PFA;                    
+    public GameObject playFabCanvas;
+
     //Variables
-    public bool gotCurrency = false;
-    private string sceneName = "ShipControlTestScene"; // Change with final game scene name.
+    [SerializeField]
+    private int scene;
+    public bool gotCurrency;
 
     private void OnEnable()
     {
-        // Instance refs---- -
-         virtualCurrency = gameObject.GetComponent<VirtualCurrency>();
-
-        /// PFA = gameObject.GetComponent<PlayFabAuth>();
-        dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
-
+        virtualCurrency = gameObject.GetComponent<VirtualCurrency>();
+        PFA = gameObject.GetComponent<PlayFabAuth>();
         manager = FindObjectOfType<Manager>();
-        inventory = gameObject.GetComponent<Inventory>();
-
     }
 
-    //private void Awake()
-    //{
-    //    //Instance refs-----
-    //    virtualCurrency = gameObject.GetComponent<VirtualCurrency>();
-        
-    //    /// PFA = gameObject.GetComponent<PlayFabAuth>();
-    //    dEV_LOGIN = gameObject.GetComponent<DEV_LOGIN>();
-       
-    //    manager = FindObjectOfType<Manager>();
-    //    inventory = gameObject.GetComponent<Inventory>();
-    //    ///---------------
-    //}
-
-    private void Update()
-    {
-        // CheckStatsAndLoadScene();
-
-       
-    }
+    private void Update() => CheckStatsAndLoadScene(); 
 
     public void FetchCurrency()
     {
-        
-        if (!gotCurrency)
+        if (gotCurrency) return; 
+
+        PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result =>
         {
-            //PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result => {
-
-            //    virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
-            //    gotCurrency = true;
-
-            //}, error => {
-            //    Debug.Log("Error ritriving you currency");
-
-            //}, null);
-
-            PlayFabClientAPI.LoginWithPlayFab(dEV_LOGIN.loginRequest, result2 => {
-               
-                virtualCurrency.SealsCurrency = result2.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
-                gotCurrency = true;
-
-            }, error => {
-               // Debug.Log("Error ritriving you currency");
-                Debug.LogError(error.ErrorMessage);
-
-            }, null);
-        }
+            virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
+            gotCurrency = true;
+        }, error =>{Debug.Log("Error ritriving you currency");}, null);
     }
 
-    //UNCOMMENT FOR FINAL!!!
+    private void CheckStatsAndLoadScene()
+    {
+        if (gotCurrency != true) return; 
+        StartCoroutine(LoadScene());
+        gotCurrency = false;
+    }
 
-    //private void CheckStatsAndLoadScene()
-    //{
-    //    if (gotCurrency == true)
-    //    {
-    //        if (sceneName != SceneManager.GetActiveScene().name)
-    //        {
-    //            SceneManager.LoadScene("ShipControlTestScene");
-    //            gotCurrency = false;
-                
-    //        }
-    //    }
-    //}
+    public void RefreshCurrency()
+    {
+        PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result =>
+        {virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
+        }, error =>{Debug.Log("Error ritriving you currency");}, null);
+    }
+
+    private IEnumerator LoadScene()
+    {
+        AsyncOperation async = SceneManager.LoadSceneAsync(scene);
+        while (!async.isDone) yield return null;
+        manager.virtualCurrency = FindObjectOfType<VirtualCurrency>();
+        manager.OnStart();
+        StartCoroutine(manager.CheckTimer());
+        playFabCanvas.SetActive(true);
+    }
+
 }
