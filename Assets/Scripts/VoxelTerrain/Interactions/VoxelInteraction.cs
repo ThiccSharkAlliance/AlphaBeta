@@ -96,7 +96,6 @@ namespace VoxelTerrain.Interactions
                     Gizmos.DrawLine(corner6, corner8);
                     Gizmos.DrawLine(corner7, corner8);
                     Gizmos.DrawLine(corner5, corner8);
-
                     break;
                 case FlattenShape.Circular:
                     Gizmos.color = Color.green;
