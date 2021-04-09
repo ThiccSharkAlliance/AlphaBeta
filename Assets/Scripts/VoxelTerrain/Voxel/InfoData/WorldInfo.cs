@@ -15,18 +15,18 @@ namespace VoxelTerrain.Voxel.InfoData
         public Transform Origin => _origin;
         public float GroundLevel => _groundLevel;
         public int Seed => _seed;
-        public SimplexNoise.OpenSimplex2SJobs SimplexAltitude => new SimplexNoise.OpenSimplex2SJobs((uint) Seed);
-        public SimplexNoise.OpenSimplex2SJobs SimplexMoisture => new SimplexNoise.OpenSimplex2SJobs((uint) Seed + 1000);
+        // public SimplexNoise.OpenSimplex2SJobs SimplexAltitude => new SimplexNoise.OpenSimplex2SJobs((uint) Seed);
+        // public SimplexNoise.OpenSimplex2SJobs SimplexMoisture => new SimplexNoise.OpenSimplex2SJobs((uint) Seed + 1000);
 
-        private void OnApplicationQuit()
-        {
-            Dispose();
-        }
-
-        public void Dispose()
-        {
-            SimplexAltitude.Dispose();
-            SimplexMoisture.Dispose();
-        }
+        // private void OnApplicationQuit()
+        // {
+        //     Dispose();
+        // }
+        //
+        // public void Dispose()
+        // {
+        //     SimplexAltitude.Dispose();
+        //     SimplexMoisture.Dispose();
+        // }
     }
 }
