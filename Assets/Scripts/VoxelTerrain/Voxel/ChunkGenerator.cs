@@ -111,13 +111,8 @@ namespace VoxelTerrain.Voxel
         {
             var resolution = Engine.ChunkInfo.VoxelSize;
             var scale = Engine.NoiseScale;
-            var stoneDepth = Engine.VoxelTypeHeights.StoneDepth;
-            var snowHeight = Engine.VoxelTypeHeights.SnowHeight;
-            var caveStartHeight = Engine.VoxelTypeHeights.CaveStartHeight;
             var groundLevel = Engine.WorldInfo.GroundLevel;
             var seed = Engine.WorldInfo.Seed;
-            var simplexAltitude = Engine.WorldInfo.FastAltitude;
-            var simplexMoisture = Engine.WorldInfo.FastMoisture;
 
             return new ChunkVoxelSetter
             {
@@ -128,12 +123,7 @@ namespace VoxelTerrain.Voxel
                 origin = origin,
                 voxels = new NativeArray<byte>((Chunk.ChunkSize) * (Chunk.ChunkHeight) * (Chunk.ChunkSize), Allocator.Persistent),
                 seed = seed,
-                StoneDepth = stoneDepth,
-                SnowHeight = snowHeight,
-                CaveStartHeight = caveStartHeight,
                 groundLevel = groundLevel,
-                // simplexAltitude = simplexAltitude,
-                // simplexMoisture = simplexMoisture
             };
         }
     }
