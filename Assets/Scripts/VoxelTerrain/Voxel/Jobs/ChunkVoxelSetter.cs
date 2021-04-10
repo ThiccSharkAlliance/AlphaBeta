@@ -21,8 +21,6 @@ namespace VoxelTerrain.Voxel.Jobs
         public Vector3 origin;
         public NativeArray<byte> voxels;
         public int seed;
-        // public SimplexNoise.OpenSimplex2SJobs simplexAltitude;
-        // public SimplexNoise.OpenSimplex2SJobs simplexMoisture;
 
         public void Execute()
         {

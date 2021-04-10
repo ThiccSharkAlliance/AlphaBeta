@@ -107,7 +107,7 @@ namespace TerrainData
                     ySample += viewPos.y;
 
                     // Generate 2D noise value
-                    noiseReturn += (float)OpenSimplex2SJobs.Noise2_XBeforeY(xSample, ySample, seed) * amplitude;
+                    noiseReturn += FastNoiseLite.SingleOpenSimplex2S(seed, xSample, ySample) * amplitude;
 
                 }
 
