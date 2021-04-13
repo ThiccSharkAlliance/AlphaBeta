@@ -12,6 +12,7 @@ public class GetPlayerStats : MonoBehaviour
     private VirtualCurrency virtualCurrency;
     private PlayFabAuth PFA;                    
     public GameObject playFabCanvas;
+    public GameObject _mainCamera;
 
     //Variables
     [SerializeField]
@@ -54,6 +55,7 @@ public class GetPlayerStats : MonoBehaviour
 
     private IEnumerator LoadScene()
     {
+        _mainCamera.SetActive(true);
         AsyncOperation async = SceneManager.LoadSceneAsync(scene);
         while (!async.isDone) yield return null;
         manager.virtualCurrency = FindObjectOfType<VirtualCurrency>();
