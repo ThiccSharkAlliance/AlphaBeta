@@ -103,7 +103,7 @@ public class Manager : MonoBehaviour
     IEnumerator StartAfterPause(Vector3 startPoint, GameObject playerShip)
     {
         yield return new WaitForSeconds(initialisationPause);
-        GameObject player = GameObject.Instantiate(playerShip, startPoint + new Vector3(0,1,0), Quaternion.identity);
+        GameObject player = GameObject.Instantiate(playerShip, startPoint + new Vector3(10,1,10), Quaternion.identity);
     }
 
     public void RebuildSelectableBuildings()
