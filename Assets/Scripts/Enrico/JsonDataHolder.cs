@@ -5,6 +5,6 @@ using UnityEngine;
 public class JsonDataHolder 
 {
     public int Damage;
-
+    public int Health;
 
 }
