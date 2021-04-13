@@ -1,65 +1,68 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using PlayFab;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using PlayFab;
-using PlayFab.ClientModels;
 
-public class GetPlayerStats : MonoBehaviour
+namespace Enrico
 {
-    //References
-    private Manager manager;
-    private VirtualCurrency virtualCurrency;
-    private PlayFabAuth PFA;                    
-    public GameObject playFabCanvas;
-
-    //Variables
-    [SerializeField]
-    private int scene;
-    public bool gotCurrency;
-
-    private void OnEnable()
+    public class GetPlayerStats : MonoBehaviour
     {
-        virtualCurrency = gameObject.GetComponent<VirtualCurrency>();
-        PFA = gameObject.GetComponent<PlayFabAuth>();
-        manager = FindObjectOfType<Manager>();
-    }
+        //References
+        private Manager manager;
+        private VirtualCurrency virtualCurrency;
+        private PlayFabAuth PFA;                    
+        public GameObject playFabCanvas;
+        public GameObject _mainCamera;
 
-    private void Update() => CheckStatsAndLoadScene(); 
+        //Variables
+        [SerializeField]
+        private int scene;
+        public bool gotCurrency;
 
-    public void FetchCurrency()
-    {
-        if (gotCurrency) return; 
-
-        PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result =>
+        private void OnEnable()
         {
-            virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
-            gotCurrency = true;
-        }, error =>{Debug.Log("Error ritriving you currency");}, null);
-    }
+            virtualCurrency = gameObject.GetComponent<VirtualCurrency>();
+            PFA = gameObject.GetComponent<PlayFabAuth>();
+            manager = FindObjectOfType<Manager>();
+        }
 
-    private void CheckStatsAndLoadScene()
-    {
-        if (gotCurrency != true) return; 
-        StartCoroutine(LoadScene());
-        gotCurrency = false;
-    }
+        private void Update() => CheckStatsAndLoadScene(); 
 
-    public void RefreshCurrency()
-    {
-        PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result =>
-        {virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
-        }, error =>{Debug.Log("Error ritriving you currency");}, null);
-    }
+        public void FetchCurrency()
+        {
+            if (gotCurrency) return; 
 
-    private IEnumerator LoadScene()
-    {
-        AsyncOperation async = SceneManager.LoadSceneAsync(scene);
-        while (!async.isDone) yield return null;
-        manager.virtualCurrency = FindObjectOfType<VirtualCurrency>();
-        manager.OnStart();
-        StartCoroutine(manager.CheckTimer());
-        playFabCanvas.SetActive(true);
-    }
+            PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result =>
+            {
+                virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
+                gotCurrency = true;
+            }, error =>{Debug.Log("Error ritriving you currency");}, null);
+        }
 
+        private void CheckStatsAndLoadScene()
+        {
+            if (gotCurrency != true) return; 
+            StartCoroutine(LoadScene());
+            gotCurrency = false;
+        }
+
+        public void RefreshCurrency()
+        {
+            PlayFabClientAPI.LoginWithPlayFab(PFA.loginRequest, result =>
+            {virtualCurrency.SealsCurrency = result.InfoResultPayload.UserVirtualCurrency["SL"]; // fetch the currency value.
+            }, error =>{Debug.Log("Error ritriving you currency");}, null);
+        }
+
+        private IEnumerator LoadScene()
+        {
+            _mainCamera.SetActive(true);
+            AsyncOperation async = SceneManager.LoadSceneAsync(scene);
+            while (!async.isDone) yield return null;
+            manager.virtualCurrency = FindObjectOfType<VirtualCurrency>();
+            manager.OnStart();
+            StartCoroutine(manager.CheckTimer());
+            playFabCanvas.SetActive(true);
+        }
+
+    }
 }

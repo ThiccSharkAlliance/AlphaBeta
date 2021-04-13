@@ -78,8 +78,7 @@ public class ShipControl : MonoBehaviour
                 }
             }
             if (Input.GetMouseButton(0) && buildMode)
-            { 
-                print("Can I build it?");
+            {
                 buildMode = !manager.TryToBuild();
                 if (!buildMode)
                 {
@@ -124,10 +123,6 @@ public class ShipControl : MonoBehaviour
 
         shipRot = transform.rotation.y;
 
-
-
-        //print("Rot diff = " + rotDiff);
-
         if(Physics.Raycast(transform.position, -transform.up, out hit))
         {
             transform.Translate(0f, heightOffGround - hit.distance + (Mathf.Sin(Time.time)*0.2f), 0f);
@@ -141,13 +136,11 @@ public class ShipControl : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + shipVel.normalized * 5, Color.blue);
 
         float angleOffset = Vector3.SignedAngle(transform.forward, shipVel.normalized,transform.up) * Mathf.Deg2Rad;
-        print(angleOffset);
 
-       
+
 
         Vector3 rotOffset = new Vector3(-Mathf.Sin(angleOffset)*15f*shipVel.normalized.magnitude, shipTrans.localRotation.y -90f, -Mathf.Cos(angleOffset)*15f * shipVel.normalized.magnitude);
         shipTrans.localRotation = Quaternion.Slerp(shipTrans.localRotation, Quaternion.Euler(rotOffset),0.1f);
-        print(rotOffset);
 
         CalcTrhusterRot();
 
@@ -167,14 +160,12 @@ public class ShipControl : MonoBehaviour
                 thrusters[3].localRotation = thrusters[0].localRotation = Quaternion.Slerp(thrusters[0].localRotation, Quaternion.Euler(315, 0, 0), 0.1f);
                 thrusters[4].localRotation = thrusters[1].localRotation = Quaternion.Slerp(thrusters[1].localRotation, Quaternion.Euler(45, 0, 0), 0.1f);
                 thrusters[5].localRotation = thrusters[2].localRotation = Quaternion.Slerp(thrusters[2].localRotation, Quaternion.Euler(0, 0, 0), 0.1f);
-                print("Ship rotating right?");
             }
             else if(rotDiff < -0.0001f)
             {
                 thrusters[3].localRotation = thrusters[0].localRotation = Quaternion.Slerp(thrusters[0].localRotation, Quaternion.Euler(45, 0, 0), 0.1f);
                 thrusters[4].localRotation = thrusters[1].localRotation = Quaternion.Slerp(thrusters[1].localRotation, Quaternion.Euler(315, 0, 0), 0.1f);
                 thrusters[5].localRotation = thrusters[2].localRotation = Quaternion.Slerp(thrusters[2].localRotation, Quaternion.Euler(0, 0, 0), 0.1f);
-                print("Ship rotating left?");
             }
             else
             { //ship static
@@ -184,7 +175,6 @@ public class ShipControl : MonoBehaviour
                 thrusters[3].localRotation = Quaternion.Slerp(thrusters[3].localRotation, Quaternion.Euler(330, 0, 30), 0.1f);
                 thrusters[4].localRotation = Quaternion.Slerp(thrusters[4].localRotation, Quaternion.Euler(315, 0, 0), 0.1f);
                 thrusters[5].localRotation = Quaternion.Slerp(thrusters[5].localRotation, Quaternion.Euler(330, 0, 30), 0.1f);
-                print("Ship is static");
             }
         }
         else

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enrico;
 using UnityEngine;
 using UnityEngine.UI;
 using VoxelTerrain.Grid;
@@ -75,7 +76,6 @@ public class Manager : MonoBehaviour
         iconHolder = buildTabScroll.transform.Find("IconHolder").gameObject;
         RebuildSelectableBuildings();
         moneyText.text = virtualCurrency.SealsCurrency.ToString();
-        Debug.Log(virtualCurrency.SealsCurrency.ToString());
         started = true;
         bool first = true;
         foreach(PlayerBaseData playerBase in bases)
@@ -103,7 +103,7 @@ public class Manager : MonoBehaviour
     IEnumerator StartAfterPause(Vector3 startPoint, GameObject playerShip)
     {
         yield return new WaitForSeconds(initialisationPause);
-        GameObject player = GameObject.Instantiate(playerShip, startPoint + new Vector3(0,1,0), Quaternion.identity);
+        GameObject player = GameObject.Instantiate(playerShip, startPoint + new Vector3(10,1,10), Quaternion.identity);
     }
 
     public void RebuildSelectableBuildings()
@@ -126,7 +126,6 @@ public class Manager : MonoBehaviour
             if (allResources.resourceInfo[i].unlocked)
             {
                 unlockedBuildOptionsList.Add(i);
-                print("Adding " + i + " = " + allResources.resourceInfo[i].resourceName);
                 GameObject go = GameObject.Instantiate(allResources.resourceInfo[i].prefab,newPlaceIndicator.transform.position,newPlaceIndicator.transform.rotation);
 
                 go.name = allResources.resourceInfo[i].prefab.name;////////////////////////////////////////// THIS REMOVES THE "(CLONE)" IN THE NAME OF THE ITEM. Needed to pass a sting for the purchase
@@ -358,7 +357,6 @@ public class Manager : MonoBehaviour
         CurrentTime.SaveDate();
         StopAllCoroutines();
         StartCoroutine(CheckTimer());
-        Debug.Log(CurrentTime);
     }
 
     public IEnumerator CheckTimer()
