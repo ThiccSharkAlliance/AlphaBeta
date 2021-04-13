@@ -33,7 +33,8 @@ public class Units : MonoBehaviour
 
     public virtual void Start()
     {
-        Action();
+        //Action();
+        Base = GetComponentInParent<Base_Range>();
         Fuzzy_AI = GetComponentInParent<Fuzzy_Coordination>();
 
         HP = GetComponentInChildren<Health_Bar>();
@@ -44,7 +45,7 @@ public class Units : MonoBehaviour
     {
         Get_Functions();
 
-        Decide_Action();
+        //Decide_Action();
     }
 
     void Get_Functions()
@@ -61,7 +62,7 @@ public class Units : MonoBehaviour
         }
     }
 
-    void Decide_Action()
+    /*void Decide_Action()
     {
         if (Action_Type == "Patrol" && ((Vector3.Distance(Agent.transform.position, Destination) <= 4) || (Agent.transform.position.x == Destination.x && Agent.transform.position.z == Destination.z)))
         {
@@ -87,7 +88,7 @@ public class Units : MonoBehaviour
         {
             Action();
         }
-    }
+    }*/
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -128,7 +129,7 @@ public class Units : MonoBehaviour
         }
     }
 
-    public void Action()
+    /*public void Action()
     {
         switch (Action_Type)
         {
@@ -202,7 +203,7 @@ public class Units : MonoBehaviour
                     return;
                 }
         }
-    }
+    }*/
 
     private void OnDrawGizmosSelected()
     {

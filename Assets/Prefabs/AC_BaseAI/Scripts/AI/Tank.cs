@@ -9,7 +9,7 @@ public class Tank : Units
     public override void Start()
     {
         //base.Start();
-        Action();
+        //Action();
         Fuzzy_AI = GetComponentInParent<Fuzzy_Coordination>();
         Shoot = GetComponentInChildren<Tank_Shooting>();
 
@@ -19,7 +19,7 @@ public class Tank : Units
 
     private void FixedUpdate()
     {
-        if (Shoot.Enemies.Count != 0)
+        /*if (Shoot.Enemies.Count != 0)
         {
             Action_Type = "Shoot";
         }
@@ -41,7 +41,7 @@ public class Tank : Units
             {
                 Action_Type = "Attack";
             }
-        }
+        }*/
     }
 
 }
