@@ -20,9 +20,9 @@ namespace VoxelTerrain.SaveLoad
             set => _chunkDirectoryName = value;
         }
 
-        public void SetDirectoryName(string name)
+        public void SetDirectoryName(string directoryName)
         {
-            ChunkDirectoryName = name;
+            ChunkDirectoryName = directoryName;
         }
 
         private void Awake()
@@ -49,13 +49,10 @@ namespace VoxelTerrain.SaveLoad
 
             var chunk = JsonConvert.DeserializeObject<Chunk>(fileContents);
 
-            if (chunk.Voxels.Length == 0)
-            {
-                File.Delete(fullPath);
-                return null;
-            }
+            if (chunk.Voxels.Length != 0) return chunk;
+            File.Delete(fullPath);
+            return null;
 
-            return chunk;
         }
 
         public void SaveChunk(Chunk chunk, ChunkId chunkId)
