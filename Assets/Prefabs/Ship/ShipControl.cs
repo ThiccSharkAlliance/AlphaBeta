@@ -95,7 +95,7 @@ public class ShipControl : MonoBehaviour
                 {
                     target.GetComponent<MeshRenderer>().material = blueMat;
                     targetColour = 1;
-                    manager.RebuildSelectableBuildings();
+                    manager.RebuildSelectableBuildings();////////////////////WORKS BETTER!!!!
                     manager.MakeBuildSelectorVisible();
                     buildMode = !buildMode;
 

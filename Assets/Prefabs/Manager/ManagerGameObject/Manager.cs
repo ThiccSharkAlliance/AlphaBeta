@@ -9,7 +9,7 @@ public class Manager : MonoBehaviour
 {
 
     public Resources allResources;
-    VirtualCurrency virtualCurrency;
+    public VirtualCurrency virtualCurrency;
     Manager manager;
     public GameObject buildTabScroll;
     bool buildSelectorVisible = false;
@@ -50,27 +50,27 @@ public class Manager : MonoBehaviour
     }//Singleton Enrico
     #endregion
 
-    private void Awake()
-    {
+    //private void Awake()
+    //{
        
-        virtualCurrency = FindObjectOfType<VirtualCurrency>();
+    //    virtualCurrency = FindObjectOfType<VirtualCurrency>();
 
-    }
+    //}
 
-    private void Start()
-    {
-        //  StartCoroutine(StartAfterPause());
-        OnStart();
-        StartCoroutine(CheckTimer());
-    }
+    //private void Start()
+    //{
+    //    //  StartCoroutine(StartAfterPause());
+    //    OnStart();
+    //    StartCoroutine(CheckTimer());
+    //}
 
   //  IEnumerator StartAfterPause()
-    void OnStart()
+    public void OnStart()
     {
         //  yield return new WaitForSeconds(initialisationPause);
     
         
-        newPlaceIndicator = GameObject.Instantiate(newPlaceIndicatorPrefab, new Vector3(0f, 0, 0f), Quaternion.identity);
+        newPlaceIndicator = GameObject.Instantiate(newPlaceIndicatorPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
         buildTabScroll.transform.position = new Vector2(-1000f, -1000f);
         iconHolder = buildTabScroll.transform.Find("IconHolder").gameObject;
         RebuildSelectableBuildings();
@@ -90,11 +90,13 @@ public class Manager : MonoBehaviour
             if (first)
             {
                 GameObject VE = GameObject.Find("VoxelEngine");
+                if (VE == null) { break; }
                 VE.GetComponent<VoxelTerrain.Voxel.InfoData.WorldInfo>().Origin = theBase.transform;
                 StartCoroutine(StartAfterPause(playerBase.basePlatePostion, playerBase.playerShip));
                 
 
             }
+
         }
     }
 
@@ -331,7 +333,7 @@ public class Manager : MonoBehaviour
             else
             {
                 buildTabScroll.transform.position = new Vector2(-1000f, -1000f);
-                newPlaceIndicator.transform.position = new Vector3(0f, -1000f, 0f);
+                newPlaceIndicator.transform.position = new Vector3(0f, 0f, 0f);
                 //for (int i = 0; i < allResources.resourceInfo.Length; i++)
                 //{
                 //    allResources.resourceInfo[i].prefab.SetActive(false);
