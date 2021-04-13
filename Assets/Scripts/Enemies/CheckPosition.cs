@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TerrainData;
 using UnityEngine;
+using VoxelTerrain.Grid;
 using VoxelTerrain.Voxel;
 using VoxelTerrain.Voxel.Jobs;
 
@@ -11,13 +12,15 @@ public class CheckPosition : MonoBehaviour
     Transform player;
     public GameObject myPrefab;
 
-
     float PosX;
     float PosZ;
     float times = 0;
     bool continueSpawn = true;
-    [SerializeField] public int distanceFromPlayer = 4;
-    [SerializeField] float maxDistance = 400;
+
+
+    [SerializeField] public int distanceFromPlayer;
+    [SerializeField] float maxDistance;
+    [SerializeField] float totalEnemies;
 
     public List<GameObject> listOfObjects;
 
@@ -28,8 +31,19 @@ public class CheckPosition : MonoBehaviour
 
     private float getPosition(float PosX, float PosZ, float ground, float scale, float groundScale)
     {
-            float altitude = Noise.Generate2DNoiseValue(PosX, PosZ, scale, _engine.WorldInfo.NumGenAltitude, ground);
-            float position = altitude - groundScale;
+
+        float position = 0;
+
+        float altitude = Noise.Generate2DNoiseValue(PosX, PosZ, scale, _engine.WorldInfo.NumGenAltitude, ground);
+
+        if(altitude < groundScale)
+        {
+             position =  groundScale - altitude;
+        }
+        else if (altitude > groundScale)
+        {
+             position = altitude - groundScale;
+        }
             return position;
     }
 
@@ -51,22 +65,28 @@ public class CheckPosition : MonoBehaviour
         float groundAltitude5 = altitude5 - groundScale;
 
 
-        if (groundAltitude2 > (groundAltitude + 0.1f) || groundAltitude2 < (groundAltitude - 0.1f))
+        Vector3 testSnap = GridSnapper.SnapToGrid(new Vector3(PosX, groundAltitude, PosZ), 1f, 0.5f);
+        Vector3 testSnap2 = GridSnapper.SnapToGrid(new Vector3(PosX, groundAltitude2, PosZ), 1f, 0.5f);
+        Vector3 testSnap3 = GridSnapper.SnapToGrid(new Vector3(PosX, groundAltitude3, PosZ), 1f, 0.5f);
+        Vector3 testSnap4 = GridSnapper.SnapToGrid(new Vector3(PosX, groundAltitude4, PosZ), 1f, 0.5f);
+        Vector3 testSnap5 = GridSnapper.SnapToGrid(new Vector3(PosX, groundAltitude5, PosZ), 1f, 0.5f);
+
+        if (testSnap2.y > (testSnap.y) || testSnap2.y < (testSnap.y))
         {
             return false;
         }
 
-        if (groundAltitude3 > (groundAltitude + 0.1f) || groundAltitude3 < (groundAltitude - 0.1f))
+        if (testSnap3.y > (testSnap.y) || testSnap3.y < (testSnap.y))
         {
             return false;
         }
 
-        if (groundAltitude4 > (groundAltitude + 0.1f) || groundAltitude4 < (groundAltitude - 0.1f))
+        if (testSnap4.y > (testSnap.y) || testSnap4.y < (testSnap.y))
         {
             return false;
         }
 
-        if (groundAltitude5 > (groundAltitude + 0.1f) || groundAltitude5 < (groundAltitude - 0.1f))
+        if (testSnap5.y > (testSnap.y) || testSnap5.y < (testSnap.y))
         {
             return false;
         }
@@ -78,19 +98,13 @@ public class CheckPosition : MonoBehaviour
         {
             foreach (GameObject item in listOfObjects)
             {
-                Debug.LogWarning(Vector3.Distance(transform, item.transform.position));
-                if (Vector3.Distance(transform, item.transform.position) < 30)
+                if (Vector3.Distance(testSnap, item.transform.position) < 30)
                 {
                     return false;
                 }
 
             }
         }
-
-       // Debug.LogError(groundAltitude2);
-       // Debug.LogError(groundAltitude3);
-       // Debug.LogError(groundAltitude4);
-       // Debug.LogError(groundAltitude5);
 
         return true;
 
@@ -103,13 +117,18 @@ public class CheckPosition : MonoBehaviour
         CheckActivation();
 
 
-        if (times > 2)
+        if (times >= totalEnemies)
         {
             continueSpawn = false;
         }
-       
 
-        if(GameObject.FindWithTag("Player") == null)
+        if (times < totalEnemies)
+        {
+            continueSpawn = true;
+        }
+
+
+        if (GameObject.FindWithTag("Player") == null)
         {
 
         }else
@@ -125,9 +144,6 @@ public class CheckPosition : MonoBehaviour
                 float PosX = player.position.x - (Random.Range(50, 70) * randomSignX);
                 float PosZ = player.position.z - (Random.Range(50, 70) * randomSignZ);
 
-                //Debug.LogWarning(PosX);
-                //Debug.LogWarning(PosZ);
-
                 float ground = _engine.WorldInfo.GroundLevel;
                 float scale = _engine.NoiseScale;
 
@@ -139,7 +155,12 @@ public class CheckPosition : MonoBehaviour
                 {
                     position = getPosition(PosX, PosZ, ground, scale, groundScale);
 
-                    GameObject Enemy = Instantiate(myPrefab, new Vector3(PosX, position + 1, PosZ), Quaternion.identity);
+                    Vector3 testSnap = GridSnapper.SnapToGrid(new Vector3(PosX, position, PosZ), 1f, 0.5f);
+
+                    GameObject Enemy = Instantiate(myPrefab, testSnap, Quaternion.identity);
+                    Rigidbody enemyRigidBody = Enemy.AddComponent<Rigidbody>();
+                    enemyRigidBody.useGravity = true;
+                    enemyRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
 
                     Enemy.tag = "Enemy";
 
@@ -147,6 +168,7 @@ public class CheckPosition : MonoBehaviour
                     System.Type MyScriptType = System.Type.GetType(ScriptName + ",Assembly-CSharp");
 
                     Enemy.AddComponent(MyScriptType);
+                    
 
                     times++;
                 }
@@ -170,10 +192,11 @@ public class CheckPosition : MonoBehaviour
 
                 if (Vector3.Distance(player.transform.position, item.transform.position) > maxDistance)
                 {
-                    item.SetActive(true);
                     listOfObjects.Remove(item);
+                    Destroy(item);
                     times--;
                 }
+              
             }
         }
 
