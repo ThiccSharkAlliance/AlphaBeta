@@ -10,15 +10,20 @@ public class Bake_NavMesh : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (NavMeshSurface Surface in Surfaces)
-        {
-            Surface.BuildNavMesh();
-        }
+        InvokeRepeating("Bake", 0.1f, 10f);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void Bake()
+    {
+        foreach (NavMeshSurface Surface in Surfaces)
+        {
+            Surface.BuildNavMesh();
+        }
     }
 }
