@@ -419,7 +419,6 @@ namespace VoxelTerrain.Interactions
         {
             Vector3 voxPos = pos;
             if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y - 1, voxPos.z])) return;
-            Debug.Log(chunk[voxPos.x, voxPos.y - 1, voxPos.z]);
             var voxType = voxelType;
 
             //For all voxels above the y position, update them

@@ -54,8 +54,6 @@ namespace VoxelTerrain.SaveLoad
                 File.Delete(fullPath);
                 return null;
             }
-            
-            Debug.Log("Loaded From: " + fullPath);
 
             return chunk;
         }
