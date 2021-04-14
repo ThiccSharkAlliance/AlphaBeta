@@ -1,4 +1,6 @@
-﻿using Unity.Mathematics;
+﻿using System;
+using TerrainData;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace VoxelTerrain.Voxel.InfoData
@@ -18,7 +20,5 @@ namespace VoxelTerrain.Voxel.InfoData
         }
         public float GroundLevel => _groundLevel;
         public int Seed => _seed;
-        public Unity.Mathematics.Random NumGenAltitude => new Unity.Mathematics.Random((uint) Seed);
-        public Unity.Mathematics.Random NumGenMoisture => new Unity.Mathematics.Random((uint) Seed + 1000);
     }
 }
