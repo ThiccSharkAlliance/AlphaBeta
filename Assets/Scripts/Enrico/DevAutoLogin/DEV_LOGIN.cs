@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Enrico;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -10,11 +11,9 @@ public class DEV_LOGIN : MonoBehaviour
     private string hiddenUserPassword;
     private string hiddenUserEmail;
 
-
-
     private VirtualCurrency vC ; 
     private GetPlayerStats gps;
-    private Inventory inventory;
+   // private Inventory inventory;
 
     public LoginWithPlayFabRequest loginRequest;
     public GetPlayerCombinedInfoRequestParams infoRequest;
@@ -23,7 +22,6 @@ public class DEV_LOGIN : MonoBehaviour
     {
         vC = gameObject.GetComponent<VirtualCurrency>();  // todo INJECT  
         gps = gameObject.GetComponent<GetPlayerStats>();  // todo INJECT  
-        inventory = gameObject.GetComponent<Inventory>(); // todo INJECT  
     }
 
     // Start is called before the first frame update
@@ -75,9 +73,11 @@ public class DEV_LOGIN : MonoBehaviour
 
                 if (gps.gotCurrency == false)
                 {
-                    inventory.GetCatalog();
+                   // inventory.GetCatalog();
+                    vC.GetCatalog();
                 
                     gps.FetchCurrency();
+                    vC.GetUserInventory();
                 
                 }
 

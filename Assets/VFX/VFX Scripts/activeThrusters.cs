@@ -10,7 +10,7 @@ public class activeThrusters : MonoBehaviour
 {
     public bool isMoving = false;
     public bool isBoost = false; 
-    public VisualEffect thrustersVFX;
+    public VisualEffect[] thrustersVFX;
     private int TS;
     
     
@@ -28,25 +28,33 @@ public class activeThrusters : MonoBehaviour
     {
 
         //basic movement thruster vfx\\
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            isMoving = true;
+        //if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        //{
+        //    isMoving = true;
            
-        }
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
-        {
-           isMoving = false;
-        }
+        //}
+        //if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
+        //{
+        //   isMoving = false;
+        //}
 
         if (isMoving)
         {
-            thrustersVFX.SetInt("thrusterSpawn", 16);
-            thrustersVFX.SetInt("backlightSpawn", 11111);
+            
+            foreach(VisualEffect v in thrustersVFX)
+            {
+                v.SetInt("thrusterSpawn", 16);
+                v.SetInt("backlightSpawn", 11111);
+            }
+            
         }
         if (!isMoving)
         {
-            thrustersVFX.SetInt("thrusterSpawn", 0);
-            thrustersVFX.SetInt("backlightSpawn", 0);
+            foreach (VisualEffect v in thrustersVFX)
+            {
+                v.SetInt("thrusterSpawn", 0);
+                v.SetInt("backlightSpawn", 0);
+            }
         }
 
 
@@ -63,15 +71,18 @@ public class activeThrusters : MonoBehaviour
             isBoost = false; 
         }
 
-
-        if (isBoost)
+        foreach (VisualEffect v in thrustersVFX)
         {
-            thrustersVFX.SetInt("powerboostSpawn", 4000);
+            if (isBoost)
+            {
+                v.SetInt("powerboostSpawn", 4000);
+            }
+            if (!isBoost)
+            {
+                v.SetInt("powerboostSpawn", 0);
+            }
         }
-        if (!isBoost)
-        {
-            thrustersVFX.SetInt("powerboostSpawn", 0);
-        }
+            
 
 
 

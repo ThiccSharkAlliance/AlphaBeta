@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.VFX;
@@ -42,6 +43,92 @@ namespace VoxelTerrain.Interactions
 
         public void SetVoxelType(VoxelType type) => Voxel = type;
 
+        #region Gizmo
+
+        private void OnDrawGizmosSelected()
+        {
+            switch (Shape)
+            {
+                case FlattenShape.Default:
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawWireSphere(transform.position, _interactionSettings.MouseSize);
+                    break;
+                case FlattenShape.Single:
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawWireSphere(transform.position, _interactionSettings.MouseSize);
+                    break;
+                case FlattenShape.Square:
+                    Gizmos.color = Color.green;
+                    var cubePos = transform.position;
+                    var corner1 = new Vector3(cubePos.x - _interactionSettings.CubeXDistance,
+                        cubePos.y - _interactionSettings.Dig,
+                        cubePos.z - _interactionSettings.CubeZDistance);
+                    var corner2 = new Vector3(cubePos.x + _interactionSettings.CubeXDistance,
+                        cubePos.y - _interactionSettings.Dig,
+                        cubePos.z - _interactionSettings.CubeZDistance);
+                    var corner3 = new Vector3(cubePos.x - _interactionSettings.CubeXDistance,
+                        cubePos.y - _interactionSettings.Dig,
+                        cubePos.z + _interactionSettings.CubeZDistance);
+                    var corner4 = new Vector3(cubePos.x - _interactionSettings.CubeXDistance,
+                        cubePos.y + _interactionSettings.Height,
+                        cubePos.z - _interactionSettings.CubeZDistance);
+                    var corner5 = new Vector3(cubePos.x + _interactionSettings.CubeXDistance,
+                        cubePos.y - _interactionSettings.Dig,
+                        cubePos.z + _interactionSettings.CubeZDistance);
+                    var corner6 = new Vector3(cubePos.x - _interactionSettings.CubeXDistance,
+                        cubePos.y + _interactionSettings.Height,
+                        cubePos.z + _interactionSettings.CubeZDistance);
+                    var corner7 = new Vector3(cubePos.x + _interactionSettings.CubeXDistance,
+                        cubePos.y + _interactionSettings.Height,
+                        cubePos.z - _interactionSettings.CubeZDistance);
+                    var corner8 = new Vector3(cubePos.x + _interactionSettings.CubeXDistance,
+                        cubePos.y + _interactionSettings.Height,
+                        cubePos.z + _interactionSettings.CubeZDistance);
+                    Gizmos.DrawLine(corner1, corner2);
+                    Gizmos.DrawLine(corner1, corner3);
+                    Gizmos.DrawLine(corner1, corner4);
+                    Gizmos.DrawLine(corner2, corner5);
+                    Gizmos.DrawLine(corner2, corner7);
+                    Gizmos.DrawLine(corner3, corner5);
+                    Gizmos.DrawLine(corner3, corner6);
+                    Gizmos.DrawLine(corner4, corner7);
+                    Gizmos.DrawLine(corner4, corner6);
+                    Gizmos.DrawLine(corner6, corner8);
+                    Gizmos.DrawLine(corner7, corner8);
+                    Gizmos.DrawLine(corner5, corner8);
+                    break;
+                case FlattenShape.Circular:
+                    Gizmos.color = Color.green;
+                    var theta = 0f;
+                    var x = _interactionSettings.CircleRadius * Mathf.Cos(theta);
+                    var y = _interactionSettings.CircleRadius * Mathf.Sin(theta);
+
+                    for (var i = -_interactionSettings.Dig; i <= _interactionSettings.Height; i++)
+                    {
+                        var pos = transform.position + new Vector3(x,i,y);
+                        var newPos = pos;
+                        var lastPos = pos;
+                        for(theta = 0.1f; theta < Mathf.PI*2; theta += 0.1f){
+                            x = _interactionSettings.CircleRadius * Mathf.Cos(theta);
+                            y = _interactionSettings.CircleRadius * Mathf.Sin(theta);
+                            newPos = transform.position + new Vector3(x,i,y);
+                            Gizmos.DrawLine(pos,newPos);
+                            pos = newPos;
+                        }
+                        Gizmos.DrawLine(pos,lastPos);
+                    }
+                    break;
+                case FlattenShape.Sphere:
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawWireSphere(transform.position, _interactionSettings.SphereRadius);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        #endregion
+
         public void EditVoxels()
         {
             var ray = CamMain.ViewportPointToRay(CamMain.ScreenToViewportPoint(Input.mousePosition));
@@ -51,14 +138,16 @@ namespace VoxelTerrain.Interactions
             //If we have hit something, snap the hit position to a voxel position
             var hitPos = GridSnapper.SnapToGrid(hit.point, Size, _offset);
             
-           
-
             StartCoroutine(UpdateChunks(hitPos));
         }
 
         //For updating chunk voxel data. Includes updating chunks that don't exist in the scene.
         public IEnumerator UpdateChunks(Vector3 hitPos)
         {
+            if (!_engine) _engine = FindObjectOfType<VoxelEngine>();
+            if (!_chunkLoader) _chunkLoader = FindObjectOfType<ChunkLoader>();
+            if (!_engine || !_chunkLoader) yield break;
+
             Vector3 chunkPos;
             Chunk chunk;
             Vector3 voxPos;
@@ -142,8 +231,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     //Stop vfx from running
@@ -204,8 +292,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }                    
                     //stop any vfx
@@ -260,8 +347,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa();
@@ -317,8 +403,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     if (_interactionEvents) _interactionEvents.VFXInteraction.VfxStopa();
@@ -333,6 +418,7 @@ namespace VoxelTerrain.Interactions
         private void Flatten(Vector3 pos, VoxelType voxelType, float flattenHeight, float digDepth, Chunk chunk)
         {
             Vector3 voxPos = pos;
+            if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y - 1, voxPos.z])) return;
             var voxType = voxelType;
 
             //For all voxels above the y position, update them
@@ -343,6 +429,7 @@ namespace VoxelTerrain.Interactions
                 chunk.SetVoxel(voxPos, voxType);
                 if (_destroyAboveGround) voxType = VoxelType.Default;
                 voxPos.y++;
+                if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y, voxPos.z])) break;
             } while (Vector3.Distance(pos, voxPos) <= flattenHeight);
 
             voxPos = pos;
@@ -351,8 +438,9 @@ namespace VoxelTerrain.Interactions
             do
             {
                 voxPos.y--;
+                if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y, voxPos.z])) break;
                 chunk.SetVoxel(voxPos, voxelType);
-            } while (Vector3.Distance(voxPos, pos) <= digDepth);
+            } while (Vector3.Distance(voxPos, pos) <= digDepth && voxPos.y > 1);
         }
 
         private void Sphere(Vector3 origin, Vector3 pos, Vector3 newPos, float sphereRadius, VoxelType voxelType, Chunk chunk)
