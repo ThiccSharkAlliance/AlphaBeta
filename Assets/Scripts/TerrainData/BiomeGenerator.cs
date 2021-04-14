@@ -8,8 +8,8 @@ namespace TerrainData
     {
         public static byte GenerateVoxelType(float x, float y, float z, float scale, int seed, float groundLevel)
         {
-            float altitude = Noise.Generate2DNoiseValue(x * 0.5f, z * 0.5f, scale, seed, groundLevel);
-            float moisture = Noise.Generate2DNoiseValue(x * 0.025f, z * 0.025f, scale, seed + 1000, 0);
+            float altitude = Noise.Generate2DNoiseValue(x * 0.5f, z * 0.5f, scale, 4, 2f, seed, groundLevel);
+            float moisture = Noise.Generate2DNoiseValue(x * 0.025f, z * 0.025f, scale, 6, 3f, seed + 1000, 0);
 
             VoxelTerrain.Voxel.VoxelType voxelType = new VoxelTerrain.Voxel.VoxelType();
 
@@ -23,7 +23,6 @@ namespace TerrainData
             {
                 groundAltitude = 0;
             }
-
 
             if (y <= groundAltitude)
             {
