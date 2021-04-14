@@ -98,7 +98,7 @@ namespace TerrainData
                     float zSample = coords.z / scale * frequency;
 
                     // Generate 3D noise value
-                    noiseReturn += PerlinNoise3D(xSample, ySample, zSample) * amplitude;
+                    noiseReturn += FastNoiseLite.SingleOpenSimplex2S(seed, xSample, ySample, zSample) * amplitude;
                 }
                 else
                 {
@@ -133,6 +133,7 @@ namespace TerrainData
             return noiseReturn * scale;
         }
 
+        /*
         /// <summary>
         /// Generates 3D Perlin noise value from given samples
         /// </summary>
@@ -153,5 +154,6 @@ namespace TerrainData
             // Combine them and divide down to one noise value
             return (xy + yz + xz + yx + zy + zx) / 6;
         }
+        */
     }
 }

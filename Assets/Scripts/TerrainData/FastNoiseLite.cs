@@ -1367,7 +1367,7 @@ namespace TerrainData
             return value * 18.24196194486065f;
         }
 
-        private float SingleOpenSimplex2S(int seed, FNLfloat x, FNLfloat y, FNLfloat z)
+        public static float SingleOpenSimplex2S(int seed, FNLfloat x, FNLfloat y, FNLfloat z)
         {
             // 3D OpenSimplex2S case uses two offset rotated cube grids.
 
