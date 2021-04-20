@@ -265,6 +265,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayFabCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5526899335568145333, guid: 76994513596273648a9ce6a926d432e8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5526899335982929217, guid: 76994513596273648a9ce6a926d432e8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -637,7 +642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 0.001
-  _circleSpeed: 0.001
+  _circleSpeed: 0.05
   _circleSize: 5000
   _parent: {fileID: 2051712171}
   _backgroundImage: {fileID: 1224600838}
@@ -849,7 +854,7 @@ PrefabInstance:
     - target: {fileID: 4466245713595235821, guid: 60542706476b59a4fb193b833236209f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4528934118283901149, guid: 60542706476b59a4fb193b833236209f,
         type: 3}
