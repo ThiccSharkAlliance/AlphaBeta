@@ -2816,6 +2816,11 @@ PrefabInstance:
       propertyPath: timer
       value: 
       objectReference: {fileID: 944802207}
+    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
+        type: 3}
+      propertyPath: _lootBoxTimer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 070856fc9ae042b49a3107d5ddbfbebd, type: 3}
 --- !u!1 &717000905
@@ -4575,7 +4580,7 @@ PrefabInstance:
     - target: {fileID: 5604089194982308971, guid: 0dec85623854a3347b7172d1180dc2f5,
         type: 3}
       propertyPath: scene
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5604089194982308971, guid: 0dec85623854a3347b7172d1180dc2f5,
         type: 3}
