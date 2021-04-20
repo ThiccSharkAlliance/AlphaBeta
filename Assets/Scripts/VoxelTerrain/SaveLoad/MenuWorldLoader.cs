@@ -33,6 +33,9 @@ namespace VoxelTerrain.SaveLoad
                 _deleteButtons[i].SetActive(false);
             }
             
+            _newGame.gameObject.SetActive(true);
+            _input.SetActive(true);
+            
             var activeButtons = 0;
             
             var directories = Directory.GetDirectories(Application.persistentDataPath + "/" + "Worlds" + "/");
@@ -86,9 +89,10 @@ namespace VoxelTerrain.SaveLoad
 
         private void SetAllInactive()
         {
-            foreach (var button in _buttons)
+            for (int i = 0; i < 5; i++)
             {
-                button.SetActive(false);
+                _buttons[i].SetActive(false);
+                _deleteButtons[i].SetActive(false);
             }
             
             _newGame.gameObject.SetActive(false);
@@ -108,7 +112,17 @@ namespace VoxelTerrain.SaveLoad
             
             var _chunkDirectory = Application.persistentDataPath + "/" + "Worlds" + "/" + worldName + "/";
 
-            if (Directory.Exists(_chunkDirectory)) Directory.Delete(_chunkDirectory);
+            if (Directory.Exists(_chunkDirectory))
+            {
+                DirectoryInfo di = new DirectoryInfo(_chunkDirectory);
+
+                foreach (FileInfo file in di.EnumerateFiles())
+                {
+                    file.Delete(); 
+                }
+
+                Directory.Delete(_chunkDirectory);
+            }
 
             var activeWorldDirectory = Application.persistentDataPath + "/" + "Active_World" + "/";
 
