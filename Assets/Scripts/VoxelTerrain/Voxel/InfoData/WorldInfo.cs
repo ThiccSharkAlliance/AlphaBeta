@@ -19,6 +19,10 @@ namespace VoxelTerrain.Voxel.InfoData
             set => _origin = value;
         }
         public float GroundLevel => _groundLevel;
-        public int Seed => _seed;
+        public int Seed
+        {
+            get => _seed;
+            set => _seed = value;
+        }
     }
 }

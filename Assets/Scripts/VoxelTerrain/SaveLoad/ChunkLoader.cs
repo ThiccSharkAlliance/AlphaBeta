@@ -32,13 +32,14 @@ namespace VoxelTerrain.SaveLoad
             {
                 var activeWorldDirectory = Application.persistentDataPath + "/" + "Active_World" + "/";
 
-                if (!Directory.Exists(_chunkDirectory)) Directory.CreateDirectory(activeWorldDirectory);
+                if (Directory.Exists(activeWorldDirectory))
+                {
+                    var fullPath = activeWorldDirectory + "activeWorld" + ".json";
 
-                var fullPath = activeWorldDirectory + "activeWorld" + ".json";
+                    var fileContents = File.ReadAllText(fullPath);
 
-                var fileContents = File.ReadAllText(fullPath);
-
-                _chunkDirectoryName = fileContents;
+                    _chunkDirectoryName = fileContents;
+                }
             }
 
             _chunkDirectory = Application.persistentDataPath + "/" + "Worlds" + "/" + _chunkDirectoryName + "/";
