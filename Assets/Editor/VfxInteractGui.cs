@@ -322,6 +322,30 @@ namespace Editor
                         EditorGUILayout.TextField(vi.VFXInteraction.SmokeSpawnStringId, GUILayout.Width(100f));
                     vi.VFXInteraction.SmokeSpawn = EditorGUILayout.IntField(vi.VFXInteraction.SmokeSpawn, GUILayout.Width(60f));
                     EditorGUILayout.EndHorizontal();
+                    
+                    EditorGUILayout.BeginHorizontal();
+                    //Set the smoke spawn ID and Value
+                    EditorGUILayout.LabelField("Smoke Colour", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.SmokeColourStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.SmokeColourStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.SmokeColour[(int)_voxType] = EditorGUILayout.ColorField(vi.VFXInteraction.SmokeColour[(int)_voxType], GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal();
+                    
+                    EditorGUILayout.BeginHorizontal();
+                    //Set the smoke spawn ID and Value
+                    EditorGUILayout.LabelField("Dust Colour", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.DustColourStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.DustColourStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.DustColour[(int)_voxType] = EditorGUILayout.ColorField(vi.VFXInteraction.DustColour[(int)_voxType], GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal(); 
+                    
+                    EditorGUILayout.BeginHorizontal();
+                    //Set the smoke spawn ID and Value
+                    EditorGUILayout.LabelField("Centre Gradient Number", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.CentreGradientStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.CentreGradientStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.CentreGradient = EditorGUILayout.FloatField(vi.VFXInteraction.CentreGradient, GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal();
                     #endregion
 
                     break;

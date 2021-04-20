@@ -44,9 +44,20 @@ namespace VoxelTerrain.Interactions
         
         [SerializeField] private string _smokeSpawnStringId = "Enter ID";
         [SerializeField] private int _smokeSpawn;
+        
+        [SerializeField] private string _smokeColourStringId = "Enter ID";
+        [SerializeField] private Color _smokeColour;  
+        
+        [SerializeField] private string _dustColourStringId = "Enter ID";
+        [SerializeField] private Color _dustColour; 
+        
+        [SerializeField] private string _centreGradientStringId = "Enter ID";
+        [SerializeField] private float _centreGradient;
 
         public VisualEffect[] Vfx = new VisualEffect[18];
         public Color[] SecondWaveColour = new Color[18];
+        public Color[] SmokeColour = new Color[18];
+        public Color[] DustColour = new Color[18];
 
         public bool ScanForVfx;
 
@@ -137,7 +148,31 @@ namespace VoxelTerrain.Interactions
         {
             get => _smokeSpawn;
             set => _smokeSpawn = value;
-        }
+        } 
+        
+        public string SmokeColourStringId
+        {
+            get => _smokeColourStringId;
+            set => _smokeColourStringId = value;
+        } 
+  
+        public string DustColourStringId
+        {
+            get => _dustColourStringId;
+            set => _dustColourStringId = value;
+        }    
+        
+        public string CentreGradientStringId
+        {
+            get => _centreGradientStringId;
+            set => _centreGradientStringId = value;
+        }   
+        public float CentreGradient
+        {
+            get => _centreGradient;
+            set => _centreGradient = value;
+        } 
+       
 
         #endregion
 
@@ -196,6 +231,9 @@ namespace VoxelTerrain.Interactions
                     Vfx[voxelType].SetInt(_sparkSpawnRateStringId, _sparkSpawnRate);
                     Vfx[voxelType].SetVector4(_secondWaveColourStringId, SecondWaveColour[voxelType]);
                     Vfx[voxelType].SetInt(_smokeSpawnStringId, _smokeSpawn);
+                    Vfx[voxelType].SetVector4(_smokeColourStringId, SmokeColour[voxelType]);
+                    Vfx[voxelType].SetVector4(_dustColourStringId, DustColour[voxelType]);
+                    Vfx[voxelType].SetFloat(_centreGradientStringId, _centreGradient);
                     break;
                 default:
                     break;
