@@ -12,6 +12,7 @@ namespace VoxelTerrain.SaveLoad
     {
         [SerializeField] private string _chunkDirectoryName = "world";
         [SerializeField] private bool _enableSaving;
+        [SerializeField] private bool _enableActiveWorld;
         private string _chunkDirectory;
 
         public string ChunkDirectoryName
@@ -20,22 +21,30 @@ namespace VoxelTerrain.SaveLoad
             set => _chunkDirectoryName = value;
         }
 
-        public void SetDirectoryName(string name)
+        public void SetDirectoryName(string directoryName)
         {
-            ChunkDirectoryName = name;
+            ChunkDirectoryName = directoryName;
         }
 
         private void Awake()
         {
+            if (_enableActiveWorld)
+            {
+                var activeWorldDirectory = Application.persistentDataPath + "/" + "Active_World" + "/";
+
+                if (Directory.Exists(activeWorldDirectory))
+                {
+                    var fullPath = activeWorldDirectory + "activeWorld" + ".json";
+
+                    var fileContents = File.ReadAllText(fullPath);
+
+                    _chunkDirectoryName = fileContents;
+                }
+            }
+
             _chunkDirectory = Application.persistentDataPath + "/" + "Worlds" + "/" + _chunkDirectoryName + "/";
 
             if (!Directory.Exists(_chunkDirectory)) Directory.CreateDirectory(_chunkDirectory);
-            
-#if UNITY_EDITOR
-
-            _chunkDirectory = Application.dataPath + "/" + "Worlds" + "/" + _chunkDirectoryName + "/";
-            if (!Directory.Exists(_chunkDirectory)) Directory.CreateDirectory(_chunkDirectory);
-#endif
         }
 
         public Chunk LoadChunkAt(Vector3 worldOrigin)
@@ -49,15 +58,10 @@ namespace VoxelTerrain.SaveLoad
 
             var chunk = JsonConvert.DeserializeObject<Chunk>(fileContents);
 
-            if (chunk.Voxels.Length == 0)
-            {
-                File.Delete(fullPath);
-                return null;
-            }
-            
-            Debug.Log("Loaded From: " + fullPath);
+            if (chunk.Voxels.Length != 0) return chunk;
+            File.Delete(fullPath);
+            return null;
 
-            return chunk;
         }
 
         public void SaveChunk(Chunk chunk, ChunkId chunkId)

@@ -1,0 +1,189 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5604089194982308969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5604089194982308973}
+  - component: {fileID: 5604089194982308970}
+  - component: {fileID: 5604089194982308971}
+  - component: {fileID: 5604089194982308968}
+  m_Layer: 0
+  m_Name: PlayFabManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5604089194982308973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604089194982308969}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5604089194982308970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604089194982308969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d589f0c100f029143943d38bd78b60f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userName: {fileID: 0}
+  userPassword: {fileID: 0}
+  userEmail: {fileID: 0}
+  message: {fileID: 0}
+  isAuthenticated: 0
+  loginRequest:
+    InfoRequestParameters:
+      GetCharacterInventories: 0
+      GetCharacterList: 0
+      GetPlayerProfile: 0
+      GetPlayerStatistics: 0
+      GetTitleData: 0
+      GetUserAccountInfo: 0
+      GetUserData: 0
+      GetUserInventory: 0
+      GetUserReadOnlyData: 0
+      GetUserVirtualCurrency: 0
+      PlayerStatisticNames: []
+      ProfileConstraints:
+        ShowAvatarUrl: 0
+        ShowBannedUntil: 0
+        ShowCampaignAttributions: 0
+        ShowContactEmailAddresses: 0
+        ShowCreated: 0
+        ShowDisplayName: 0
+        ShowExperimentVariants: 0
+        ShowLastLogin: 0
+        ShowLinkedAccounts: 0
+        ShowLocations: 0
+        ShowMemberships: 0
+        ShowOrigination: 0
+        ShowPushNotificationRegistrations: 0
+        ShowStatistics: 0
+        ShowTags: 0
+        ShowTotalValueToDateInUsd: 0
+        ShowValuesToDate: 0
+      TitleDataKeys: []
+      UserDataKeys: []
+      UserReadOnlyDataKeys: []
+    Password: 
+    TitleId: 
+    Username: 
+  registerRequest:
+    DisplayName: 
+    Email: 
+    EncryptedRequest: 
+    InfoRequestParameters:
+      GetCharacterInventories: 0
+      GetCharacterList: 0
+      GetPlayerProfile: 0
+      GetPlayerStatistics: 0
+      GetTitleData: 0
+      GetUserAccountInfo: 0
+      GetUserData: 0
+      GetUserInventory: 0
+      GetUserReadOnlyData: 0
+      GetUserVirtualCurrency: 0
+      PlayerStatisticNames: []
+      ProfileConstraints:
+        ShowAvatarUrl: 0
+        ShowBannedUntil: 0
+        ShowCampaignAttributions: 0
+        ShowContactEmailAddresses: 0
+        ShowCreated: 0
+        ShowDisplayName: 0
+        ShowExperimentVariants: 0
+        ShowLastLogin: 0
+        ShowLinkedAccounts: 0
+        ShowLocations: 0
+        ShowMemberships: 0
+        ShowOrigination: 0
+        ShowPushNotificationRegistrations: 0
+        ShowStatistics: 0
+        ShowTags: 0
+        ShowTotalValueToDateInUsd: 0
+        ShowValuesToDate: 0
+      TitleDataKeys: []
+      UserDataKeys: []
+      UserReadOnlyDataKeys: []
+    Password: 
+    PlayerSecret: 
+    TitleId: 
+    Username: 
+  infoRequest:
+    GetCharacterInventories: 1
+    GetCharacterList: 1
+    GetPlayerProfile: 1
+    GetPlayerStatistics: 1
+    GetTitleData: 1
+    GetUserAccountInfo: 1
+    GetUserData: 1
+    GetUserInventory: 1
+    GetUserReadOnlyData: 1
+    GetUserVirtualCurrency: 1
+    PlayerStatisticNames: []
+    ProfileConstraints:
+      ShowAvatarUrl: 0
+      ShowBannedUntil: 0
+      ShowCampaignAttributions: 0
+      ShowContactEmailAddresses: 0
+      ShowCreated: 0
+      ShowDisplayName: 0
+      ShowExperimentVariants: 0
+      ShowLastLogin: 0
+      ShowLinkedAccounts: 0
+      ShowLocations: 0
+      ShowMemberships: 0
+      ShowOrigination: 0
+      ShowPushNotificationRegistrations: 0
+      ShowStatistics: 0
+      ShowTags: 0
+      ShowTotalValueToDateInUsd: 0
+      ShowValuesToDate: 0
+    TitleDataKeys: []
+    UserDataKeys: []
+    UserReadOnlyDataKeys: []
+--- !u!114 &5604089194982308971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604089194982308969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99cb5b66a2a041b47b34ec7af8e3a0b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: 2
+  gotCurrency: 0
+--- !u!114 &5604089194982308968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604089194982308969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88cc717918070e242b3700458b8293c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -98,7 +98,6 @@ namespace VoxelTerrain.Interactions
                     Gizmos.DrawLine(corner6, corner8);
                     Gizmos.DrawLine(corner7, corner8);
                     Gizmos.DrawLine(corner5, corner8);
-
                     break;
                 case FlattenShape.Circular:
                     Gizmos.color = Color.green;
@@ -185,6 +184,10 @@ namespace VoxelTerrain.Interactions
         //For updating chunk voxel data. Includes updating chunks that don't exist in the scene.
         public IEnumerator UpdateChunks(Vector3 hitPos)
         {
+            if (!_engine) _engine = FindObjectOfType<VoxelEngine>();
+            if (!_chunkLoader) _chunkLoader = FindObjectOfType<ChunkLoader>();
+            if (!_engine || !_chunkLoader) yield break;
+
             Vector3 chunkPos;
             Chunk chunk;
             Vector3 voxPos;
@@ -268,8 +271,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     //Stop vfx from running
@@ -330,8 +332,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }                    
                     //stop any vfx
@@ -386,8 +387,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     if (_interactionEvent) _interactionEvent.VFXInteraction.VfxStopa(_shape, vox);
@@ -443,8 +443,7 @@ namespace VoxelTerrain.Interactions
                     for (int i = 0; i < chunkList.Count; i++)
                     {
                         chunkList[i].SetMesh(posList[i]);
-                        if (!chunkList[i].GetEntity())
-                            _engine.WorldData.Chunks.Remove(new ChunkId(posList[i].x, posList[i].y, posList[i].z));
+                        if (!chunkList[i].GetEntity()) _engine.RemoveChunkAt(posList[i]);
                         yield return null;
                     }
                     if (_interactionEvent) _interactionEvent.VFXInteraction.VfxStopa(_shape, vox);
@@ -459,6 +458,7 @@ namespace VoxelTerrain.Interactions
         private void Flatten(Vector3 pos, VoxelType voxelType, float flattenHeight, float digDepth, Chunk chunk)
         {
             Vector3 voxPos = pos;
+            if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y - 1, voxPos.z])) return;
             var voxType = voxelType;
 
             //For all voxels above the y position, update them
@@ -469,6 +469,7 @@ namespace VoxelTerrain.Interactions
                 chunk.SetVoxel(voxPos, voxType);
                 if (_destroyAboveGround) voxType = VoxelType.Default;
                 voxPos.y++;
+                if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y, voxPos.z])) break;
             } while (Vector3.Distance(pos, voxPos) <= flattenHeight);
 
             voxPos = pos;
@@ -477,8 +478,9 @@ namespace VoxelTerrain.Interactions
             do
             {
                 voxPos.y--;
+                if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y, voxPos.z])) break;
                 chunk.SetVoxel(voxPos, voxelType);
-            } while (Vector3.Distance(voxPos, pos) <= digDepth);
+            } while (Vector3.Distance(voxPos, pos) <= digDepth && voxPos.y > 1);
         }
 
         private void Sphere(Vector3 origin, Vector3 pos, Vector3 newPos, float sphereRadius, VoxelType voxelType, Chunk chunk)

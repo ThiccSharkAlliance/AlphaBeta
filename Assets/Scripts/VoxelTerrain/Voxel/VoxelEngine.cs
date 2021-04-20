@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.IO;
+using UnityEngine;
 using VoxelTerrain.Voxel.Dependencies;
 using VoxelTerrain.Voxel.InfoData;
 
@@ -30,6 +32,26 @@ namespace VoxelTerrain.Voxel
         #region Unity Functions
         private void Awake()
         {
+            var activeWorldDirectory = Application.persistentDataPath + "/" + "Active_World" + "/";
+
+            if (Directory.Exists(activeWorldDirectory))
+            {
+                var fullPath = activeWorldDirectory + "activeWorld" + ".json";
+
+                var fileContents = File.ReadAllText(fullPath);
+                
+                var directory = Application.persistentDataPath + "/" + "Worlds" + "/" + fileContents + "/";
+
+                if (File.Exists(directory + "seed.json"))
+                {
+                    fullPath = directory + "seed.json";
+
+                    fileContents = File.ReadAllText(fullPath);
+
+                    WorldInfo.Seed = Convert.ToInt32(fileContents);
+                }
+            }
+
             WorldData.Engine = this;
             _worldGeneration.GenerateWorld(transform.position, _worldInfo.Distance,  - (ChunkHeight / 2), _chunkInfo.VoxelSize);
         }
@@ -118,6 +140,7 @@ namespace VoxelTerrain.Voxel
                     
             nonNullChunk.SetMesh(pos);
             
+            if (WorldData.ChunkObjects.ContainsKey(chunkId)) Debug.Log("Chunk: " + chunkId.X + ", " + chunkId.Y + ", " + chunkId.Z + " Exists");
             WorldData.ChunkObjects.Add(chunkId, go);
         }
         
