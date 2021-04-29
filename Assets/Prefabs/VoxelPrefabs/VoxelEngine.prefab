@@ -54,7 +54,6 @@ MonoBehaviour:
   _voxelTypeHeights: {fileID: 7941170911782372760}
   _worldGeneration: {fileID: 7941170911782372765}
   _noiseScale: 30
-  seed: 1
 --- !u!114 &7941170911782372760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +99,7 @@ MonoBehaviour:
   _distance: 64
   _origin: {fileID: 0}
   _groundLevel: 1
+  _seed: 1
 --- !u!114 &7941170911782372765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,5 +140,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a53ef923e2a61e47be103ca2eeee4e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chunkDirectoryName: Chunks
+  _chunkDirectoryName: IansLand
   _enableSaving: 1

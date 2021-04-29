@@ -10,6 +10,16 @@
         Sand,
         Snow,
         Water,
-        Wood
+        Forest,
+        Beach,
+        Plains,
+        Sandstone,
+        SavannahGrass,
+        SavannahForest,
+        JungleForest,
+        PineForest,
+        SwampForest,
+        Mud,
+        Ice,
     }
 }

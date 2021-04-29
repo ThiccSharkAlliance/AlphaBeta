@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7c4ac7e0597e245996d54cf99c7261, type: 3}
+  m_Name: Vfx Interaction
+  m_EditorClassIdentifier: 
+  _vfxInteraction:
+    _spawnRateStringId: DestructionSpawn
+    _spawnRate: 100
+    _spawnRateBoxStringId: Enter ID
+    _spawnRateBox: 0
+    _spawnPointStringId: DestructionSP
+    _particleLifeStringId: DestructionParticleLife
+    _particleLife: 2
+    _sphereRadiusStringId: SphereRadius
+    _sphereRadius: 0.08
+    _boxRadiusXStringId: Enter ID
+    _boxRadiusX: 2
+    _boxRadiusZStringId: Enter ID
+    _boxRadiusZ: 2
+    _planeRadiusStringId: Enter ID
+    _planeRadius: 0
+    _particleRingCountStringId: RingSpawnCount
+    _particleRingCount: 100
+    _sparkSpawnRateStringId: SparksSpawn
+    _sparkSpawnRate: 60
+    _secondWaveColourStringId: SecondWaveColour
+    _secondWaveColour: {r: 0.06657174, g: 0.4811321, b: 0, a: 1}
+    _smokeSpawnStringId: SmokeSpawn
+    _smokeSpawn: 1
+    _smokeColourStringId: SmokeColour
+    _smokeColour: {r: 0, g: 0, b: 0, a: 0}
+    _dustColourStringId: DustColour
+    _dustColour: {r: 0, g: 0, b: 0, a: 0}
+    _centreGradientStringId: CentreSpawnGradient
+    _centreGradient: 1
+    Vfx:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    SecondWaveColour:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 0.15305126, g: 0.5943396, b: 0.042052325, a: 1}
+    - {r: 0.6415094, g: 0.12581342, b: 0.11196155, a: 1}
+    - {r: 0.28128338, g: 0.34574145, b: 0.4056604, a: 1}
+    - {r: 0.9553981, g: 1, b: 0, a: 1}
+    - {r: 0.78208435, g: 0.8962264, b: 0.8962264, a: 1}
+    - {r: 0.40970984, g: 0.7593591, b: 0.9339623, a: 1}
+    - {r: 0.09721576, g: 0.6132076, b: 0.014462441, a: 1}
+    - {r: 1, g: 0.86307746, b: 0, a: 1}
+    - {r: 0.7735849, g: 0.57230896, b: 0.14231044, a: 1}
+    - {r: 0.94509804, g: 0.6745098, b: 0.30588236, a: 1}
+    - {r: 0.7450819, g: 1, b: 0.015686274, a: 1}
+    - {r: 0.88200766, g: 0.9245283, b: 0.047970813, a: 1}
+    - {r: 0.117584474, g: 0.7264151, b: 0.051397286, a: 1}
+    - {r: 0.8018868, g: 0.3619298, b: 0.018912422, a: 1}
+    - {r: 0.252759, g: 0.754717, b: 0.36965913, a: 1}
+    - {r: 0.6415094, g: 0.29098985, b: 0, a: 1}
+    - {r: 0.30647027, g: 0.8625855, b: 0.9150943, a: 1}
+    SmokeColour:
+    - {r: 0.244126, g: 0.24457388, b: 0.24528301, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0.21568629, g: 0.21568629, b: 0.17254902, a: 0}
+    - {r: 0.18431373, g: 0.23137257, b: 0.30588236, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0.11764707, g: 0.10588236, b: 0.08627451, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    DustColour:
+    - {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0.98039216, g: 0.92241865, b: 0.13333331, a: 0}
+    - {r: 0.83921576, g: 0.9490197, b: 1, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0.9803922, g: 0.8313726, b: 0.13333334, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    ScanForVfx: 0

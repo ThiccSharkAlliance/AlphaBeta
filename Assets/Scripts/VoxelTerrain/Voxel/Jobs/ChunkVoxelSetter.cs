@@ -14,9 +14,6 @@ namespace VoxelTerrain.Voxel.Jobs
         [ReadOnly] public float groundLevel;
         [ReadOnly] public float scale;
         [ReadOnly] public float resolution;
-        [ReadOnly] public float StoneDepth;
-        [ReadOnly] public float SnowHeight;
-        [ReadOnly] public float CaveStartHeight;
 
         public Vector3 origin;
         public NativeArray<byte> voxels;
@@ -31,13 +28,13 @@ namespace VoxelTerrain.Voxel.Jobs
                     for (var j = 0; j < height; j++)
                     {
                         //set voxel based on noise world position
-                        voxels[Chunk.PosToIndex(i, j, k)] = SetVoxelType(origin.x + i * resolution, origin.y + j * resolution,
-                            origin.z + k * resolution);
+                        voxels[Chunk.PosToIndex(i, j, k)] = BiomeGenerator.GenerateVoxelType(origin.x + i * resolution, origin.y + j * resolution, origin.z + k * resolution, scale, seed, groundLevel);
                     }
                 }
             }
         }
 
+        /*
         //set individual voxel type using noise function
         //eventually this will be replaced by Josephs noise types
         public byte SetVoxelType(float x, float y, float z)
@@ -45,7 +42,7 @@ namespace VoxelTerrain.Voxel.Jobs
             var blockType = VoxelType.Default;
 
             //3D noise for heightmap
-            var simplex1 = Noise.Generate2DNoiseValue( x, z, scale, seed, groundLevel);
+            var simplex1 = Noise.Generate2DNoiseValue( x, z, scale, numGen, groundLevel);
 
             //under the surface, dirt block
             if (y <= simplex1)
@@ -62,5 +59,6 @@ namespace VoxelTerrain.Voxel.Jobs
 
             return (byte) blockType;
         }
+        */
     }
 }

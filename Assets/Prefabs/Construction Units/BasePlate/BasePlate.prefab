@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1917014331532121435}
   - component: {fileID: 1917014331532121428}
   - component: {fileID: 1917014331532121429}
+  - component: {fileID: -4969349658553802502}
+  - component: {fileID: 7560111337367856845}
   m_Layer: 8
   m_Name: BasePlate
   m_TagString: Buildings
@@ -93,3 +95,42 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4969349658553802502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917014331532121430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556f6ca82f1010c4690204222eac8792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _engine: {fileID: 0}
+  _chunkLoader: {fileID: 0}
+  _interactionEvents: {fileID: 0}
+  _setVoxelType: 2
+  _destroyAboveGround: 1
+  _interactionSettings:
+    _mouseSize: 0
+    _cubeXDistance: 1
+    _cubeZDistance: 1
+    _circleRadius: 0
+    _sphereRadius: 0
+    _height: 3
+    _dig: 0
+  _shape: 2
+--- !u!114 &7560111337367856845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917014331532121430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320e33d397c477549a944c817eb3d650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interaction: {fileID: -4969349658553802502}

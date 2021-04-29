@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using VoxelTerrain.Mouse;
 using VoxelTerrain.Voxel;
 
 namespace VoxelTerrain.Interactions
