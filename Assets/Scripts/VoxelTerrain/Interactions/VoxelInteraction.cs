@@ -135,10 +135,14 @@ namespace VoxelTerrain.Interactions
 
         private void Awake()
         {
-            if (Application.isPlaying && _interactionEvent) _interactionEvent.VFXInteraction.ScanForVfx = true;
+            if (Application.isPlaying && _interactionEvent)
+            {
+                _interactionEvent.VFXInteraction.ScanForVfx = true;
+                UpdateVfx();
+            }
         }
 
-        private void Update()
+        private void UpdateVfx()
         {
             if (!_interactionEvent) return;
 
@@ -204,7 +208,11 @@ namespace VoxelTerrain.Interactions
             var vox = chunk[voxPos.x, voxPos.y, voxPos.z];
 
             //Run vfx if we have it
-            if (_interactionEvent) _interactionEvent.VFXInteraction.VfxPlaya(hitPos, vox, _interactionSettings, Shape);
+            if (_interactionEvent)
+            {
+                UpdateVfx();
+                _interactionEvent.VFXInteraction.VfxPlaya(hitPos, vox, _interactionSettings, Shape);
+            }
             
             
             //Pick the shape type
