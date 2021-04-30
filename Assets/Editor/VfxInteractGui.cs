@@ -314,6 +314,8 @@ namespace Editor
                     vi.VFXInteraction.SmokeSpawnStringId =
                         EditorGUILayout.TextField(vi.VFXInteraction.SmokeSpawnStringId, GUILayout.Width(100f));
                     vi.VFXInteraction.SmokeSpawn = EditorGUILayout.IntField(vi.VFXInteraction.SmokeSpawn, GUILayout.Width(60f));
+                    vi.VFXInteraction._smokeSpawnActive[(int) _voxType] =
+                        EditorGUILayout.Toggle(vi.VFXInteraction._smokeSpawnActive[(int) _voxType]);
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.BeginHorizontal();
@@ -322,6 +324,8 @@ namespace Editor
                     vi.VFXInteraction.SmokeColourStringId =
                         EditorGUILayout.TextField(vi.VFXInteraction.SmokeColourStringId, GUILayout.Width(100f));
                     vi.VFXInteraction.SmokeColour[(int)_voxType] = EditorGUILayout.ColorField(vi.VFXInteraction.SmokeColour[(int)_voxType], GUILayout.Width(60f));
+                    vi.VFXInteraction._smokeColourActive[(int) _voxType] =
+                        EditorGUILayout.Toggle(vi.VFXInteraction._smokeColourActive[(int) _voxType]);
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.BeginHorizontal();
@@ -330,6 +334,8 @@ namespace Editor
                     vi.VFXInteraction.DustColourStringId =
                         EditorGUILayout.TextField(vi.VFXInteraction.DustColourStringId, GUILayout.Width(100f));
                     vi.VFXInteraction.DustColour[(int)_voxType] = EditorGUILayout.ColorField(vi.VFXInteraction.DustColour[(int)_voxType], GUILayout.Width(60f));
+                    vi.VFXInteraction._dustColourActive[(int) _voxType] =
+                        EditorGUILayout.Toggle(vi.VFXInteraction._dustColourActive[(int) _voxType]);
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.BeginHorizontal();
@@ -338,6 +344,8 @@ namespace Editor
                     vi.VFXInteraction.CentreGradientStringId =
                         EditorGUILayout.TextField(vi.VFXInteraction.CentreGradientStringId, GUILayout.Width(100f));
                     vi.VFXInteraction.CentreGradient = EditorGUILayout.FloatField(vi.VFXInteraction.CentreGradient, GUILayout.Width(60f));
+                    vi.VFXInteraction._centreGradientActive[(int) _voxType] =
+                        EditorGUILayout.Toggle(vi.VFXInteraction._centreGradientActive[(int) _voxType]);
                     EditorGUILayout.EndHorizontal();
                     #endregion
                     break;

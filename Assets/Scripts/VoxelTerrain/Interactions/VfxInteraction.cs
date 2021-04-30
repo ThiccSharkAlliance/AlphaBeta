@@ -45,14 +45,22 @@ namespace VoxelTerrain.Interactions
         [SerializeField] private string _smokeSpawnStringId = "Enter ID";
         [SerializeField] private int _smokeSpawn;
         
+        [HideInInspector] public bool[] _smokeSpawnActive = new bool[18];
+        
         [SerializeField] private string _smokeColourStringId = "Enter ID";
         [SerializeField] private Color _smokeColour;  
         
+        [HideInInspector] public bool[] _smokeColourActive = new bool[18];
+        
         [SerializeField] private string _dustColourStringId = "Enter ID";
-        [SerializeField] private Color _dustColour; 
+        [SerializeField] private Color _dustColour;
+        
+        [HideInInspector] public bool[] _dustColourActive = new bool[18];
         
         [SerializeField] private string _centreGradientStringId = "Enter ID";
         [SerializeField] private float _centreGradient;
+        
+        [HideInInspector] public bool[] _centreGradientActive = new bool[18];
 
         public VisualEffect[] Vfx = new VisualEffect[18];
         public Color[] SecondWaveColour = new Color[18];
@@ -143,7 +151,8 @@ namespace VoxelTerrain.Interactions
         {
             get => _smokeSpawnStringId;
             set => _smokeSpawnStringId = value;
-        } 
+        }
+
         public int SmokeSpawn
         {
             get => _smokeSpawn;
@@ -195,8 +204,6 @@ namespace VoxelTerrain.Interactions
         
         public void VfxPlaya(Vector3 spawnPoint, byte voxelType, InteractionSettings interactionSettings, FlattenShape shape = FlattenShape.Single)
         {
-           
-
             Vfx[voxelType].SetInt(_spawnRateStringId, _spawnRate);
             switch (shape)
             {
@@ -225,12 +232,10 @@ namespace VoxelTerrain.Interactions
                         _particleRingCount);
                     Vfx[voxelType].SetInt(_sparkSpawnRateStringId, _sparkSpawnRate);
                     Vfx[voxelType].SetVector4(_secondWaveColourStringId, SecondWaveColour[voxelType]);
-                    Vfx[voxelType].SetInt(_smokeSpawnStringId, _smokeSpawn);
-                    Vfx[voxelType].SetVector4(_smokeColourStringId, SmokeColour[voxelType]);
-                    Vfx[voxelType].SetVector4(_dustColourStringId, DustColour[voxelType]);
-                    Vfx[voxelType].SetFloat(_centreGradientStringId, _centreGradient);
-
-
+                    if (_smokeSpawnActive[voxelType]) Vfx[voxelType].SetInt(_smokeSpawnStringId, _smokeSpawn);
+                    if (_smokeColourActive[voxelType]) Vfx[voxelType].SetVector4(_smokeColourStringId, SmokeColour[voxelType]);
+                    if (_dustColourActive[voxelType]) Vfx[voxelType].SetVector4(_dustColourStringId, DustColour[voxelType]);
+                    if (_centreGradientActive[voxelType]) Vfx[voxelType].SetFloat(_centreGradientStringId, _centreGradient);
                     break;
                 case FlattenShape.Sphere:
                     Vfx[voxelType].SetInt(_spawnRateStringId, _spawnRate);
