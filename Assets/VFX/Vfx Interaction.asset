@@ -19,7 +19,7 @@ MonoBehaviour:
     _spawnRateBox: 0
     _spawnPointStringId: DestructionSP
     _particleLifeStringId: DestructionParticleLife
-    _particleLife: 2
+    _particleLife: 3
     _sphereRadiusStringId: SphereRadius
     _sphereRadius: 0.04
     _boxRadiusXStringId: Enter ID
