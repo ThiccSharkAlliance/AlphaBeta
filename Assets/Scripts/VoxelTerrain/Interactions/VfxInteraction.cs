@@ -261,7 +261,7 @@ namespace VoxelTerrain.Interactions
         {
             Vfx[voxelType].SetInt(_spawnRateStringId, 0);
             Vfx[voxelType].SetInt(_sparkSpawnRateStringId, 0);
-            Vfx[voxelType].SetInt(_smokeSpawnStringId, 0);
+            if (_smokeSpawnActive[voxelType]) Vfx[voxelType].SetInt(_smokeSpawnStringId, 0);
 
 
             switch (shape)
