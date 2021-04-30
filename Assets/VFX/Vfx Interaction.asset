@@ -21,7 +21,7 @@ MonoBehaviour:
     _particleLifeStringId: DestructionParticleLife
     _particleLife: 2
     _sphereRadiusStringId: SphereRadius
-    _sphereRadius: 0.08
+    _sphereRadius: 0.04
     _boxRadiusXStringId: Enter ID
     _boxRadiusX: 2
     _boxRadiusZStringId: Enter ID

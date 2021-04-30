@@ -217,6 +217,18 @@ namespace VoxelTerrain.Interactions
                     break;
                 case FlattenShape.Circular:
                     Vfx[voxelType].SetInt(_spawnRateStringId, _spawnRate);
+                    Vfx[voxelType].SetFloat(_particleLifeStringId, _particleLife);
+                    Vfx[voxelType].SetFloat(_sphereRadiusStringId,
+                        _sphereRadius = interactionSettings.SphereRadius / 100f + 0.04f);
+                    Vfx[voxelType].SetVector3(_spawnPointStringId, spawnPoint);
+                    Vfx[voxelType].SetFloat(_particleRingCountStringId,
+                        _particleRingCount);
+                    Vfx[voxelType].SetInt(_sparkSpawnRateStringId, _sparkSpawnRate);
+                    Vfx[voxelType].SetVector4(_secondWaveColourStringId, SecondWaveColour[voxelType]);
+                    Vfx[voxelType].SetInt(_smokeSpawnStringId, _smokeSpawn);
+                    Vfx[voxelType].SetVector4(_smokeColourStringId, SmokeColour[voxelType]);
+                    Vfx[voxelType].SetVector4(_dustColourStringId, DustColour[voxelType]);
+                    Vfx[voxelType].SetFloat(_centreGradientStringId, _centreGradient);
 
 
                     break;

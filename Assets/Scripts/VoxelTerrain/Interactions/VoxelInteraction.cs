@@ -135,7 +135,7 @@ namespace VoxelTerrain.Interactions
 
         private void Awake()
         {
-            if (Application.isPlaying) _interactionEvent.VFXInteraction.ScanForVfx = true;
+            if (Application.isPlaying && _interactionEvent) _interactionEvent.VFXInteraction.ScanForVfx = true;
         }
 
         private void Update()

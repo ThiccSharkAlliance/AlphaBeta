@@ -284,7 +284,61 @@ namespace Editor
                     break;
                 case FlattenShape.Circular:
                     #region circular
+                    EditorGUILayout.BeginHorizontal();
+                    //Set sphere radius ID and value
+                    EditorGUILayout.LabelField("Sphere Radius", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.SphereRadiusStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.SphereRadiusStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.SphereRadius = EditorGUILayout.FloatField(vi.VFXInteraction.SphereRadius, GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal();
 
+                    EditorGUILayout.BeginHorizontal();
+                    //Set the Particle Ring count ID and Value
+                    EditorGUILayout.LabelField("Paricle Ring Count", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.RingSpawnCountStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.RingSpawnCountStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.RingSpawnCount = EditorGUILayout.FloatField(vi.VFXInteraction.RingSpawnCount, GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.BeginHorizontal();
+                    //Set the Particle Ring count ID and Value
+                    EditorGUILayout.LabelField("Second Wave Colour", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.SecondWaveColourStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.SecondWaveColourStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.SecondWaveColour[(int)_voxType] = EditorGUILayout.ColorField(vi.VFXInteraction.SecondWaveColour[(int)_voxType], GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.BeginHorizontal();
+                    //Set the smoke spawn ID and Value
+                    EditorGUILayout.LabelField("Smoke Spawn", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.SmokeSpawnStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.SmokeSpawnStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.SmokeSpawn = EditorGUILayout.IntField(vi.VFXInteraction.SmokeSpawn, GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.BeginHorizontal();
+                    //Set the smoke spawn ID and Value
+                    EditorGUILayout.LabelField("Smoke Colour", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.SmokeColourStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.SmokeColourStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.SmokeColour[(int)_voxType] = EditorGUILayout.ColorField(vi.VFXInteraction.SmokeColour[(int)_voxType], GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.BeginHorizontal();
+                    //Set the smoke spawn ID and Value
+                    EditorGUILayout.LabelField("Dust Colour", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.DustColourStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.DustColourStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.DustColour[(int)_voxType] = EditorGUILayout.ColorField(vi.VFXInteraction.DustColour[(int)_voxType], GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal();
+
+                    EditorGUILayout.BeginHorizontal();
+                    //Set the smoke spawn ID and Value
+                    EditorGUILayout.LabelField("Centre Gradient Number", GUILayout.MinWidth(60f), GUILayout.MaxWidth(100f));
+                    vi.VFXInteraction.CentreGradientStringId =
+                        EditorGUILayout.TextField(vi.VFXInteraction.CentreGradientStringId, GUILayout.Width(100f));
+                    vi.VFXInteraction.CentreGradient = EditorGUILayout.FloatField(vi.VFXInteraction.CentreGradient, GUILayout.Width(60f));
+                    EditorGUILayout.EndHorizontal();
                     #endregion
                     break;
                 case FlattenShape.Sphere:
