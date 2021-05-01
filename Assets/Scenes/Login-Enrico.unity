@@ -2821,6 +2821,11 @@ PrefabInstance:
       propertyPath: _lootBoxTimer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2929511488373839931, guid: 070856fc9ae042b49a3107d5ddbfbebd,
+        type: 3}
+      propertyPath: ignoreLayer.m_Bits
+      value: 1792
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 070856fc9ae042b49a3107d5ddbfbebd, type: 3}
 --- !u!1 &717000905

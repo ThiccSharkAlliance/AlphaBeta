@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2485675771713908297}
   - component: {fileID: 7134222445694513646}
   - component: {fileID: 7766295715345125072}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6572205090781808705}
   - component: {fileID: 8773275290934439663}
   - component: {fileID: -4571892634604936143}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HQ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 3022303816728804878}
   - component: {fileID: 6373334867278851138}
   - component: {fileID: 595878215028904820}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 7318738735911042856}
   - component: {fileID: 2737845853745028880}
   - component: {fileID: 382248213459695585}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pTorus2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 8133314171156510699}
   - component: {fileID: 3605311547626178060}
   - component: {fileID: 5696881819825710070}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube28
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 5912780507468523409}
   - component: {fileID: 2422254326317201095}
   - component: {fileID: 4731924187430092630}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Nav_Mesh_Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 851908631133117418}
   - component: {fileID: 6813609367004905659}
   - component: {fileID: 1766359899082061226}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -679,7 +679,7 @@ GameObject:
   - component: {fileID: 1895730777059669399}
   - component: {fileID: 7767989864564966849}
   - component: {fileID: 2766777202476945504}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pTorus3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 4971892020002935401}
   - component: {fileID: 399161330472591779}
   - component: {fileID: 2040675054680147069}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube27
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: 8853335576793283584}
   - component: {fileID: 5649854594106607606}
   - component: {fileID: 2489845087349419864}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pTorus1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -916,7 +916,7 @@ GameObject:
   - component: {fileID: 886355460409988682}
   - component: {fileID: 2026021186963022881}
   - component: {fileID: 3586576220224125958}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,7 +995,7 @@ GameObject:
   - component: {fileID: 7637265480207358501}
   - component: {fileID: 4229736551565831690}
   - component: {fileID: 5396224765443791726}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1074,7 +1074,7 @@ GameObject:
   - component: {fileID: 7715107366528495869}
   - component: {fileID: 5322673851658671620}
   - component: {fileID: 6786341946073596044}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1152,7 +1152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5853509767106298962}
   - component: {fileID: 4411516187319702641}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Area_Of_Control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1197,7 +1197,7 @@ GameObject:
   - component: {fileID: 7110201438991390233}
   - component: {fileID: 264475892026275928}
   - component: {fileID: 3808773196370457161}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube26
   m_TagString: Untagged
   m_Icon: {fileID: 0}
