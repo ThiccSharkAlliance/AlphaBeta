@@ -62,7 +62,7 @@ public class Units : MonoBehaviour
         }
     }
 
-    /*void Decide_Action()
+    void Decide_Action()
     {
         if (Action_Type == "Patrol" && ((Vector3.Distance(Agent.transform.position, Destination) <= 4) || (Agent.transform.position.x == Destination.x && Agent.transform.position.z == Destination.z)))
         {
@@ -88,7 +88,7 @@ public class Units : MonoBehaviour
         {
             Action();
         }
-    }*/
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -104,7 +104,7 @@ public class Units : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        //if(collision.transform.parent.tag == "Turret" && collision.gameObject.tag == "Bullet")
+        if(collision.transform.parent.tag == "Turret" && collision.gameObject.tag == "Bullet")
         if (collision.gameObject.tag == "Bullet")
         {
             if (collision.gameObject.GetComponent<Turret_Bullet>() != null)
@@ -129,7 +129,7 @@ public class Units : MonoBehaviour
         }
     }
 
-    /*public void Action()
+    public void Action()
     {
         switch (Action_Type)
         {
@@ -203,7 +203,7 @@ public class Units : MonoBehaviour
                     return;
                 }
         }
-    }*/
+    }
 
     private void OnDrawGizmosSelected()
     {

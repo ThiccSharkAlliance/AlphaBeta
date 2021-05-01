@@ -11,6 +11,7 @@ public class Manager : MonoBehaviour
 
     public Resources allResources;
     public VirtualCurrency virtualCurrency;
+    [SerializeField] private float _lootBoxTimer = 3f;
     Manager manager;
     public GameObject buildTabScroll;
     bool buildSelectorVisible = false;
@@ -356,7 +357,7 @@ public class Manager : MonoBehaviour
     public void callGrantLootBox()
     {
         virtualCurrency.GrantLootBox();
-        DateTime CurrentTime = DateTime.Now.AddMinutes(5); ///1440 minutes in a day. 
+        DateTime CurrentTime = DateTime.Now.AddMinutes(_lootBoxTimer); ///1440 minutes in a day. 
         CurrentTime.SaveDate();
         StopAllCoroutines();
         StartCoroutine(CheckTimer());

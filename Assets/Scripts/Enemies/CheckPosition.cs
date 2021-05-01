@@ -34,7 +34,7 @@ public class CheckPosition : MonoBehaviour
 
         float position = 0;
 
-        float altitude = Noise.Generate2DNoiseValue(PosX, PosZ, scale, _engine.WorldInfo.NumGenAltitude, ground);
+        float altitude = Noise.Generate2DNoiseValue(PosX, PosZ, scale, 4, 2f, _engine.WorldInfo.Seed, ground);
 
         if(altitude < groundScale)
         {
@@ -51,17 +51,17 @@ public class CheckPosition : MonoBehaviour
     private bool validatePosition(float PosX, float PosZ, float ground, float scale, float groundScale)
     {
 
-        Unity.Mathematics.Random RNG = _engine.WorldInfo.NumGenAltitude;
+        var seed = _engine.WorldInfo.Seed;
 
-        float altitude = Noise.Generate2DNoiseValue(PosX, PosZ, scale, RNG, ground);
+        float altitude = Noise.Generate2DNoiseValue(PosX, PosZ, scale, 4, 2f, seed, ground);
         float groundAltitude = altitude - groundScale;
-        float altitude2 = Noise.Generate2DNoiseValue(PosX + 0.5f, PosZ, scale, RNG, ground);
+        float altitude2 = Noise.Generate2DNoiseValue(PosX + 0.5f, PosZ, scale, 4, 2f, seed, ground);
         float groundAltitude2 = altitude - groundScale;
-        float altitude3 = Noise.Generate2DNoiseValue(PosX - 0.5f, PosZ, scale, RNG, ground);
+        float altitude3 = Noise.Generate2DNoiseValue(PosX - 0.5f, PosZ, scale, 4, 2f, seed, ground);
         float groundAltitude3 = altitude3 - groundScale;
-        float altitude4 = Noise.Generate2DNoiseValue(PosX, PosZ + 0.5f, scale, RNG, ground);
+        float altitude4 = Noise.Generate2DNoiseValue(PosX, PosZ + 0.5f, scale, 4, 2f, seed, ground);
         float groundAltitude4 = altitude4 - groundScale;
-        float altitude5 = Noise.Generate2DNoiseValue(PosX, PosZ - 0.5f, scale, RNG, ground);
+        float altitude5 = Noise.Generate2DNoiseValue(PosX, PosZ - 0.5f, scale, 4, 2f, seed, ground);
         float groundAltitude5 = altitude5 - groundScale;
 
 

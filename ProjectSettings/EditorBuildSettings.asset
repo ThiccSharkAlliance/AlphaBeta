@@ -9,12 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Login-Enrico.unity
     guid: a7558c246fec4104e85dba38363b0b17
   - enabled: 1
-    path: Assets/Scenes/ShipControlTestScene.unity
-    guid: a542bed14c8d5494d95ab3e34099b008
-  - enabled: 1
-    path: Assets/Scenes/Test.unity
-    guid: 18fb5e0ca783b684594986ded5da747f
-  - enabled: 1
     path: Assets/Scenes/MainLevel.unity
     guid: 0cc79ff1fd4018c4d8d0ff607a1893c7
   m_configObjects: {}

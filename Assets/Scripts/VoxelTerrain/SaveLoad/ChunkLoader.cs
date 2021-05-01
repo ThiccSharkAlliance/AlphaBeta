@@ -12,6 +12,7 @@ namespace VoxelTerrain.SaveLoad
     {
         [SerializeField] private string _chunkDirectoryName = "world";
         [SerializeField] private bool _enableSaving;
+        [SerializeField] private bool _enableActiveWorld;
         private string _chunkDirectory;
 
         public string ChunkDirectoryName
@@ -27,15 +28,23 @@ namespace VoxelTerrain.SaveLoad
 
         private void Awake()
         {
+            if (_enableActiveWorld)
+            {
+                var activeWorldDirectory = Application.persistentDataPath + "/" + "Active_World" + "/";
+
+                if (Directory.Exists(activeWorldDirectory))
+                {
+                    var fullPath = activeWorldDirectory + "activeWorld" + ".json";
+
+                    var fileContents = File.ReadAllText(fullPath);
+
+                    _chunkDirectoryName = fileContents;
+                }
+            }
+
             _chunkDirectory = Application.persistentDataPath + "/" + "Worlds" + "/" + _chunkDirectoryName + "/";
 
             if (!Directory.Exists(_chunkDirectory)) Directory.CreateDirectory(_chunkDirectory);
-            
-#if UNITY_EDITOR
-
-            _chunkDirectory = Application.dataPath + "/" + "Worlds" + "/" + _chunkDirectoryName + "/";
-            if (!Directory.Exists(_chunkDirectory)) Directory.CreateDirectory(_chunkDirectory);
-#endif
         }
 
         public Chunk LoadChunkAt(Vector3 worldOrigin)

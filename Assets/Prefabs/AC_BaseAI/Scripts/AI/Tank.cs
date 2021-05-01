@@ -19,7 +19,7 @@ public class Tank : Units
 
     private void FixedUpdate()
     {
-        /*if (Shoot.Enemies.Count != 0)
+        if (Shoot.Enemies.Count != 0)
         {
             Action_Type = "Shoot";
         }
@@ -41,7 +41,7 @@ public class Tank : Units
             {
                 Action_Type = "Attack";
             }
-        }*/
+        }
     }
 
 }

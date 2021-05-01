@@ -14,15 +14,10 @@ namespace VoxelTerrain.Voxel.Jobs
         [ReadOnly] public float groundLevel;
         [ReadOnly] public float scale;
         [ReadOnly] public float resolution;
-        [ReadOnly] public float StoneDepth;
-        [ReadOnly] public float SnowHeight;
-        [ReadOnly] public float CaveStartHeight;
 
         public Vector3 origin;
         public NativeArray<byte> voxels;
         public int seed;
-        public Unity.Mathematics.Random numGenAltitude;
-        public Unity.Mathematics.Random numGenMoisture;
 
         public void Execute()
         {
@@ -33,7 +28,7 @@ namespace VoxelTerrain.Voxel.Jobs
                     for (var j = 0; j < height; j++)
                     {
                         //set voxel based on noise world position
-                        voxels[Chunk.PosToIndex(i, j, k)] = BiomeGenerator.GenerateVoxelType(origin.x + i * resolution, origin.y + j * resolution, origin.z + k * resolution, scale, numGenAltitude, numGenMoisture, groundLevel);
+                        voxels[Chunk.PosToIndex(i, j, k)] = BiomeGenerator.GenerateVoxelType(origin.x + i * resolution, origin.y + j * resolution, origin.z + k * resolution, scale, seed, groundLevel);
                     }
                 }
             }
