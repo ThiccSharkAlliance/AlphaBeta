@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
@@ -32,7 +33,16 @@ namespace VoxelTerrain.Voxel
                 
                 //Create a job for the current chunk data
                 var job = CreateJob(worldOrigin);
-                var handle = job.Schedule();
+                JobHandle handle;
+                try
+                {
+                    handle = job.Schedule();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
 
                 //if it completed hella quick, then lets complete
                 if (handle.IsCompleted)
@@ -101,13 +111,8 @@ namespace VoxelTerrain.Voxel
         {
             var resolution = Engine.ChunkInfo.VoxelSize;
             var scale = Engine.NoiseScale;
-            var stoneDepth = Engine.VoxelTypeHeights.StoneDepth;
-            var snowHeight = Engine.VoxelTypeHeights.SnowHeight;
-            var caveStartHeight = Engine.VoxelTypeHeights.CaveStartHeight;
             var groundLevel = Engine.WorldInfo.GroundLevel;
             var seed = Engine.WorldInfo.Seed;
-            var numGenAltitude = Engine.WorldInfo.NumGenAltitude;
-            var numGenMoisture = Engine.WorldInfo.NumGenMoisture;
 
             return new ChunkVoxelSetter
             {
@@ -118,12 +123,7 @@ namespace VoxelTerrain.Voxel
                 origin = origin,
                 voxels = new NativeArray<byte>((Chunk.ChunkSize) * (Chunk.ChunkHeight) * (Chunk.ChunkSize), Allocator.Persistent),
                 seed = seed,
-                StoneDepth = stoneDepth,
-                SnowHeight = snowHeight,
-                CaveStartHeight = caveStartHeight,
                 groundLevel = groundLevel,
-                numGenAltitude = numGenAltitude,
-                numGenMoisture = numGenMoisture
             };
         }
     }

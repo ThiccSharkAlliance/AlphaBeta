@@ -11,6 +11,7 @@ public class Manager : MonoBehaviour
 
     public Resources allResources;
     public VirtualCurrency virtualCurrency;
+    [SerializeField] private float _lootBoxTimer = 3f;
     Manager manager;
     public GameObject buildTabScroll;
     bool buildSelectorVisible = false;
@@ -32,6 +33,8 @@ public class Manager : MonoBehaviour
     public List<PlayerBaseData> bases = new List<PlayerBaseData>();
     float initialisationPause = 1f;
     bool started = false;
+
+    GameObject theBase;
 
     #region Singleton
     private void OnEnable()
@@ -80,7 +83,7 @@ public class Manager : MonoBehaviour
         bool first = true;
         foreach(PlayerBaseData playerBase in bases)
         {
-            GameObject theBase = GameObject.Instantiate(playerBase.basePlate, playerBase.basePlatePostion, Quaternion.identity);
+            theBase = GameObject.Instantiate(playerBase.basePlate, playerBase.basePlatePostion, Quaternion.identity);
             Camera.main.GetComponent<CameraControl>().playerPoint = theBase.gameObject;
             foreach (PlayerBaseData.BuildingInfo building in playerBase.baseBuildings)
             {
@@ -266,6 +269,7 @@ public class Manager : MonoBehaviour
         {
             GameObject toBeCloned = placeHolderPrefabs[currentSelection];
             GameObject newBuilding = GameObject.Instantiate(toBeCloned, newPlaceIndicator.transform.position, newPlaceIndicator.transform.rotation);
+            newBuilding.transform.SetParent(theBase.transform);
             // newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, placeIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);
 
             newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, newPlaceIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);
@@ -353,7 +357,7 @@ public class Manager : MonoBehaviour
     public void callGrantLootBox()
     {
         virtualCurrency.GrantLootBox();
-        DateTime CurrentTime = DateTime.Now.AddMinutes(5); ///1440 minutes in a day. 
+        DateTime CurrentTime = DateTime.Now.AddMinutes(_lootBoxTimer); ///1440 minutes in a day. 
         CurrentTime.SaveDate();
         StopAllCoroutines();
         StartCoroutine(CheckTimer());
