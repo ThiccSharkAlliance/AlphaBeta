@@ -9,7 +9,7 @@ public class Tank : Units
     public override void Start()
     {
         //base.Start();
-        //Action();
+        Action();
         Fuzzy_AI = GetComponentInParent<Fuzzy_Coordination>();
         Shoot = GetComponentInChildren<Tank_Shooting>();
 
@@ -19,7 +19,33 @@ public class Tank : Units
 
     private void FixedUpdate()
     {
-        if (Shoot.Enemies.Count != 0)
+        if(Fuzzy_AI == null)
+        {
+            Fuzzy_AI = FindObjectOfType<Fuzzy_Coordination>();
+            /*if (transform.parent == null)
+            {
+                Debug.Log("Doesn't have parent");
+                Fuzzy_AI = FindObjectOfType<Fuzzy_Coordination>();
+            }
+            else
+            {
+                Fuzzy_AI = GetComponentInParent<Fuzzy_Coordination>();
+            }*/
+        }
+        if(Base == null)
+        {
+            /*if (transform.parent == null)
+            {
+                Base = FindObjectOfType<Base_Range>();
+            }
+            else
+            {
+                Base = GetComponentInParent<Base_Range>();
+            }*/
+            Base = FindObjectOfType<Base_Range>();
+        }
+
+        /*if (Shoot.Enemies.Count != 0)
         {
             Action_Type = "Shoot";
         }
@@ -41,7 +67,7 @@ public class Tank : Units
             {
                 Action_Type = "Attack";
             }
-        }
+        }*/
     }
 
 }

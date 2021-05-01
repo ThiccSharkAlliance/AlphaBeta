@@ -8,8 +8,8 @@ public class Fuzzy_Coordination : MonoBehaviour
     [SerializeField]
     public Status Active_Status;
 
-    [SerializeField]
-    public GameObject Enemy_Base;
+    //[SerializeField]
+    //public GameObject Enemy_Base;
     public List<Transform> Enemy_Turrets = new List<Transform>();
 
     [SerializeField]
@@ -24,7 +24,7 @@ public class Fuzzy_Coordination : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Enemy_Base.transform.childCount != 0)
+        /*if(Enemy_Base.transform.childCount != 0)
         {
             if (Enemy_Turrets.Count <= Enemy_Base.transform.childCount)
             {
@@ -36,6 +36,6 @@ public class Fuzzy_Coordination : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
     }
 }

@@ -45,7 +45,7 @@ public class Units : MonoBehaviour
     {
         Get_Functions();
 
-        //Decide_Action();
+        Decide_Action();
     }
 
     void Get_Functions()
@@ -156,7 +156,7 @@ public class Units : MonoBehaviour
                 {
                     if (Turret == null)
                     {
-                        Destination = Fuzzy_AI.Enemy_Base.transform.position;
+                        //Destination = Fuzzy_AI.Enemy_Base.transform.position;
 
                         Agent.SetDestination(Destination);
 
