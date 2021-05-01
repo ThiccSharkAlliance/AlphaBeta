@@ -155,17 +155,17 @@ public class Tank_Shooting : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == Fuzzy_AI.Enemy)
+        /*if (other.gameObject.tag == Fuzzy_AI.Enemy)
         {
             Enemies.Add(other.gameObject);
-        }
+        }*/
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == Fuzzy_AI.Enemy)
+        /*if (other.gameObject.tag == Fuzzy_AI.Enemy)
         {
             Enemies.Remove(other.gameObject);
-        }
+        }*/
     }
 }

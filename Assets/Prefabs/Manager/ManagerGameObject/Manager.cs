@@ -34,6 +34,8 @@ public class Manager : MonoBehaviour
     float initialisationPause = 1f;
     bool started = false;
 
+    GameObject theBase;
+
     #region Singleton
     private void OnEnable()
     {
@@ -81,7 +83,7 @@ public class Manager : MonoBehaviour
         bool first = true;
         foreach(PlayerBaseData playerBase in bases)
         {
-            GameObject theBase = GameObject.Instantiate(playerBase.basePlate, playerBase.basePlatePostion, Quaternion.identity);
+            theBase = GameObject.Instantiate(playerBase.basePlate, playerBase.basePlatePostion, Quaternion.identity);
             Camera.main.GetComponent<CameraControl>().playerPoint = theBase.gameObject;
             foreach (PlayerBaseData.BuildingInfo building in playerBase.baseBuildings)
             {
@@ -267,6 +269,7 @@ public class Manager : MonoBehaviour
         {
             GameObject toBeCloned = placeHolderPrefabs[currentSelection];
             GameObject newBuilding = GameObject.Instantiate(toBeCloned, newPlaceIndicator.transform.position, newPlaceIndicator.transform.rotation);
+            newBuilding.transform.SetParent(theBase.transform);
             // newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, placeIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);
 
             newBuilding.transform.localScale = new Vector3(newBuilding.transform.localScale.x, newPlaceIndicator.transform.localScale.y * newBuilding.transform.localScale.y, newBuilding.transform.localScale.z);

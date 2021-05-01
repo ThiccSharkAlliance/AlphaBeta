@@ -33,7 +33,8 @@ public class Units : MonoBehaviour
 
     public virtual void Start()
     {
-        Action();
+        //Action();
+        Base = GetComponentInParent<Base_Range>();
         Fuzzy_AI = GetComponentInParent<Fuzzy_Coordination>();
 
         HP = GetComponentInChildren<Health_Bar>();
@@ -103,7 +104,7 @@ public class Units : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        //if(collision.transform.parent.tag == "Turret" && collision.gameObject.tag == "Bullet")
+        if(collision.transform.parent.tag == "Turret" && collision.gameObject.tag == "Bullet")
         if (collision.gameObject.tag == "Bullet")
         {
             if (collision.gameObject.GetComponent<Turret_Bullet>() != null)
@@ -155,7 +156,7 @@ public class Units : MonoBehaviour
                 {
                     if (Turret == null)
                     {
-                        Destination = Fuzzy_AI.Enemy_Base.transform.position;
+                        //Destination = Fuzzy_AI.Enemy_Base.transform.position;
 
                         Agent.SetDestination(Destination);
 

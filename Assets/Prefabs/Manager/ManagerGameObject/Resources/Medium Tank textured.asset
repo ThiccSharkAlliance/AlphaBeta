@@ -16,6 +16,6 @@ MonoBehaviour:
   buildingCost: 1200
   unlocked: 1
   iconSprite: {fileID: 21300000, guid: 1a89e1a341f724748a663c41cb828de5, type: 3}
-  prefab: {fileID: 3947718035888212423, guid: c2e20af494852c048aa55e71f32940cf, type: 3}
+  prefab: {fileID: 1963490091546563014, guid: 16dbdb5601838e245b6c02a878e828a4, type: 3}
   damage: 200
   health: 200
