@@ -19,6 +19,7 @@ public class TreeLSystem : MonoBehaviour
     [SerializeField] private int branchCount = 4;
     [SerializeField] private float branchLength = 10;
     [SerializeField] private float branchAngle = 30;
+    [SerializeField] private float angleVariation = 10;
 
     private const string axiom = "X";
     private string treeString = "";
@@ -70,6 +71,8 @@ public class TreeLSystem : MonoBehaviour
             currentString = "";
         }
 
+        Debug.Log(treeString);
+
         for(int i = 0; i < treeString.Length; i++)
         {
             switch (treeString[i])
@@ -79,26 +82,29 @@ public class TreeLSystem : MonoBehaviour
                     transform.Translate(Vector3.up * branchLength);
 
                     LineRenderer branchObject = new LineRenderer();
-                    if (treeString[(i + 1) % treeString.Length] == 'X' || treeString[(i + 3) % treeString.Length] == 'F' && treeString[(i + 4) % treeString.Length] == 'X')
+                    
+                    if (treeString[i + 1] == 'X' || treeString[i + 5] == 'X' || treeString[i + 11] == 'X' || treeString[i + 3] == 'F' && treeString[i + 4] == 'X')
                     {
                         branchObject = Instantiate(leafPrefab, transform).GetComponent<LineRenderer>();
+                        branchObject.startWidth = 0.5f;
+                        branchObject.endWidth = 0.5f;
                     }
                     else
                     {
                         branchObject = Instantiate(branchPrefab, transform).GetComponent<LineRenderer>();
+                        branchObject.startWidth = 0.2f;
+                        branchObject.endWidth = 0.2f;
                     }
                     branchObject.SetPosition(0, initialBranchPosition);
                     branchObject.SetPosition(1, transform.position);
-                    branchObject.startWidth = 5;
-                    branchObject.endWidth = 5;
                     break;
                 case 'X':
                     break;
                 case '+':
-                    transform.Rotate(Vector3.back * branchAngle);
+                    transform.Rotate(Vector3.back * (branchAngle + Random.Range(-angleVariation, angleVariation)));
                     break;
                 case '-':
-                    transform.Rotate(Vector3.forward * branchAngle);
+                    transform.Rotate(Vector3.forward * (branchAngle + Random.Range(-angleVariation, angleVariation)));
                     break;
                 case '*':
                     transform.Rotate(Vector3.up * 120);
