@@ -21,5 +21,15 @@
         SwampForest,
         Mud,
         Ice,
+        OakBranch,
+        OakLeaf,
+        JungleBranch,
+        JungleLeaf,
+        SavannahBranch,
+        SavannahLeaf,
+        PineBranch,
+        PineLeaf,
+        SwampBranch,
+        SwampLeaf
     }
 }

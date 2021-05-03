@@ -146,6 +146,34 @@ namespace VoxelTerrain.Voxel
 
             return difference.magnitude <= _maxMagnitude;
         }
+        
+        //Set voxel from world position
+        public void SetVoxelFromWorld(Vector3 pos, VoxelType voxelType)
+        {
+            var chunkPos = NearestChunk(pos);
+
+            var chunk = ChunkAt(new ChunkId(pos.x, pos.y, pos.z));
+
+            if (chunk == null) return;
+
+            var voxPos = pos - chunkPos;
+
+            chunk[voxPos.x, voxPos.y, voxPos.z] = (byte) voxelType;
+        }
+        
+        //Get voxel from world position
+        public VoxelType GetVoxelFromWorld(Vector3 pos)
+        {
+            var chunkPos = NearestChunk(pos);
+
+            var chunk = ChunkAt(new ChunkId(pos.x, pos.y, pos.z));
+
+            if (chunk == null) return 0;
+
+            var voxPos = pos - chunkPos;
+
+            return (VoxelType) chunk[voxPos.x, voxPos.y, voxPos.z];
+        }
         #endregion
     }
 }
