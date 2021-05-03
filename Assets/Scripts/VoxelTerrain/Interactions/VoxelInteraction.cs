@@ -418,7 +418,7 @@ namespace VoxelTerrain.Interactions
         private void Flatten(Vector3 pos, VoxelType voxelType, float flattenHeight, float digDepth, Chunk chunk)
         {
             Vector3 voxPos = pos;
-            if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y - 1, voxPos.z])) return;
+            if (InteractionBan.InteractionBanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y - 1, voxPos.z])) return;
             var voxType = voxelType;
 
             //For all voxels above the y position, update them
@@ -429,7 +429,7 @@ namespace VoxelTerrain.Interactions
                 chunk.SetVoxel(voxPos, voxType);
                 if (_destroyAboveGround) voxType = VoxelType.Default;
                 voxPos.y++;
-                if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y, voxPos.z])) break;
+                if (InteractionBan.InteractionBanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y, voxPos.z])) break;
             } while (Vector3.Distance(pos, voxPos) <= flattenHeight);
 
             voxPos = pos;
@@ -438,7 +438,7 @@ namespace VoxelTerrain.Interactions
             do
             {
                 voxPos.y--;
-                if (InteractionBan.BanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y, voxPos.z])) break;
+                if (InteractionBan.InteractionBanList.Contains((VoxelType)chunk[voxPos.x, voxPos.y, voxPos.z])) break;
                 chunk.SetVoxel(voxPos, voxelType);
             } while (Vector3.Distance(voxPos, pos) <= digDepth && voxPos.y > 1);
         }
