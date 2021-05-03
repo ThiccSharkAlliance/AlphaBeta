@@ -7,6 +7,7 @@ public class TransformInfo
 {
     public Vector3 position;
     public Quaternion rotation;
+    public float branchWidth;
 }
 
 public class TreeLSystem : MonoBehaviour
@@ -73,6 +74,8 @@ public class TreeLSystem : MonoBehaviour
 
         Debug.Log(treeString);
 
+        float currentBranchWidth = 0.25f;
+
         for(int i = 0; i < treeString.Length; i++)
         {
             switch (treeString[i])
@@ -86,14 +89,15 @@ public class TreeLSystem : MonoBehaviour
                     if (treeString[i + 1] == 'X' || treeString[i + 5] == 'X' || treeString[i + 11] == 'X' || treeString[i + 3] == 'F' && treeString[i + 4] == 'X')
                     {
                         branchObject = Instantiate(leafPrefab, transform).GetComponent<LineRenderer>();
-                        branchObject.startWidth = 0.5f;
-                        branchObject.endWidth = 0.5f;
+                        branchObject.startWidth = 0.4f;
+                        branchObject.endWidth = 0.4f;
                     }
                     else
                     {
                         branchObject = Instantiate(branchPrefab, transform).GetComponent<LineRenderer>();
-                        branchObject.startWidth = 0.2f;
-                        branchObject.endWidth = 0.2f;
+                        branchObject.startWidth = currentBranchWidth;
+                        currentBranchWidth -= 0.012f;
+                        branchObject.endWidth = currentBranchWidth;
                     }
                     branchObject.SetPosition(0, initialBranchPosition);
                     branchObject.SetPosition(1, transform.position);
@@ -113,10 +117,11 @@ public class TreeLSystem : MonoBehaviour
                     transform.Rotate(Vector3.down * 120);
                     break;
                 case '[':
-                    transformStack.Push(new TransformInfo() { position = transform.position, rotation = transform.rotation });
+                    transformStack.Push(new TransformInfo() { position = transform.position, rotation = transform.rotation, branchWidth = currentBranchWidth });
                     break;
                 case ']':
                     TransformInfo ti = transformStack.Pop();
+                    currentBranchWidth = ti.branchWidth;
                     transform.position = ti.position;
                     transform.rotation = ti.rotation;
                     break;
