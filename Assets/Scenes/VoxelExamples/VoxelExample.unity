@@ -341,7 +341,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 999722760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e3f847816ac4b64893baaeaefcd3fcf, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e3ee6bb712bb5c4590b36a9555f97ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   treePrefabs:
@@ -375,7 +375,7 @@ MonoBehaviour:
     - {fileID: 7027393647611073930, guid: ad9307891cfa82d4e86163c52f1862e4, type: 3}
     - {fileID: 4197865763073412187, guid: 9c28a7c72fc88204c87ffca3e7ad3398, type: 3}
     - {fileID: 5256926306430708849, guid: 3c11c7fd0db94144985271c04f680451, type: 3}
-  _treeSpawnDistance: 0
+  _treeSpawnDistance: 32
 --- !u!4 &999722762
 Transform:
   m_ObjectHideFlags: 0
