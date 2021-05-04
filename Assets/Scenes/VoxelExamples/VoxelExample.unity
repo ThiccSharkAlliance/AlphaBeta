@@ -376,6 +376,7 @@ MonoBehaviour:
     - {fileID: 4197865763073412187, guid: 9c28a7c72fc88204c87ffca3e7ad3398, type: 3}
     - {fileID: 5256926306430708849, guid: 3c11c7fd0db94144985271c04f680451, type: 3}
   _treeSpawnDistance: 72
+  treeLimit: 50
 --- !u!4 &999722762
 Transform:
   m_ObjectHideFlags: 0

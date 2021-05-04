@@ -15,6 +15,7 @@ namespace TerrainData
         private VoxelTerrain.Voxel.InfoData.WorldInfo _worldInfo => FindObjectOfType<VoxelTerrain.Voxel.InfoData.WorldInfo>();
         [SerializeField] private TreeWrapper[] treePrefabs;
         [SerializeField] private float _treeSpawnDistance;
+        [SerializeField] private int treeLimit;
 
         private List<GameObject> _trees = new List<GameObject>();
 
@@ -63,7 +64,7 @@ namespace TerrainData
             var pos = _toSpawn.First();
             _toSpawn.Remove(pos);
 
-            if (_trees.Count >= 50)
+            if (_trees.Count >= treeLimit)
             {
                 _toSpawn.Clear();
                 return;
@@ -86,6 +87,8 @@ namespace TerrainData
 
         public void StartSpawn()
         {
+            if (_trees.Count >= treeLimit) return;
+
             var rndPos = Random.insideUnitCircle * _treeSpawnDistance;
             Vector3 snappedPos = VoxelTerrain.Grid.GridSnapper.SnapToGrid(new Vector3(_voxelEngine.Position.x + rndPos.x, 32, _voxelEngine.Position.z + rndPos.y));
             var position = new Vector3(snappedPos.x, 32, snappedPos.z);
@@ -97,7 +100,7 @@ namespace TerrainData
                 if (hitColliders.Length == 0)
                 {
                     VoxelTerrain.Voxel.VoxelType voxelType = _voxelEngine.GetVoxelFromWorld(new Vector3(hit.point.x, hit.point.y - 1, hit.point.z));
-                    Debug.Log(voxelType);
+
                     if (voxelType == VoxelTerrain.Voxel.VoxelType.PineForest)
                     {
                         _toSpawn.Add(new Vector4(hit.point.x, hit.point.y, hit.point.z, 0));
