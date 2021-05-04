@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5807394119334776112}
   - component: {fileID: 5389488182369425852}
   - component: {fileID: 7737525770491653401}
+  - component: {fileID: 2312441758188990811}
   m_Layer: 0
   m_Name: Chunk
   m_TagString: Untagged
@@ -120,3 +121,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e038bf700cfa444fb16c6ef963be9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2312441758188990811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8788348479459475484}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e3f847816ac4b64893baaeaefcd3fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treePrefabs:
+  - treeObjects:
+    - {fileID: 4195287848080112350, guid: 5ae37976643ae4e4f85749454b24c5a0, type: 3}
+    - {fileID: 8018715466705921981, guid: 5a1adfd5578b924468cdbb8c3671f1f4, type: 3}
+    - {fileID: 4156143974349794988, guid: 495ea42d04c0b124d8bf6c0b6d1085b2, type: 3}
+    - {fileID: 2789795472830039693, guid: 93c7fe8438168c841825e171d920c297, type: 3}
+    - {fileID: 1806264313636478873, guid: b1696cc7b2b1d764f862e1ec13b5cf9d, type: 3}
+  - treeObjects:
+    - {fileID: 2012525374533392742, guid: 882029f60622a1848b2edfbfcf759dce, type: 3}
+    - {fileID: 6123970622917956086, guid: dda39558d489fe04f9d66b71ea37de1f, type: 3}
+    - {fileID: 1656036764513565725, guid: 7f51dae8207404c48a9b54d45c0f5ec5, type: 3}
+    - {fileID: 5758826423472008347, guid: e10695dc109ce4c4ca29972c41e683f2, type: 3}
+    - {fileID: 5564964211830770554, guid: 6a7dea5603614e34bb899aad7998467a, type: 3}
+  - treeObjects:
+    - {fileID: 838678018703551381, guid: 4ab2b792c6149014e8624a1cf22dd24d, type: 3}
+    - {fileID: 5931650366854772201, guid: fd7a6e8d867e44d48b4f48d5631c2725, type: 3}
+    - {fileID: 5752114525447296063, guid: 5ad2238d6ba9b7f4da2806bf09adc4f3, type: 3}
+    - {fileID: 3777905393072089224, guid: f9d645fe9d4c7c44b8aff020e71ad585, type: 3}
+    - {fileID: 2029214591810300227, guid: 232df53716e80f449bfdbd33286c0ae4, type: 3}
+  - treeObjects:
+    - {fileID: 5401880349286432752, guid: cb0aaf03655e85140aa6ac897171e797, type: 3}
+    - {fileID: 5553101050600774727, guid: 25a296fc10ee15040a2324a6a689c1b6, type: 3}
+    - {fileID: 2472330050710910214, guid: 6bd7f33dee264cb4585980d678b22a64, type: 3}
+    - {fileID: 6581475365547385373, guid: c9f28aca8ccf9734396d5f5a5663a255, type: 3}
+    - {fileID: 1727175218183127166, guid: 8a5f038f6e3c5a34989086c771a1e619, type: 3}
+  - treeObjects:
+    - {fileID: 5030013665484661749, guid: ac6ec9afe593b324b8ef726b056d1723, type: 3}
+    - {fileID: 3326127405325937724, guid: 1367f587477de6a43bd72afaf4938c5b, type: 3}
+    - {fileID: 7027393647611073930, guid: ad9307891cfa82d4e86163c52f1862e4, type: 3}
+    - {fileID: 4197865763073412187, guid: 9c28a7c72fc88204c87ffca3e7ad3398, type: 3}
+    - {fileID: 5256926306430708849, guid: 3c11c7fd0db94144985271c04f680451, type: 3}
+  _treeSpawnDistance: 32

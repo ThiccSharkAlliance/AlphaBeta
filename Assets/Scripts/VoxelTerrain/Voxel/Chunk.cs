@@ -66,6 +66,8 @@ namespace VoxelTerrain.Voxel
 
             monoGo.MeshFilter.sharedMesh = mesh;
             monoGo.MeshCollider.sharedMesh = mesh;
+
+            Entity.GetComponent<TerrainData.TreeSpawner>().StartSpawn();
         }
         
         //convert world position to index position of the voxel array
