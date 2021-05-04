@@ -20,8 +20,6 @@ namespace TerrainData
 
         private List<Vector4> _toSpawn = new List<Vector4>();
 
-        private bool _spawn;
-
         public void SpawnTree(int index, Vector3 position)
         {
             GameObject treeObject = Instantiate(treePrefabs[index].treeObjects[Random.Range(0, treePrefabs[index].treeObjects.Length)]);
@@ -32,9 +30,22 @@ namespace TerrainData
 
         private void Despawn()
         {
-            foreach (var tree in _trees)
+            if (_trees.Count > 0)
             {
-                if (Vector3.Distance(tree.transform.position, _voxelEngine.Position) > _treeSpawnDistance) tree.SetActive(false);
+                for (int i = _trees.Count - 1; i >= 0; i--)
+                {
+                    if (Vector3.Distance(_trees[i].transform.position, new Vector3(_voxelEngine.Position.x, _trees[i].transform.position.y, _voxelEngine.Position.z)) > _treeSpawnDistance)
+                    {
+                        GameObject treeToDestroy = _trees[i];
+                        _trees.Remove(_trees[i]);
+                        Destroy(treeToDestroy);
+                    }
+
+                    if (_trees.Count == 0)
+                    {
+                        return;
+                    }
+                }
             }
         }
 
@@ -52,6 +63,12 @@ namespace TerrainData
             var pos = _toSpawn.First();
             _toSpawn.Remove(pos);
 
+            if (_trees.Count >= 50)
+            {
+                _toSpawn.Clear();
+                return;
+            }
+
             var tree = Instantiate(
                 treePrefabs[(int)pos.w].treeObjects[Random.Range(0, treePrefabs[(int)pos.w].treeObjects.Length)],
                 pos, Quaternion.Euler(0, Random.Range(0, 360), 0));
@@ -59,34 +76,24 @@ namespace TerrainData
             tree.transform.parent = transform;
 
             _trees.Add(tree);
-
-            if (_toSpawn.Count <= 0) _spawn = true;
         }
 
         private void LateUpdate()
         {
-            switch (Vector3.Distance(transform.position, _voxelEngine.Position) > _treeSpawnDistance)
-            {
-                case true:
-                    Despawn();
-                    break;
-                case false:
-                    if (_spawn) Spawn();
-                    else Generate();
-                    break;
-            }
+            Despawn();
+            Generate();
         }
 
         public void StartSpawn()
         {
-            var rndPos = Random.insideUnitCircle * 10;
+            var rndPos = Random.insideUnitCircle * _treeSpawnDistance;
             Vector3 snappedPos = VoxelTerrain.Grid.GridSnapper.SnapToGrid(new Vector3(_voxelEngine.Position.x + rndPos.x, 32, _voxelEngine.Position.z + rndPos.y));
             var position = new Vector3(snappedPos.x, 32, snappedPos.z);
 
             RaycastHit hit;
             if (Physics.Raycast(position, -Vector3.up, out hit))
             {
-                Collider[] hitColliders = Physics.OverlapSphere(hit.point, 2, -10);
+                Collider[] hitColliders = Physics.OverlapSphere(hit.point, Random.Range(5, 8), -10);
                 if (hitColliders.Length == 0)
                 {
                     VoxelTerrain.Voxel.VoxelType voxelType = _voxelEngine.GetVoxelFromWorld(new Vector3(hit.point.x, hit.point.y - 1, hit.point.z));
