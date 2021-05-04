@@ -16,7 +16,8 @@ public class TreeLSystem : MonoBehaviour
     private Stack<TransformInfo> transformStack = new Stack<TransformInfo>();
     [SerializeField] private GameObject branchPrefab;
     [SerializeField] private GameObject leafPrefab;
-    [Range(0, 7)] [SerializeField] private int treeType = 0;
+    [Range(0, 10)] [SerializeField] private int treeType = 0;
+    [SerializeField] private int trunkLength = 1;
     [SerializeField] private int branchCount = 4;
     [SerializeField] private float branchLength = 10;
     [SerializeField] private float branchAngle = 30;
@@ -33,7 +34,10 @@ public class TreeLSystem : MonoBehaviour
         new Dictionary<char, string> { { 'X', "[FX[+F[-FX]FX][-F-FXFX]]" }, { 'F', "FF" } },
         new Dictionary<char, string> { { 'X', "[F[+FX][*+FX][/+FX]]" }, { 'F', "FF" } },
         new Dictionary<char, string> { { 'X', "[*+FX]X[+FX][/+F-FX]" }, { 'F', "FF" } },
-        new Dictionary<char, string> { { 'X', "[F[-X+F[+FX]][*-X+F[+FX]][/-X+F[+FX]-X]]" }, { 'F', "FF" } }
+        new Dictionary<char, string> { { 'X', "[F[-X+F[+FX]][*-X+F[+FX]][/-X+F[+FX]-X]]" }, { 'F', "FF" } },
+        new Dictionary<char, string> { { 'X', "[FFF[-X+F[+FX]][*-X+F[+FX]][/-X+F[+FX]-X]]" }, { 'F', "FF" } },
+        new Dictionary<char, string> { { 'X', "[[-X+F[+FX]]F[*-X+F[+FX]][/-X+F[+FX]-X]]" }, { 'F', "FF" } },
+        new Dictionary<char, string> { { 'X', "[[*-X+F[+FX]]F[/-X+F[+FX]-X]F[*-X+F[+FX]]F[/-X+F[+FX]-X]F[*-X+F[+FX]]F[/-X+F[+FX]-X]F[*-X+F[+FX]]F[/-X+F[+FX]-X]]" }, { 'F', "FF" } }
     };
 #pragma warning restore 0649
 
@@ -72,9 +76,12 @@ public class TreeLSystem : MonoBehaviour
             currentString = "";
         }
 
+        string trunkString = new string('F', trunkLength);
+        treeString = treeString.Insert(1, trunkString);
+
         Debug.Log(treeString);
 
-        float currentBranchWidth = 0.25f;
+        float currentBranchWidth = 0.32f;
 
         for(int i = 0; i < treeString.Length; i++)
         {
@@ -82,21 +89,23 @@ public class TreeLSystem : MonoBehaviour
             {
                 case 'F':
                     Vector3 initialBranchPosition = transform.position;
-                    transform.Translate(Vector3.up * branchLength);
+                    
 
                     LineRenderer branchObject = new LineRenderer();
                     
-                    if (treeString[i + 1] == 'X' || treeString[i + 5] == 'X' || treeString[i + 11] == 'X' || treeString[i + 3] == 'F' && treeString[i + 4] == 'X')
+                    if (treeString[i + 1] == 'X' || treeString[i + 3] == 'F' && treeString[i + 4] == 'X')
                     {
+                        transform.Translate(Vector3.up * branchLength);
                         branchObject = Instantiate(leafPrefab, transform).GetComponent<LineRenderer>();
-                        branchObject.startWidth = 0.4f;
-                        branchObject.endWidth = 0.4f;
+                        branchObject.startWidth = 0.2f;
+                        branchObject.endWidth = 0.2f;
                     }
                     else
                     {
+                        transform.Translate(Vector3.up * branchLength);
                         branchObject = Instantiate(branchPrefab, transform).GetComponent<LineRenderer>();
                         branchObject.startWidth = currentBranchWidth;
-                        currentBranchWidth -= 0.012f;
+                        currentBranchWidth -= 0.007f;
                         branchObject.endWidth = currentBranchWidth;
                     }
                     branchObject.SetPosition(0, initialBranchPosition);
