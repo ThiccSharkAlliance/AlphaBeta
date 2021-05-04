@@ -55,44 +55,45 @@ public class CheckPosition : MonoBehaviour
 
         float altitude = Noise.Generate2DNoiseValue(PosX, PosZ, scale, 4, 2f, seed, ground);
         float groundAltitude = altitude - groundScale;
-        float altitude2 = Noise.Generate2DNoiseValue(PosX + 0.5f, PosZ, scale, 4, 2f, seed, ground);
+        float altitude2 = Noise.Generate2DNoiseValue(PosX + 0.6f, PosZ, scale, 4, 2f, seed, ground);
         float groundAltitude2 = altitude - groundScale;
-        float altitude3 = Noise.Generate2DNoiseValue(PosX - 0.5f, PosZ, scale, 4, 2f, seed, ground);
+        float altitude3 = Noise.Generate2DNoiseValue(PosX - 0.6f, PosZ, scale, 4, 2f, seed, ground);
         float groundAltitude3 = altitude3 - groundScale;
-        float altitude4 = Noise.Generate2DNoiseValue(PosX, PosZ + 0.5f, scale, 4, 2f, seed, ground);
+        float altitude4 = Noise.Generate2DNoiseValue(PosX, PosZ + 0.6f, scale, 4, 2f, seed, ground);
         float groundAltitude4 = altitude4 - groundScale;
-        float altitude5 = Noise.Generate2DNoiseValue(PosX, PosZ - 0.5f, scale, 4, 2f, seed, ground);
+        float altitude5 = Noise.Generate2DNoiseValue(PosX, PosZ - 0.6f, scale, 4, 2f, seed, ground);
         float groundAltitude5 = altitude5 - groundScale;
+
+        float altitude1Round = Mathf.RoundToInt(groundAltitude);
+        float altitude2Round = Mathf.RoundToInt(groundAltitude2);
+        float altitude3Round = Mathf.RoundToInt(groundAltitude3);
+        float altitude4Round = Mathf.RoundToInt(groundAltitude4);
+        float altitude5Round = Mathf.RoundToInt(groundAltitude5);
+
+        if (altitude2Round > altitude1Round || altitude2Round < altitude1Round)
+        {
+            return false;
+        }
+
+        if (altitude3Round > altitude1Round || altitude3Round < altitude1Round)
+        {
+            return false;
+        }
+
+        if (altitude4Round > altitude1Round || altitude4Round < altitude1Round)
+        {
+            return false;
+        }
+
+        if (altitude5Round > altitude1Round || altitude5Round < altitude1Round)
+        {
+            return false;
+        }
 
 
         Vector3 testSnap = GridSnapper.SnapToGrid(new Vector3(PosX, groundAltitude, PosZ), 1f, 0.5f);
-        Vector3 testSnap2 = GridSnapper.SnapToGrid(new Vector3(PosX, groundAltitude2, PosZ), 1f, 0.5f);
-        Vector3 testSnap3 = GridSnapper.SnapToGrid(new Vector3(PosX, groundAltitude3, PosZ), 1f, 0.5f);
-        Vector3 testSnap4 = GridSnapper.SnapToGrid(new Vector3(PosX, groundAltitude4, PosZ), 1f, 0.5f);
-        Vector3 testSnap5 = GridSnapper.SnapToGrid(new Vector3(PosX, groundAltitude5, PosZ), 1f, 0.5f);
-
-        if (testSnap2.y > (testSnap.y) || testSnap2.y < (testSnap.y))
-        {
-            return false;
-        }
-
-        if (testSnap3.y > (testSnap.y) || testSnap3.y < (testSnap.y))
-        {
-            return false;
-        }
-
-        if (testSnap4.y > (testSnap.y) || testSnap4.y < (testSnap.y))
-        {
-            return false;
-        }
-
-        if (testSnap5.y > (testSnap.y) || testSnap5.y < (testSnap.y))
-        {
-            return false;
-        }
 
         float position = getPosition(PosX, PosZ, ground, scale, groundScale);
-        var transform = new Vector3(PosX, position + 1, PosZ);
 
         if (listOfObjects.Count > 0)
         {
@@ -142,6 +143,7 @@ public class CheckPosition : MonoBehaviour
                 float randomSignZ = UnityEngine.Random.value < 0.5f ? 1 : -1;
 
                 float PosX = player.position.x - (Random.Range(50, 70) * randomSignX);
+               
                 float PosZ = player.position.z - (Random.Range(50, 70) * randomSignZ);
 
                 float ground = _engine.WorldInfo.GroundLevel;
@@ -155,9 +157,9 @@ public class CheckPosition : MonoBehaviour
                 {
                     position = getPosition(PosX, PosZ, ground, scale, groundScale);
 
-                    Vector3 testSnap = GridSnapper.SnapToGrid(new Vector3(PosX, position, PosZ), 1f, 0.5f);
+                    Vector3 objectPosition = new Vector3(PosX, position, PosZ);
 
-                    GameObject Enemy = Instantiate(myPrefab, testSnap, Quaternion.identity);
+                    GameObject Enemy = Instantiate(myPrefab, objectPosition, Quaternion.identity);
                     Rigidbody enemyRigidBody = Enemy.AddComponent<Rigidbody>();
                     enemyRigidBody.useGravity = true;
                     enemyRigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
@@ -182,7 +184,7 @@ public class CheckPosition : MonoBehaviour
     {
         if (listOfObjects.Count > 0)
         {
-            foreach (GameObject item in listOfObjects)
+            foreach (GameObject item in listOfObjects.ToArray())
             {
                 if (Vector3.Distance(player.transform.position, item.transform.position) < distanceFromPlayer)
                 {
