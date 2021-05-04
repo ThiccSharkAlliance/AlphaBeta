@@ -151,7 +151,7 @@ namespace VoxelTerrain.Voxel
         {
             var chunkPos = NearestChunk(pos);
 
-            var chunk = ChunkAt(new ChunkId(pos.x, pos.y, pos.z));
+            var chunk = ChunkAt(new ChunkId(chunkPos.x, chunkPos.y, chunkPos.z));
 
             if (chunk == null) return 0;
 
