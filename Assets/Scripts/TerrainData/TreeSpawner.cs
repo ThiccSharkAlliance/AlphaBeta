@@ -15,7 +15,7 @@ namespace TerrainData
         private VoxelTerrain.Voxel.VoxelEngine _voxelEngine => FindObjectOfType<VoxelTerrain.Voxel.VoxelEngine>();
         private VoxelTerrain.Voxel.InfoData.WorldInfo _worldInfo => FindObjectOfType<VoxelTerrain.Voxel.InfoData.WorldInfo>();
         [SerializeField] private TreeWrapper[] treePrefabs;
-        private int step = 3;
+        private int step = 8;
 
         public void SpawnTree(int index, Vector3 position)
         {
@@ -26,16 +26,16 @@ namespace TerrainData
 
         public void StartSpawn()
         {
-            for (var x = 0; x <= _voxelEngine.ChunkSize; x += step + Random.Range(-2, 2))
+            for (var x = Random.Range(0,10); x <= _voxelEngine.ChunkSize; x += step + Random.Range(-4, 4))
             {
-                for (var z = 0; z <= _voxelEngine.ChunkSize; z += step + Random.Range(-2, 2))
+                for (var z = Random.Range(0, 5); z <= _voxelEngine.ChunkSize; z += step + Random.Range(-4, 4))
                 {
                     var position = new Vector3(transform.position.x + x, 32, transform.position.z + z);
 
                     RaycastHit hit;
                     if (Physics.Raycast(position, -Vector3.up, out hit))
                     {
-                        Collider[] hitColliders = Physics.OverlapSphere(hit.point, 3 + Random.Range(-2, 2), -10);
+                        Collider[] hitColliders = Physics.OverlapSphere(hit.point, 2, -10);
                         if (hitColliders.Length == 0)
                         {
                             VoxelTerrain.Voxel.VoxelType voxelType = _voxelEngine.GetVoxelFromWorld(new Vector3(hit.point.x, hit.point.y - 1, hit.point.z));
