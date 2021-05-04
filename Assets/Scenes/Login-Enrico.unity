@@ -780,6 +780,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75605161}
   m_CullTransparentMesh: 0
+--- !u!1 &112532328 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5486612223370472805, guid: 7e13d6e580dbe6d4899a8eee1fca2876,
+    type: 3}
+  m_PrefabInstance: {fileID: 563739499}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &112532329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112532328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55870608d309cd343b4fe7e1defb6ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _engine: {fileID: 0}
+  myPrefab: {fileID: 907552945985608320, guid: 6719d274901f325428b20bf3779ba231, type: 3}
+  distanceFromPlayer: 40
+  maxDistance: 100
+  totalEnemies: 5
+  listOfObjects: []
 --- !u!1 &114898796
 GameObject:
   m_ObjectHideFlags: 0
