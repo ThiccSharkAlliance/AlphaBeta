@@ -20,9 +20,9 @@ namespace VoxelTerrain.Voxel
 
         private float _maxMagnitude;
 
-        private Vector3 Position => _worldInfo.Origin != null ? new Vector3(_worldInfo.Origin.position.x, -ChunkHeight / 2, _worldInfo.Origin.position.z) : Vector3.zero;
+        public Vector3 Position => _worldInfo.Origin != null ? new Vector3(_worldInfo.Origin.position.x, -ChunkHeight / 2, _worldInfo.Origin.position.z) : Vector3.zero;
         public ChunkInfo ChunkInfo => _chunkInfo;
-        private float ChunkSize => Chunk.ChunkSize * _chunkInfo.VoxelSize;
+        public float ChunkSize => Chunk.ChunkSize * _chunkInfo.VoxelSize;
         private float ChunkHeight => Chunk.ChunkHeight * _chunkInfo.VoxelSize;
         public VoxelTypeHeights VoxelTypeHeights => _voxelTypeHeights;
         public float NoiseScale => _noiseScale;
@@ -167,6 +167,19 @@ namespace VoxelTerrain.Voxel
             var difference = Position - pos;
 
             return difference.magnitude <= _maxMagnitude;
+        }
+
+        public VoxelType GetVoxelFromWorld(Vector3 pos)
+        {
+            var chunkPos = NearestChunk(pos);
+
+            var chunk = ChunkAt(new ChunkId(chunkPos.x, chunkPos.y, chunkPos.z));
+
+            if (chunk == null) return 0;
+
+            var voxPos = pos - chunkPos;
+
+            return (VoxelType)chunk[voxPos.x, voxPos.y, voxPos.z];
         }
         #endregion
     }

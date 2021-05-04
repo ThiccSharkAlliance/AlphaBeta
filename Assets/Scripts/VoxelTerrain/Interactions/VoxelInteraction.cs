@@ -204,6 +204,12 @@ namespace VoxelTerrain.Interactions
             newChunkPos = new Vector3(hitPos.x, hitPos.y - Size, hitPos.z);
             chunkPos = _engine.NearestChunk(newChunkPos);
             chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
+            //if there isn't a chunk, continuously request one
+            while (chunk == null)
+            {
+                chunk = _engine.WorldData.GetNonNullChunkAt(chunkPos);
+                yield return null;
+            }
             voxPos = (newChunkPos - chunkPos) / Size;
             var vox = chunk[voxPos.x, voxPos.y, voxPos.z];
 
