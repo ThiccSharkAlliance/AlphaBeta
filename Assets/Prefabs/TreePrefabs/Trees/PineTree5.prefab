@@ -27273,8 +27273,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1806264313636478879}
   - component: {fileID: 1806264313636478872}
-  m_Layer: 0
-  m_Name: TreeSpawner
+  - component: {fileID: 7678408611995617509}
+  m_Layer: 10
+  m_Name: PineTree5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28344,10 +28345,27 @@ MonoBehaviour:
     type: 3}
   leafPrefab: {fileID: 1097865939035194, guid: 7d983fe2f0f041448a05ab57d433a1a1, type: 3}
   treeType: 10
+  trunkLength: 1
   branchCount: 2
   branchLength: 0.3
+  branchWidth: 0.3
+  branchTaper: 1
   branchAngle: 120
   angleVariation: 7
+  leafSize: 0.2
+--- !u!135 &7678408611995617509
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806264313636478873}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1842917999702537996
 GameObject:
   m_ObjectHideFlags: 0

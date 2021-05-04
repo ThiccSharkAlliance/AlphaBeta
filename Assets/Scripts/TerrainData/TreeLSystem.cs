@@ -20,8 +20,11 @@ public class TreeLSystem : MonoBehaviour
     [SerializeField] private int trunkLength = 1;
     [SerializeField] private int branchCount = 4;
     [SerializeField] private float branchLength = 10;
+    [SerializeField] private float branchWidth = 0.3f;
+    [SerializeField] private float branchTaper = 1f;
     [SerializeField] private float branchAngle = 30;
     [SerializeField] private float angleVariation = 10;
+    [SerializeField] private float leafSize = 0.2f;
 
     private const string axiom = "X";
     private string treeString = "";
@@ -81,7 +84,7 @@ public class TreeLSystem : MonoBehaviour
 
         Debug.Log(treeString);
 
-        float currentBranchWidth = 0.32f;
+        float currentBranchWidth = branchWidth / 10;
 
         for(int i = 0; i < treeString.Length; i++)
         {
@@ -89,23 +92,26 @@ public class TreeLSystem : MonoBehaviour
             {
                 case 'F':
                     Vector3 initialBranchPosition = transform.position;
-                    
 
                     LineRenderer branchObject = new LineRenderer();
                     
-                    if (treeString[i + 1] == 'X' || treeString[i + 3] == 'F' && treeString[i + 4] == 'X')
+                    if (treeString[i + 1] == 'X' || treeString[i + 11] == 'X' || treeString[i + 3] == 'F' && treeString[i + 4] == 'X')
                     {
-                        transform.Translate(Vector3.up * branchLength);
+                        Quaternion storedRotation = transform.rotation;
+                        transform.rotation = Quaternion.identity;
+                        transform.Rotate(Vector3.forward * 180);
+                        transform.Translate(Vector3.up * (leafSize / 5));
                         branchObject = Instantiate(leafPrefab, transform).GetComponent<LineRenderer>();
-                        branchObject.startWidth = 0.2f;
-                        branchObject.endWidth = 0.2f;
+                        branchObject.startWidth = leafSize / 10;
+                        branchObject.endWidth = leafSize / 10;
+                        transform.rotation = storedRotation;
                     }
                     else
                     {
-                        transform.Translate(Vector3.up * branchLength);
+                        transform.Translate(Vector3.up * (branchLength / 10));
                         branchObject = Instantiate(branchPrefab, transform).GetComponent<LineRenderer>();
                         branchObject.startWidth = currentBranchWidth;
-                        currentBranchWidth -= 0.007f;
+                        currentBranchWidth -= branchTaper / 100;
                         branchObject.endWidth = currentBranchWidth;
                     }
                     branchObject.SetPosition(0, initialBranchPosition);

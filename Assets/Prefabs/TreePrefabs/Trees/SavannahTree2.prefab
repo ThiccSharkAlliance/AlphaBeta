@@ -27820,8 +27820,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3326127405325937722}
-  m_Layer: 0
-  m_Name: TreeSpawner
+  - component: {fileID: -8565141169104759698}
+  m_Layer: 10
+  m_Name: SavannahTree2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28444,6 +28445,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &-8565141169104759698
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326127405325937724}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3328006206502325463
 GameObject:
   m_ObjectHideFlags: 0

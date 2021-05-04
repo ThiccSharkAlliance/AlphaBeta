@@ -212,7 +212,7 @@ namespace TerrainData
                         {
                             voxelType = VoxelTerrain.Voxel.VoxelType.SavannahGrass;
                         }
-                        else if (altitude > -1 * heightScale)
+                        else if (altitude > -0.5 * heightScale)
                         {
                             voxelType = VoxelTerrain.Voxel.VoxelType.Plains;
                         }
