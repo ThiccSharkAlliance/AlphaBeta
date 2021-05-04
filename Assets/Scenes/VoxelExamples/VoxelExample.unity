@@ -315,18 +315,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &523825611 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7941170911782372762, guid: 2b7228255036a30479393ef9a76b8464,
-    type: 3}
-  m_PrefabInstance: {fileID: 1219288309642976018}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99accc2e46a2126489cb11755851112f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &999722760
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,8 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3f847816ac4b64893baaeaefcd3fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _voxelEngine: {fileID: 201202581}
-  _worldInfo: {fileID: 523825611}
   treePrefabs:
   - treeObjects:
     - {fileID: 4195287848080112350, guid: 5ae37976643ae4e4f85749454b24c5a0, type: 3}
@@ -389,6 +375,7 @@ MonoBehaviour:
     - {fileID: 7027393647611073930, guid: ad9307891cfa82d4e86163c52f1862e4, type: 3}
     - {fileID: 4197865763073412187, guid: 9c28a7c72fc88204c87ffca3e7ad3398, type: 3}
     - {fileID: 5256926306430708849, guid: 3c11c7fd0db94144985271c04f680451, type: 3}
+  _treeSpawnDistance: 0
 --- !u!4 &999722762
 Transform:
   m_ObjectHideFlags: 0
@@ -9332,7 +9319,7 @@ PrefabInstance:
     - target: {fileID: 7941170911782372762, guid: 2b7228255036a30479393ef9a76b8464,
         type: 3}
       propertyPath: _distance
-      value: 80
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 7941170911782372762, guid: 2b7228255036a30479393ef9a76b8464,
         type: 3}

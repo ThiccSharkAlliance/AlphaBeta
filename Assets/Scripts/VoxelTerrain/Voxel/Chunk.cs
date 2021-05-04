@@ -9,7 +9,7 @@ namespace VoxelTerrain.Voxel
 {
     public class Chunk
     {
-        public const int ChunkSize = 16; //Leave at this size
+        public const int ChunkSize = 32; //Leave at this size
         public const int ChunkHeight = 64; //This should be 16 too, but I wanted taller chunks
         public byte[] Voxels;
         private VoxelEngine Engine;
