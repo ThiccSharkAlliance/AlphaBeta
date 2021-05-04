@@ -114,7 +114,10 @@ public class CheckPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
+        //edit added by Ian to ensure voxel engine assigned
+        if (!_engine) _engine = FindObjectOfType<VoxelEngine>();
+        
         CheckActivation();
 
 
